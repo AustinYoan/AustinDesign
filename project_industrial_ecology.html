@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Ecology | Designer Austin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+
+<body class="lang-en">
+    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000;">
+        <button id="lang-toggle-btn" class="lang-btn">中文</button>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <header class="project-hero fade-in-up">
+        <div class="hero-content">
+            <h1>
+                <span class="en">Industrial Ecology</span>
+                <span class="zh">工業生態：大型環工解決方案</span>
+            </h1>
+            <p class="subtitle">
+                <span class="en">Engineering & Large Scale</span>
+                <span class="zh">工程與大型規模設計</span>
+            </p>
+        </div>
+        <div class="hero-bg-placeholder"></div>
+    </header>
+
+    <main>
+        <!-- 2. Info Grid -->
+        <section class="project-info-grid fade-in-up delay">
+            <div class="info-item">
+                <span class="label">
+                    <span class="en">Client</span>
+                    <span class="zh">客戶</span>
+                </span>
+                <span class="value">
+                    <span class="en">Eco Solutions</span>
+                    <span class="zh">環保解決方案</span>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="label">
+                    <span class="en">Date</span>
+                    <span class="zh">年份</span>
+                </span>
+                <span class="value">2023</span>
+            </div>
+            <div class="info-item">
+                <span class="label">
+                    <span class="en">Role</span>
+                    <span class="zh">擔任角色</span>
+                </span>
+                <span class="value">
+                    <span class="en">Project Manager</span>
+                    <span class="zh">專案經理</span>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="label">
+                    <span class="en">Material</span>
+                    <span class="zh">主要材質</span>
+                </span>
+                <span class="value">
+                    <span class="en">Composite</span>
+                    <span class="zh">複合材料</span>
+                </span>
+            </div>
+        </section>
+
+        <!-- 3. Immersive Story Layout -->
+        <section class="immersive-container fade-in-up delay-2">
+            <!-- Left: Sticky Text -->
+            <aside class="sticky-text-col">
+                <div class="sticky-content">
+                    <h2>
+                        <span class="en">Design Concept</span>
+                        <span class="zh">設計理念</span>
+                    </h2>
+                    <p>
+                        <span class="en">Tackling large-scale environmental challenges requires robust engineering and
+                            sustainable thinking.</span>
+                        <span class="zh">應對大規模環境挑戰需要穩健的工程技術與永續思維。</span>
+                    </p>
+                    <p>
+                        <span class="en">This solution integrates seamlessly with industrial ecosystems to minimize
+                            impact and maximize efficiency.</span>
+                        <span class="zh">此解決方案與工業生態系統無縫整合，以最小化影響並最大化效率。</span>
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Right: Image Stream -->
+            <div class="image-stream-col">
+                <div class="stream-image-placeholder">
+                    <span>Sketch / Wireframe</span>
+                </div>
+                <div class="stream-image-placeholder">
+                    <span>Exploded View / Structure</span>
+                </div>
+                <div class="stream-image-placeholder">
+                    <span>Final Rendering</span>
+                </div>
+                <div class="stream-image-placeholder">
+                    <span>Detail Shot</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Next Project -->
+        <a href="project_precision_aesthetics.html" class="next-project-link fade-in-up delay-3">
+            <div class="next-content">
+                <span class="next-label">
+                    <span class="en">Next Project</span>
+                    <span class="zh">下一個專案</span>
+                </span>
+                <h2 class="next-title">
+                    <span class="en">Precision Aesthetics</span>
+                    <span class="zh">精密美學：手持美容儀器</span>
+                    <span class="arrow">→</span>
+                </h2>
+            </div>
+        </a>
+
+        <div class="footer-nav" style="text-align: center;">
+            <a href="projects.html" class="lang-btn">
+                <span class="en">Back to Projects</span>
+                <span class="zh">返回作品列表</span>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const langBtn = document.getElementById('lang-toggle-btn');
+        const body = document.body;
+
+        langBtn.addEventListener('click', () => {
+            body.classList.toggle('chinese-mode');
+            if (body.classList.contains('chinese-mode')) {
+                langBtn.textContent = 'English';
+            } else {
+                langBtn.textContent = '中文';
+            }
+        });
+    </script>
+</body>
+
+</html>

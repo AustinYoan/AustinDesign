@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me | Designer Austin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <style>
+        /* Specific page override if needed, but handled in style.css */
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body class="lang-en">
+
+    <!-- Navigation (Language Toggle & Back) -->
+    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000; display: flex; gap: 10px;">
+        <a href="index.html" class="lang-btn">
+            <span class="en">Home</span>
+            <span class="zh">首頁</span>
+        </a>
+        <button id="lang-toggle-btn" class="lang-btn">中文</button>
+    </nav>
+
+    <main class="contact-layout fade-in-up">
+        <div class="contact-grid">
+
+            <!-- Left Column -->
+            <div class="contact-left">
+                <h1>
+                    <span class="en">Let's Build<br>Something<br>Together</span>
+                    <span class="zh">讓我們一起<br>打造產品</span>
+                </h1>
+                <p class="subtitle">
+                    <span class="en">From design concept to mass production, transforming your ideas into
+                        reality.</span>
+                    <span class="zh">從設計概念到量產製造，將您的想法轉化為現實。</span>
+                </p>
+            </div>
+
+            <!-- Right Column: Card -->
+            <div class="contact-right">
+                <div class="contact-card">
+
+                    <!-- Email -->
+                    <a href="mailto:austinyoan@gmail.com?subject=Inquiry%20for%20Product%20Design" class="contact-item">
+                        <div class="contact-icon">
+                            <span class="material-icons">email</span>
+                        </div>
+                        <div class="contact-text">
+                            <span class="label">Email</span>
+                            <span class="value">austinyoan@gmail.com</span>
+                        </div>
+                    </a>
+
+                    <!-- Phone -->
+                    <a href="tel:+886961353313" class="contact-item">
+                        <div class="contact-icon">
+                            <span class="material-icons">call</span>
+                        </div>
+                        <div class="contact-text">
+                            <span class="label">Phone</span>
+                            <span class="value">+886 961-353-313</span>
+                        </div>
+                    </a>
+
+                    <!-- Line -->
+                    <div class="contact-item" style="cursor: default; align-items: flex-start;">
+                        <div class="contact-icon" style="margin-top: 5px;">
+                            <span class="material-icons">chat</span>
+                        </div>
+                        <div class="contact-text">
+                            <span class="label">Line ID</span>
+                            <div class="value">
+                                <img src="assets/line_qr.png" alt="Line QR Code"
+                                    style="width: 120px; border-radius: 8px; margin-top: 10px; border: 2px solid white;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Studio -->
+                    <div class="contact-item" style="cursor: default;">
+                        <div class="contact-icon">
+                            <span class="material-icons">place</span>
+                        </div>
+                        <div class="contact-text">
+                            <span class="label">Studio</span>
+                            <span class="value">Taipei, Taiwan</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="cta-container fade-in-up delay">
+                <a href="mailto:austinyoan@gmail.com?subject=Inquiry%20for%20Product%20Design" class="contact-cta-btn">
+                    <span class="en">Start a Project via Email</span>
+                    <span class="zh">以 Email 開始專案</span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const langBtn = document.getElementById('lang-toggle-btn');
+        const body = document.body;
+
+        langBtn.addEventListener('click', () => {
+            body.classList.toggle('chinese-mode');
+            if (body.classList.contains('chinese-mode')) {
+                langBtn.textContent = 'English';
+            } else {
+                langBtn.textContent = '中文';
+            }
+        });
+    </script>
+</body>
+
+</html>

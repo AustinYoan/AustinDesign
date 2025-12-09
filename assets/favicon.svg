@@ -1,0 +1,27 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimalist Industrial Icon: Circular A/M Flange -->
+  
+  <!-- Frame: Circular Flange -->
+  <circle cx="256" cy="256" r="232" fill="none" stroke="#222222" stroke-width="32" />
+  
+  <!-- Rivets: 4 Bolt holes on the flange ring (White/Transparent to look like holes) -->
+  <!-- Situated at 45, 135, 225, 315 degrees -->
+  <!-- r=232, offset from center approx +/- 164 -->
+  <!-- 256-164 = 92, 256+164 = 420 -->
+  <circle cx="92" cy="92" r="12" fill="#ffffff" />
+  <circle cx="420" cy="92" r="12" fill="#ffffff" />
+  <circle cx="92" cy="420" r="12" fill="#ffffff" />
+  <circle cx="420" cy="420" r="12" fill="#ffffff" />
+  
+  <!-- Symbol: Abstract 'A' / 'M' Structural Beam / Caliper -->
+  <g stroke="#222222" stroke-width="36" stroke-linecap="butt" stroke-linejoin="miter" fill="none">
+    <!-- The 'A' Frame legs -->
+    <path d="M 120 400 L 256 100 L 392 400" />
+    
+    <!-- The 'M' Cross-brace (Caliper slide) -->
+    <path d="M 170 280 L 256 360 L 342 280" stroke-linejoin="round" />
+    
+    <!-- Vertical Center Line (Measurement mark) -->
+    <path d="M 256 360 L 256 420" stroke-width="20" />
+  </g>
+</svg>

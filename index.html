@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designer Zero | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+
+<body>
+    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000;">
+        <button id="lang-toggle-btn" class="lang-btn">中文</button>
+    </nav>
+
+    <main class="container">
+        <div class="content">
+            <h1 class="fade-in-up">
+                <span class="en">DESIGNER AUSTIN</span>
+                <span class="zh">設計師 奧斯汀</span>
+            </h1>
+            <p class="subtitle fade-in-up delay">
+                <span class="en">Product Design / Industrial Art</span>
+                <span class="zh">產品設計 / 工業藝術</span>
+            </p>
+            <a href="projects.html" class="btn fade-in-up delay">
+                <span class="en">View Projects</span>
+                <span class="zh">查看作品</span>
+            </a>
+            <a href="contact.html" class="btn fade-in-up delay"
+                style="background-color: transparent; border: 1px solid var(--accent-color); margin-left: 1rem; box-shadow: none;">
+                <span class="en">Contact Me</span>
+                <span class="zh">聯絡我</span>
+            </a>
+        </div>
+
+        <section class="about-section fade-in-up delay-2"
+            style="margin-top: 4rem; max-width: 800px; margin-left: auto; margin-right: auto; text-align: left;">
+            <h2>
+                <span class="en">About Me</span>
+                <span class="zh">關於我</span>
+            </h2>
+            <div class="about-text">
+                <p>
+                    <span class="en">I am a Product Designer with a unique foundation in metal processing and industrial
+                        craftsmanship. My journey began in the workshop, where I learned the tangible properties of
+                        materials—the resistance of steel, the malleability of aluminum, and the precision required to
+                        shape them.</span>
+                    <span
+                        class="zh">我是一位產品設計師，擁有紮根於金屬加工與工業工藝的獨特背景。我的設計旅程始於工廠車間，在那裡我深刻體悟了材料的實質特性——鋼鐵的剛毅抗性、鋁材的柔韌延展，以及將其成型所需的精準度。</span>
+                </p>
+                <p>
+                    <span class="en">This hands-on experience with raw materials has profoundly influenced my design
+                        philosophy. I don't just design for aesthetics; I design for structural integrity, tactile
+                        experience, and manufacturability. I believe that true innovation lies at the intersection of
+                        artistic vision and engineering reality.</span>
+                    <span
+                        class="zh">這段親手處理原物料的實作經驗，深深影響了我的設計哲學。我的設計不單是為了追求美學，更是為了結構的完整性、觸覺的體驗感，以及產品的可製造性。我堅信，真正的創新，誕生於藝術視野與工程現實的交會之處。</span>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const langBtn = document.getElementById('lang-toggle-btn');
+        const body = document.body;
+
+        langBtn.addEventListener('click', () => {
+            // Toggle the class on the body
+            body.classList.toggle('chinese-mode');
+
+            // Change button text based on current mode
+            if (body.classList.contains('chinese-mode')) {
+                langBtn.textContent = "English"; // Switch button label to English
+            } else {
+                langBtn.textContent = "中文";    // Switch button label back to Chinese
+            }
+        });
+    </script>
+</body>
+
+</html>
