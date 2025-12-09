@@ -1205,3 +1205,24 @@ a span {
         display: inline-block;
     }
 }
+
+@media (max-width: 768px) {
+    /* Force Visibility Prompt Fixes */
+    .project-overlay {
+        opacity: 1 !important;
+        visibility: visible !important;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent) !important;
+    }
+
+    .project-text h3,
+    .tags {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure padding alignment */
+    .project-overlay {
+        padding-bottom: 20px !important;
+        justify-content: flex-end;
+    }
+}
