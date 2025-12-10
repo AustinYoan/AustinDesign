@@ -10,6 +10,76 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <style>
+        /* --- 複製自 Cyclonic Page 的成功樣式 --- */
+        .locked-wrap {
+            position: relative !important;
+            display: block !important;
+            margin-bottom: 30px !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+            cursor: pointer !important;
+        }
+
+        /* 圖片預設強制模糊 */
+        .locked-img {
+            display: block !important;
+            width: 100% !important;
+            filter: blur(12px) !important;
+            /* 預設模糊 */
+            transform: scale(1.1) !important;
+            transition: all 0.5s ease !important;
+        }
+
+        /* 遮罩層與按鈕 */
+        .locked-overlay {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3) !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            z-index: 10 !important;
+            opacity: 0.8 !important;
+            /* 按鈕若隱若現 */
+            transition: all 0.3s ease !important;
+        }
+
+        /* Hover 互動：圖片變清楚一點，按鈕變亮 */
+        .locked-wrap:hover .locked-img {
+            filter: blur(4px) !important;
+            transform: scale(1.05) !important;
+        }
+
+        .locked-wrap:hover .locked-overlay {
+            opacity: 1 !important;
+            background: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        /* 按鈕標準樣式 */
+        .locked-btn {
+            background: #ff6600 !important;
+            color: white !important;
+            padding: 15px 30px !important;
+            border-radius: 50px !important;
+            font-weight: bold !important;
+            text-decoration: none !important;
+            border: 2px solid white !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* 一般圖片樣式 */
+        .standard-image {
+            display: block;
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 
 <body class="lang-en">
@@ -80,36 +150,87 @@
             <aside class="sticky-text-col">
                 <div class="sticky-content">
                     <h2>
-                        <span class="en">Design Concept</span>
-                        <span class="zh">設計理念</span>
+                        <span class="en">Design Narrative</span>
+                        <span class="zh">設計敘事</span>
                     </h2>
-                    <p>
-                        <span class="en">Merging playfulness with robust engineering, this project reimagines urban
-                            movement.</span>
-                        <span class="zh">本專案將趣味性與穩健的工程結構相結合，重新構想了城市中的動態體驗。</span>
-                    </p>
-                    <p>
-                        <span class="en">Safety is paramount, achieved through rigorous structural analysis and durable
-                            material selection.</span>
-                        <span class="zh">安全是首要考量，透過嚴格的結構分析與耐用材料的選擇來達成。</span>
-                    </p>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4>
+                            <span class="en">Concept: When the City Longs to Fly</span>
+                            <span class="zh">當城市渴望飛行</span>
+                        </h4>
+                        <p>
+                            <span class="zh">業主的願景很單純：『在水泥叢林裡，給孩子一條能飛翔的軌道。』我們屏棄了傳統遊具的廉價感，將滑軌打造為一道劃過公園的動態雕塑
+                                (<strong>Kinetic Sculpture</strong>)。銀色的流線骨架穿梭於樹林間，既是遊具，也是地景藝術。</span>
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4>
+                            <span class="en">Wind Load Analysis: Dancing with the Wind</span>
+                            <span class="zh">與強風共舞</span>
+                        </h4>
+                        <p>
+                            <span class="zh">在台灣，遊具最大的敵人是颱風。長跨度結構容易產生危險共振。我們導入 <strong>CFD</strong> 流體力學與結構應力模擬，計算 16
+                                級陣風下的受力點。透過優化桁架幾何角度，確保結構在狂風中不僅屹立不搖，更能有效分散風壓。</span>
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4>
+                            <span class="en">Zero Stalling: Refusing to Stall</span>
+                            <span class="zh">拒絕中途停滯</span>
+                        </h4>
+                        <p>
+                            <span class="zh">滑軌最掃興的瞬間就是卡在半空中。為了創造一氣呵成的飛行，我們對滑車進行了極致的低滾阻優化。結合精密密封軸承與重力位能
+                                (<strong>Potential Energy</strong>) 的精算，確保高程差能完美轉換為動能，讓滑車擁有足夠慣性衝過最低點，絕不卡頓。</span>
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4>
+                            <span class="en">Manufacturing: Taming the Metal</span>
+                            <span class="zh">馴服金屬</span>
+                        </h4>
+                        <p>
+                            <span class="zh">設計圖上的完美曲線，仰賴 <strong>CNC</strong> 精密彎管技術來實踐。我們開發了模組化的現場組裝工法，讓長達 20
+                                米的軌道能分段運輸、精準對接，消除接縫帶來的頓挫感，確保滑行體驗如絲綢般順滑。</span>
+                        </p>
+                    </div>
                 </div>
             </aside>
 
             <!-- Right: Image Stream -->
             <div class="image-stream-col">
-                <div class="stream-image-placeholder">
-                    <span>Sketch / Wireframe</span>
-                </div>
-                <div class="stream-image-placeholder">
-                    <span>Exploded View / Structure</span>
-                </div>
-                <div class="stream-image-placeholder">
-                    <span>Final Rendering</span>
-                </div>
-                <div class="stream-image-placeholder">
-                    <span>Detail Shot</span>
-                </div>
+                <!-- 1 First Image (Standard) -->
+                <figure style="margin: 0; margin-bottom: 3rem;">
+                    <img src="assets/ParkEquipment.jpg" class="standard-image" alt="Concept Design">
+                </figure>
+
+                <!-- 2 Second Image (Locked) -->
+                <figure style="margin: 0; margin-bottom: 3rem;">
+                    <div class="locked-wrap">
+                        <img src="assets/ParkEquipmentFEA.png" class="locked-img" alt="Wind Load Analysis">
+                        <div class="locked-overlay">
+                            <a href="contact.html" class="locked-btn">Start Your Project</a>
+                        </div>
+                    </div>
+                </figure>
+
+                <!-- 3 Third Image (Locked) -->
+                <figure style="margin: 0; margin-bottom: 3rem;">
+                    <div class="locked-wrap">
+                        <img src="assets/SlideCar.jpg" class="locked-img" alt="Mechanism Detail">
+                        <div class="locked-overlay">
+                            <a href="contact.html" class="locked-btn">Start Your Project</a>
+                        </div>
+                    </div>
+                </figure>
+
+                <!-- 4 Fourth Image (Standard) -->
+                <figure style="margin: 0; margin-bottom: 3rem;">
+                    <img src="assets/SliderInstall.jpg" class="standard-image" alt="Installation">
+                </figure>
             </div>
         </section>
 
