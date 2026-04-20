@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austin Design | Structural Mastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <style>
+        /* --- 互動圖片樣式 --- */
+        .locked-wrap {
+            position: relative !important;
+            display: block !important;
+            margin-bottom: 10px !important; /* 縮小下方間距給圖說用 */
+            border-radius: 12px !important;
+            overflow: hidden !important;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
+            cursor: pointer !important;
+        }
+        .locked-img {
+            display: block !important;
+            width: 100% !important;
+            filter: blur(12px) !important;
+            transform: scale(1.1) !important;
+            transition: all 0.5s ease !important;
+        }
+        .locked-overlay {
+            position: absolute !important;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3) !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            z-index: 10 !important;
+            opacity: 0.8 !important;
+            transition: all 0.3s ease !important;
+        }
+        .locked-wrap:hover .locked-img { filter: blur(4px) !important; transform: scale(1.05) !important; }
+        .locked-wrap:hover .locked-overlay { opacity: 1 !important; background: rgba(0,0,0,0.5) !important; }
+        .locked-btn { background: #ff6600 !important; color: white !important; padding: 15px 30px !important; border-radius: 50px !important; font-weight: bold; text-decoration: none; border: 2px solid white !important; }
+
+        /* --- 一般圖片樣式 --- */
+        .standard-image { display: block; width: 100%; border-radius: 12px; margin-bottom: 10px !important; }
+
+        /* --- 新增：圖片圖說樣式 (The Visual Arc) --- */
+        .image-caption {
+            margin-bottom: 50px !important; /* 圖說與下一張圖的距離 */
+            padding-left: 10px;
+            border-left: 3px solid #ff6600; /* 左側橘色線條強調 */
+        }
+        .caption-title {
+            display: block;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .caption-desc {
+            display: block;
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body class="lang-en chinese-mode">
+    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000;">
+        <button id="lang-toggle-btn" class="lang-btn">English</button>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <header class="project-hero fade-in-up">
+        <div class="hero-content">
+            <h1>
+                <span class="en">We Find Where Things Break — Before They Do.</span>
+                <span class="zh">我們在失效發生前，先找到它。</span>
+            </h1>
+            <p class="subtitle">
+                <span class="en">Structural Analysis & Failure Prevention</span>
+                <span class="zh">結構分析 × 失效預防 × 量產準備</span>
+            </p>
+        </div>
+        <div class="hero-bg-placeholder"></div>
+    </header>
+
+    <main>
+        <!-- 2. Info Grid -->
+        <section class="project-info-grid fade-in-up delay">
+            <div class="info-item">
+                <span class="label">
+                    <span class="en">Industry</span>
+                    <span class="zh">適用產業</span>
+                </span>
+                <span class="value">
+                    <span class="en">Any Load-Bearing Product</span>
+                    <span class="zh">任何有受力需求的產品</span>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="label">
+                    <span class="en">Core Benefit</span>
+                    <span class="zh">你能得到什麼</span>
+                </span>
+                <span class="value">
+                    <span class="en">Lighter. Stronger. Production-Ready.</span>
+                    <span class="zh">更輕、更強、能直接量產</span>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="label">
+                    <span class="en">Tools</span>
+                    <span class="zh">使用工具</span>
+                </span>
+                <span class="value">
+                    <span class="en">Ansys / SolidWorks / Abaqus</span>
+                    <span class="zh">業界主流有限元素分析軟體</span>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="label">
+                    <span class="en">Bottom Line</span>
+                    <span class="zh">最終目的</span>
+                </span>
+                <span class="value">
+                    <span class="en">No Surprises After Launch</span>
+                    <span class="zh">讓你量產後不用擔心出事</span>
+                </span>
+            </div>
+        </section>
+
+        <!-- 3. Immersive Story Layout -->
+        <section class="immersive-container fade-in-up delay-2">
+            <!-- Left: Sticky Text (The Backbone of Function) -->
+            <aside class="sticky-text-col">
+                <div class="sticky-content">
+                    <h2>
+                        <span class="en">Your Product Has a Weak Spot. We Find It First.</span>
+                        <span class="zh">你的產品有弱點。我們幫你先找到它。</span>
+                    </h2>
+                    <p class="project-subtitle" style="margin-top: -10px; margin-bottom: 2rem;">
+                        <span class="en" style="font-size:0.8em; color:#666;">From 30-ton excavator arms to precision medical equipment — same physics, same stakes.</span>
+                        <span class="zh" style="font-size:0.8em; color:#666;">從 30 噸挖掘機到精密醫療器材，物理法則從不妥協。</span>
+                    </p>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4>
+                            <span class="en">The problem isn't always visible</span>
+                            <span class="zh">問題往往藏在看不見的地方</span>
+                        </h4>
+                        <p>
+                            <span class="en">A fishing boat crane and an operating-room lamp look nothing alike — but both are fighting the same invisible enemy: stress. The real challenge isn't just "making it stronger." It's knowing exactly where it will fail, under what conditions, and how to fix it before a single prototype is built.</span>
+                            <span class="zh">漁船吊臂和手術室燈架看起來毫無關係，但它們面對的是同一個隱形敵人：應力。真正的挑戰不是「做得更強」，而是在第一個原型出來之前，就知道它會在哪裡、在什麼狀況下出問題。</span>
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4>
+                            <span class="en">Think of it as a health check for your design</span>
+                            <span class="zh">把它想成你產品的健康檢查</span>
+                        </h4>
+                        <p>
+                            <span class="en">We simulate the worst conditions your product will ever face — extreme loads, vibration, impact — and turn invisible stress into clear, actionable data. The result: you know exactly where to reinforce, where to trim weight, and where you're already good. No guesswork. No late-stage surprises.</span>
+                            <span class="zh">我們模擬你的產品可能遭遇的最惡劣條件——極端負載、震動、衝擊——把看不見的應力轉化成清楚的數據。結果是：你知道哪裡要補強、哪裡可以減料、哪裡已經夠好了。不靠猜測，不留隱患。</span>
+                        </p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right: Image Stream (The Visual Arc) -->
+            <div class="image-stream-col">
+                <!-- Group 1: The Setup -->
+                <figure style="margin: 0;">
+                    <img src="assets/fea_mesh.jpg" class="standard-image" alt="FEA Mesh Setup">
+                    <div class="image-caption">
+                        <span class="caption-title">
+                            <span class="en">Step 1 — Building the Digital Twin</span>
+                            <span class="zh">第一步：建立數位分身</span>
+                        </span>
+                        <span class="caption-desc">
+                            <span class="en">Before anything breaks in real life, it breaks here first. We recreate your product's geometry and the forces it will face — so the simulation is only useful if the inputs are honest.</span>
+                            <span class="zh">在現實中壞掉之前，先在這裡壞掉。我們重建你產品的幾何與受力狀況，模擬結果的可信度，取決於輸入的誠實程度。</span>
+                        </span>
+                    </div>
+                </figure>
+
+                <!-- Group 2: The Diagnosis -->
+                <figure style="margin: 0;">
+                    <div class="locked-wrap">
+                        <img src="assets/fea_stress.jpg" class="locked-img" alt="FEA Stress Analysis">
+                        <div class="locked-overlay">
+                            <a href="contact.html" class="locked-btn">
+                                <span class="en">See the Full Analysis →</span>
+                                <span class="zh">看完整分析 →</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="image-caption">
+                        <span class="caption-title">
+                            <span class="en">Step 2 — The Red Zones Are the Story</span>
+                            <span class="zh">第二步：紅色區域就是答案</span>
+                        </span>
+                        <span class="caption-desc">
+                            <span class="en">Those bright red areas aren't just colors — they're where your product would eventually crack or fatigue. Seeing them before production is worth every penny of the analysis cost.</span>
+                            <span class="zh">那些鮮紅色的區域不只是顏色，那是你的產品日後最可能龜裂的位置。在量產前看到它，遠比出事後修要划算。</span>
+                        </span>
+                    </div>
+                </figure>
+
+                <!-- Group 3: The Prescription -->
+                <figure style="margin: 0;">
+                    <div class="locked-wrap">
+                        <img src="assets/fea_ribs.jpg" class="locked-img" alt="Structural Optimization">
+                        <div class="locked-overlay">
+                            <a href="contact.html" class="locked-btn">
+                                <span class="en">Let's Work Together →</span>
+                                <span class="zh">讓我幫你做一次 →</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="image-caption">
+                        <span class="caption-title">
+                            <span class="en">Step 3 — Fix Smart, Not Brute-Force</span>
+                            <span class="zh">第三步：聰明補強，不是盲目加厚</span>
+                        </span>
+                        <span class="caption-desc">
+                            <span class="en">Adding material everywhere is the expensive, heavy way out. Ribs and guided force paths achieve the same rigidity at a fraction of the weight — and cost. This is where good engineering pays for itself.</span>
+                            <span class="zh">到處加厚是最貴、最重的解法。透過肋條設計與力流引導，用更少的料達到同等的剛性。這就是好工程師能省你錢的地方。</span>
+                        </span>
+                    </div>
+                </figure>
+
+                <!-- Group 4: The Verification -->
+                <figure style="margin: 0;">
+                    <img src="assets/fea_final.jpg" class="standard-image" alt="Final Product Verification">
+                    <div class="image-caption">
+                        <span class="caption-title">
+                            <span class="en">Step 4 — Ready to Build With Confidence</span>
+                            <span class="zh">第四步：帶著信心去量產</span>
+                        </span>
+                        <span class="caption-desc">
+                            <span class="en">The final structure isn't just safe — it's optimized. You go into production knowing exactly what you have, and why it works. That confidence is the real deliverable.</span>
+                            <span class="zh">最終結構不只是「安全達標」，而是經過優化的。你帶著清楚的數據去量產，知道為什麼它可行。這份確定感，才是我們真正交付的東西。</span>
+                        </span>
+                    </div>
+                </figure>
+            </div>
+        </section>
+
+        <!-- 4. Next Project -->
+        <a href="projects.html" class="next-project-link fade-in-up delay-3">
+            <div class="next-content">
+                <span class="next-label">
+                    <span class="en">Back to Portfolio</span>
+                    <span class="zh">回到作品集</span>
+                </span>
+                <h2 class="next-title">
+                    <span class="en">Explore More Projects</span>
+                    <span class="zh">探索更多專案</span>
+                    <span class="arrow">→</span>
+                </h2>
+            </div>
+        </a>
+
+        <div class="footer-nav" style="text-align: center;">
+            <a href="projects.html" class="lang-btn">
+                <span class="en">Back to Projects</span>
+                <span class="zh">返回作品列表</span>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const langBtn = document.getElementById('lang-toggle-btn');
+        const body = document.body;
+
+        langBtn.addEventListener('click', () => {
+            body.classList.toggle('chinese-mode');
+            if (body.classList.contains('chinese-mode')) {
+                langBtn.textContent = 'English';
+            } else {
+                langBtn.textContent = '中文';
+            }
+        });
+    </script>
+</body>
+
+</html>

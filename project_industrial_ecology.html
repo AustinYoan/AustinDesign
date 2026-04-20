@@ -1,20 +1,87 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Austin Design | Industrial & Product Solutions</title>
+    <title>Austin Design | Industrial Ecology</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <style>
+        /* --- 互動區塊樣式 (複製自成功範本) --- */
+        .locked-wrap {
+            position: relative !important;
+            display: block !important;
+            margin-bottom: 30px !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+            cursor: pointer !important;
+        }
+
+        /* 圖片預設強制模糊 */
+        .locked-img {
+            display: block !important;
+            width: 100% !important;
+            filter: blur(12px) !important;
+            transform: scale(1.1) !important;
+            transition: all 0.5s ease !important;
+        }
+
+        /* 遮罩層與按鈕 */
+        .locked-overlay {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3) !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            z-index: 10 !important;
+            opacity: 0.8 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        /* Hover 互動 */
+        .locked-wrap:hover .locked-img {
+            filter: blur(4px) !important;
+            transform: scale(1.05) !important;
+        }
+
+        .locked-wrap:hover .locked-overlay {
+            opacity: 1 !important;
+            background: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        /* 按鈕樣式 */
+        .locked-btn {
+            background: #ff6600 !important;
+            color: white !important;
+            padding: 15px 30px !important;
+            border-radius: 50px !important;
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid white !important;
+        }
+
+        /* 一般圖片樣式 */
+        .standard-image {
+            display: block;
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 
-<body class="lang-en">
+<body class="lang-en chinese-mode">
     <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000;">
-        <button id="lang-toggle-btn" class="lang-btn">中文</button>
+        <button id="lang-toggle-btn" class="lang-btn">English</button>
     </nav>
 
     <!-- 1. Hero Section -->
@@ -22,11 +89,11 @@
         <div class="hero-content">
             <h1>
                 <span class="en">Industrial Ecology</span>
-                <span class="zh">工業生態：大型環工解決方案</span>
+                <span class="zh">工業生態工程</span>
             </h1>
             <p class="subtitle">
-                <span class="en">Engineering & Large Scale</span>
-                <span class="zh">工程與大型規模設計</span>
+                <span class="en">System Engineering</span>
+                <span class="zh">系統工程設計</span>
             </p>
         </div>
         <div class="hero-bg-placeholder"></div>
@@ -41,8 +108,8 @@
                     <span class="zh">客戶</span>
                 </span>
                 <span class="value">
-                    <span class="en">Eco Solutions</span>
-                    <span class="zh">環保解決方案</span>
+                    <span class="en">Confidential</span>
+                    <span class="zh">保密</span>
                 </span>
             </div>
             <div class="info-item">
@@ -50,7 +117,7 @@
                     <span class="en">Date</span>
                     <span class="zh">年份</span>
                 </span>
-                <span class="value">2023</span>
+                <span class="value">2024</span>
             </div>
             <div class="info-item">
                 <span class="label">
@@ -58,18 +125,18 @@
                     <span class="zh">擔任角色</span>
                 </span>
                 <span class="value">
-                    <span class="en">Project Manager</span>
-                    <span class="zh">專案經理</span>
+                    <span class="en">System Engineer</span>
+                    <span class="zh">系統工程師</span>
                 </span>
             </div>
             <div class="info-item">
                 <span class="label">
-                    <span class="en">Material</span>
-                    <span class="zh">主要材質</span>
+                    <span class="en">Focus</span>
+                    <span class="zh">設計重點</span>
                 </span>
                 <span class="value">
-                    <span class="en">Composite</span>
-                    <span class="zh">複合材料</span>
+                    <span class="en">Integration</span>
+                    <span class="zh">系統整合</span>
                 </span>
             </div>
         </section>
@@ -80,49 +147,112 @@
             <aside class="sticky-text-col">
                 <div class="sticky-content">
                     <h2>
-                        <span class="en">Design Concept</span>
-                        <span class="zh">設計理念</span>
+                        <span class="en">From drawings to the factory floor.</span>
+                        <span class="zh">從圖紙到現場</span>
                     </h2>
-                    <p>
-                        <span class="en">Tackling large-scale environmental challenges requires robust engineering and
-                            sustainable thinking.</span>
-                        <span class="zh">應對大規模環境挑戰需要穩健的工程技術與永續思維。</span>
-                    </p>
-                    <p>
-                        <span class="en">This solution integrates seamlessly with industrial ecosystems to minimize
-                            impact and maximize efficiency.</span>
-                        <span class="zh">此解決方案與工業生態系統無縫整合，以最小化影響並最大化效率。</span>
-                    </p>
+
+                    <div style="margin-bottom: 2rem;">
+                        <p>
+                            <span class="en">Industrial environmental systems aren't a single product — they're a collection of things that all need to work together: bag houses, SCR denitrification chambers, cyclone collectors, large storage tanks. I was the main designer across the whole project, from 3D modeling to 2D construction drawings to on-site supervision.</span>
+                            <span class="zh">環工設備不是單一產品，是一堆東西要同時運作：袋式集塵器、SCR 脫硝系統、旋風集塵器、大型儲桶。我是這個案子的主要設計師，從 3D 建模到 2D 施工圖到現場監造，整個流程都有跟。</span>
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4>
+                            <span class="en">Data first, then welding.</span>
+                            <span class="zh">數據說 OK，才開始焊</span>
+                        </h4>
+                        <p>
+                            <span class="en">Each piece of equipment has different flow requirements. I validated each with CFD before anything was built — airflow uniformity for SCR reaction efficiency, pressure drop management for the bag house, particle capture trajectory for the cyclone collectors. No assumptions, no guessing.</span>
+                            <span class="zh">每種設備的流場需求不一樣，我在開始製造前分別用 CFD 驗證——SCR 要氣流均勻才有反應效率、Bag House 要控制壓損、旋風器要確認粒子軌跡真的能被捕捉到。沒有假設，沒有猜測。</span>
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4>
+                            <span class="en">Then came the factory.</span>
+                            <span class="zh">然後就是現場</span>
+                        </h4>
+                        <p>
+                            <span class="en">Drawings meet reality on the factory floor. Weld distortion, assembly tolerances, machinery that doesn't quite match what was drawn — I was on-site adjusting in real time, so what got installed actually matched what was calculated.</span>
+                            <span class="zh">圖紙遇到現實的地方就是工廠現場。焊接變形、組裝公差、機具跟圖面有落差——我在現場即時調整，讓最後裝起來的東西跟計算結果一致。</span>
+                        </p>
+                    </div>
                 </div>
             </aside>
 
             <!-- Right: Image Stream -->
             <div class="image-stream-col">
-                <div class="stream-image-placeholder">
-                    <span>Sketch / Wireframe</span>
-                </div>
-                <div class="stream-image-placeholder">
-                    <span>Exploded View / Structure</span>
-                </div>
-                <div class="stream-image-placeholder">
-                    <span>Final Rendering</span>
-                </div>
-                <div class="stream-image-placeholder">
-                    <span>Detail Shot</span>
-                </div>
+                <!-- 1. System Design Image (Locked) -->
+                <figure style="margin: 0; margin-bottom: 3rem;">
+                    <div class="locked-wrap">
+                        <img src="assets/BagHouse2D.png" alt="2D Engineering Drawing" class="locked-img">
+                        <div class="locked-overlay">
+                            <a href="contact.html" class="locked-btn">Start Your Project</a>
+                        </div>
+                    </div>
+                    <figcaption style="margin-top: 1rem; text-align: left;">
+                        <div
+                            style="font-size: 0.8rem; color: var(--accent-color); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;">
+                            System Design</div>
+                        <div style="color: #ccc; font-size: 0.95rem; line-height: 1.5;">
+                            <span class="en">Precision 2D drawings derived from 3D models.</span>
+                            <span class="zh">源自 3D 模型的精密 2D 施工圖。</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- 2. CFD Validation Image (Locked) -->
+                <figure style="margin: 0; margin-bottom: 3rem;">
+                    <div class="locked-wrap">
+                        <img src="assets/BagHouseCADFlow.png" alt="CFD Flow Simulation" class="locked-img">
+                        <div class="locked-overlay">
+                            <a href="contact.html" class="locked-btn">Start Your Project</a>
+                        </div>
+                    </div>
+                    <figcaption style="margin-top: 1rem; text-align: left;">
+                        <div
+                            style="font-size: 0.8rem; color: var(--accent-color); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;">
+                            CFD Validation</div>
+                        <div style="color: #ccc; font-size: 0.95rem; line-height: 1.5;">
+                            <span class="en">Flow simulation ensuring optimal performance.</span>
+                            <span class="zh">確保最佳性能的流場模擬。</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- 3. On-Site Execution Image (Locked) -->
+                <figure style="margin: 0; margin-bottom: 3rem;">
+                    <div class="locked-wrap">
+                        <img src="assets/BagHouseFactory.jpg" alt="Factory Installation" class="locked-img">
+                        <div class="locked-overlay">
+                            <a href="contact.html" class="locked-btn">Start Your Project</a>
+                        </div>
+                    </div>
+                    <figcaption style="margin-top: 1rem; text-align: left;">
+                        <div
+                            style="font-size: 0.8rem; color: var(--accent-color); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;">
+                            On-Site Execution</div>
+                        <div style="color: #ccc; font-size: 0.95rem; line-height: 1.5;">
+                            <span class="en">Bridging the gap between design and reality.</span>
+                            <span class="zh">連結設計與現實的製造現場。</span>
+                        </div>
+                    </figcaption>
+                </figure>
             </div>
         </section>
 
         <!-- 4. Next Project -->
-        <a href="project_precision_aesthetics.html" class="next-project-link fade-in-up delay-3">
+        <a href="projects.html" class="next-project-link fade-in-up delay-3">
             <div class="next-content">
                 <span class="next-label">
-                    <span class="en">Next Project</span>
-                    <span class="zh">下一個專案</span>
+                    <span class="en">View Projects</span>
+                    <span class="zh">瀏覽更多作品</span>
                 </span>
                 <h2 class="next-title">
-                    <span class="en">Precision Aesthetics</span>
-                    <span class="zh">精密美學：手持美容儀器</span>
+                    <span class="en">Back to Portfolio</span>
+                    <span class="zh">返回作品集</span>
                     <span class="arrow">→</span>
                 </h2>
             </div>
