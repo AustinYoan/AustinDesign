@@ -4,12 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Austin Design | Industrial Ecology</title>
+    <title>工業生態工程 | Austin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZGMELF4GDL');
+    </script>
     <style>
         /* --- 互動區塊樣式 (複製自成功範本) --- */
         .locked-wrap {
@@ -80,7 +88,11 @@
 </head>
 
 <body class="lang-en chinese-mode">
-    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000;">
+    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000; display: flex; gap: 1rem; align-items: center;">
+        <a href="index.html" class="lang-btn" style="text-decoration: none;">
+            <span class="en">Home</span>
+            <span class="zh">首頁</span>
+        </a>
         <button id="lang-toggle-btn" class="lang-btn">English</button>
     </nav>
 
@@ -189,7 +201,10 @@
                     <div class="locked-wrap">
                         <img src="assets/BagHouse2D.png" alt="2D Engineering Drawing" class="locked-img">
                         <div class="locked-overlay">
-                            <a href="contact.html" class="locked-btn">Start Your Project</a>
+                            <a href="contact.html" class="locked-btn">
+                                <span class="en">Start Your Project</span>
+                                <span class="zh">開始你的專案</span>
+                            </a>
                         </div>
                     </div>
                     <figcaption style="margin-top: 1rem; text-align: left;">
@@ -208,7 +223,10 @@
                     <div class="locked-wrap">
                         <img src="assets/BagHouseCADFlow.png" alt="CFD Flow Simulation" class="locked-img">
                         <div class="locked-overlay">
-                            <a href="contact.html" class="locked-btn">Start Your Project</a>
+                            <a href="contact.html" class="locked-btn">
+                                <span class="en">Start Your Project</span>
+                                <span class="zh">開始你的專案</span>
+                            </a>
                         </div>
                     </div>
                     <figcaption style="margin-top: 1rem; text-align: left;">
@@ -227,7 +245,10 @@
                     <div class="locked-wrap">
                         <img src="assets/BagHouseFactory.jpg" alt="Factory Installation" class="locked-img">
                         <div class="locked-overlay">
-                            <a href="contact.html" class="locked-btn">Start Your Project</a>
+                            <a href="contact.html" class="locked-btn">
+                                <span class="en">Start Your Project</span>
+                                <span class="zh">開始你的專案</span>
+                            </a>
                         </div>
                     </div>
                     <figcaption style="margin-top: 1rem; text-align: left;">
@@ -244,19 +265,37 @@
         </section>
 
         <!-- 4. Next Project -->
-        <a href="projects.html" class="next-project-link fade-in-up delay-3">
+        <a href="project_glass_bottle.html" class="next-project-link fade-in-up delay-3">
             <div class="next-content">
                 <span class="next-label">
-                    <span class="en">View Projects</span>
-                    <span class="zh">瀏覽更多作品</span>
+                    <span class="en">Next Project</span>
+                    <span class="zh">下一個專案</span>
                 </span>
                 <h2 class="next-title">
-                    <span class="en">Back to Portfolio</span>
-                    <span class="zh">返回作品集</span>
+                    <span class="en">High-End Glass Bottle Design</span>
+                    <span class="zh">高端禮品酒瓶結構設計</span>
                     <span class="arrow">→</span>
                 </h2>
             </div>
         </a>
+
+        <!-- Diagnostic CTA -->
+        <section style="max-width: 1400px; margin: 0 auto 3rem; padding: 0 2rem; text-align: center;">
+            <div style="background: #fff3ec; border: 1.5px solid rgba(232,93,0,0.2); border-radius: 16px; padding: 2.5rem 2rem; max-width: 680px; margin: 0 auto;">
+                <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem; color: #1e1e1e;">
+                    <span class="en">Got something similar in mind?</span>
+                    <span class="zh">你也有類似的想法？</span>
+                </h3>
+                <p style="color: #666; margin-bottom: 1.5rem; font-size: 1rem;">
+                    <span class="en">Take 2 minutes to map out your idea. I'll tell you if it's buildable.</span>
+                    <span class="zh">花 2 分鐘釐清你的需求，我幫你看看能不能做。</span>
+                </p>
+                <a href="diagnostic.html" class="lang-btn" style="background: #e85d00; color: #fff; border-color: #e85d00; padding: 0.75rem 2rem; text-decoration: none; font-weight: 700; display: inline-block;">
+                    <span class="en">Map My Idea</span>
+                    <span class="zh">釐清我的想法</span>
+                </a>
+            </div>
+        </section>
 
         <div class="footer-nav" style="text-align: center;">
             <a href="projects.html" class="lang-btn">

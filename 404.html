@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Austin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZGMELF4GDL');
+    </script>
+</head>
+
+<body class="lang-en chinese-mode">
+    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000;">
+        <button id="lang-toggle-btn" class="lang-btn">English</button>
+    </nav>
+
+    <main class="container">
+        <div class="content fade-in-up">
+            <p style="font-size: 6rem; font-weight: 700; color: var(--accent-color); line-height: 1; margin-bottom: 1.5rem; opacity: 0.25;">
+                404
+            </p>
+            <h1 style="font-size: 2.5rem; text-transform: none; letter-spacing: -0.01em; margin-bottom: 1rem;">
+                <span class="en">This page doesn't exist.</span>
+                <span class="zh">這頁不存在。</span>
+            </h1>
+            <p class="subtitle" style="margin-bottom: 2.5rem;">
+                <span class="en">But your idea does. Let's talk.</span>
+                <span class="zh">但你的想法存在。來聊聊。</span>
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" class="btn">
+                    <span class="en">Back to Home</span>
+                    <span class="zh">回首頁</span>
+                </a>
+                <a href="diagnostic.html" class="btn" style="background: transparent; border: 1.5px solid var(--accent-color); color: var(--accent-color); box-shadow: none;">
+                    <span class="en">Map My Idea</span>
+                    <span class="zh">釐清我的想法</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const langBtn = document.getElementById('lang-toggle-btn');
+        const body = document.body;
+        langBtn.addEventListener('click', () => {
+            body.classList.toggle('chinese-mode');
+            langBtn.textContent = body.classList.contains('chinese-mode') ? 'English' : '中文';
+        });
+    </script>
+</body>
+
+</html>

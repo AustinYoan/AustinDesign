@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服務方案 | Austin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZGMELF4GDL');
+    </script>
+    <style>
+        .services-page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 7rem 2rem 4rem;
+        }
+        .services-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .services-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            text-transform: none;
+            letter-spacing: -0.01em;
+        }
+        .services-hero .sub {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+        .tier-card {
+            background: var(--card-bg);
+            border: 0.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.25rem 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .tier-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 24px rgba(232,93,0,0.1);
+        }
+        .tier-number {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        .tier-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .tier-tagline {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        .tier-includes {
+            margin-bottom: 1.5rem;
+        }
+        .tier-includes-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        .tier-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .tier-items li {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            line-height: 1.5;
+        }
+        .tier-items li::before {
+            content: "—";
+            color: var(--accent-color);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .tier-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 1.25rem 0;
+        }
+        .tier-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .tier-price span {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+        .services-cta {
+            text-align: center;
+            background: var(--card-bg);
+            border: 0.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .services-cta p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.75rem;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-outline {
+            display: inline-block;
+            border: 1.5px solid var(--accent-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .tiers { grid-template-columns: 1fr; }
+            .services-hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+
+<body class="lang-en chinese-mode">
+    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000; display: flex; gap: 1rem; align-items: center;">
+        <a href="index.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='var(--text-secondary)'">
+            <span class="en">← Home</span>
+            <span class="zh">← 首頁</span>
+        </a>
+        <button id="lang-toggle-btn" class="lang-btn">English</button>
+    </nav>
+
+    <main class="services-page fade-in-up">
+
+        <!-- Hero -->
+        <div class="services-hero">
+            <h1>
+                <span class="en">You need more than someone who can model it.</span>
+                <span class="zh">你需要的，不只是一個會畫圖的人。</span>
+            </h1>
+            <p class="sub">
+                <span class="en">Here's how we can work together.</span>
+                <span class="zh">以下是我們可以合作的方式。</span>
+            </p>
+        </div>
+
+        <!-- Service Tiers -->
+        <div class="tiers fade-in-up delay">
+
+            <!-- Tier 1 -->
+            <div class="tier-card">
+                <div class="tier-number">
+                    <span class="en">Tier 01</span>
+                    <span class="zh">等級一</span>
+                </div>
+                <div class="tier-name">
+                    <span class="en">Quick Consult</span>
+                    <span class="zh">快速諮詢</span>
+                </div>
+                <p class="tier-tagline">
+                    <span class="en">60 minutes to get your idea out of your head and into something we can actually discuss.</span>
+                    <span class="zh">60 分鐘，把你的想法說清楚。</span>
+                </p>
+                <div class="tier-includes">
+                    <div class="tier-includes-label">
+                        <span class="en">Includes</span>
+                        <span class="zh">包含</span>
+                    </div>
+                    <ul class="tier-items">
+                        <li>
+                            <span class="en">Meeting notes + key takeaways</span>
+                            <span class="zh">會議記錄 + 重點整理</span>
+                        </li>
+                        <li>
+                            <span class="en">Initial feasibility assessment</span>
+                            <span class="zh">初步可行性評估</span>
+                        </li>
+                        <li>
+                            <span class="en">Recommended next steps</span>
+                            <span class="zh">建議下一步</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tier-divider"></div>
+                <div class="tier-price">
+                    <span class="en">From NT$3,000</span>
+                    <span class="zh">NT$3,000 起</span>
+                </div>
+            </div>
+
+            <!-- Tier 2 -->
+            <div class="tier-card">
+                <div class="tier-number">
+                    <span class="en">Tier 02</span>
+                    <span class="zh">等級二</span>
+                </div>
+                <div class="tier-name">
+                    <span class="en">Project Blueprint</span>
+                    <span class="zh">專案藍圖</span>
+                </div>
+                <p class="tier-tagline">
+                    <span class="en">A complete technical plan — so you know exactly what to build, who to involve, and what it'll cost.</span>
+                    <span class="zh">完整的技術方案，讓你知道要花多少、要找誰、要做什麼。</span>
+                </p>
+                <div class="tier-includes">
+                    <div class="tier-includes-label">
+                        <span class="en">Includes</span>
+                        <span class="zh">包含</span>
+                    </div>
+                    <ul class="tier-items">
+                        <li>
+                            <span class="en">Technical spec document</span>
+                            <span class="zh">技術方案文件</span>
+                        </li>
+                        <li>
+                            <span class="en">BOM cost estimation</span>
+                            <span class="zh">BOM 預估</span>
+                        </li>
+                        <li>
+                            <span class="en">Timeline planning</span>
+                            <span class="zh">時程規劃</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tier-divider"></div>
+                <div class="tier-price">
+                    <span class="en">From NT$15,000</span>
+                    <span class="zh">NT$15,000 起</span>
+                </div>
+            </div>
+
+            <!-- Tier 3 -->
+            <div class="tier-card">
+                <div class="tier-number">
+                    <span class="en">Tier 03</span>
+                    <span class="zh">等級三</span>
+                </div>
+                <div class="tier-name">
+                    <span class="en">Full Execution</span>
+                    <span class="zh">執行合作</span>
+                </div>
+                <p class="tier-tagline">
+                    <span class="en">From blueprint to finished product. I stay with you the whole way — the blueprint fee applies toward the project.</span>
+                    <span class="zh">從藍圖到成品，我陪你走完。藍圖費可折抵專案費用。</span>
+                </p>
+                <div class="tier-includes">
+                    <div class="tier-includes-label">
+                        <span class="en">Includes</span>
+                        <span class="zh">包含</span>
+                    </div>
+                    <ul class="tier-items">
+                        <li>
+                            <span class="en">Full development &amp; execution</span>
+                            <span class="zh">完整開發執行</span>
+                        </li>
+                        <li>
+                            <span class="en">Mechanical, electronics, software as needed</span>
+                            <span class="zh">機械、電子、軟體全整合</span>
+                        </li>
+                        <li>
+                            <span class="en">Blueprint fee credited to project</span>
+                            <span class="zh">藍圖費折抵專案費用</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tier-divider"></div>
+                <div class="tier-price">
+                    <span class="en">Quoted per project</span>
+                    <span class="zh">依專案估價</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer CTA -->
+        <div class="services-cta fade-in-up delay-2">
+            <p>
+                <span class="en">Not sure which one fits? Figure out where you are first.</span>
+                <span class="zh">不確定你需要哪個？先釐清你的想法。</span>
+            </p>
+            <div class="cta-buttons">
+                <a href="diagnostic.html" class="btn">
+                    <span class="en">Start the Diagnostic</span>
+                    <span class="zh">開始診斷</span>
+                </a>
+                <a href="contact.html" class="btn-outline">
+                    <span class="en">Contact Directly</span>
+                    <span class="zh">直接聯絡</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-nav" style="text-align: center;">
+            <a href="index.html" class="lang-btn">
+                <span class="en">Back to Home</span>
+                <span class="zh">返回首頁</span>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const langBtn = document.getElementById('lang-toggle-btn');
+        const body = document.body;
+        langBtn.addEventListener('click', () => {
+            body.classList.toggle('chinese-mode');
+            langBtn.textContent = body.classList.contains('chinese-mode') ? 'English' : '中文';
+        });
+    </script>
+</body>
+
+</html>

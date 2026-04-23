@@ -4,61 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Austin Design | Industrial & Product Solutions</title>
+    <title>Austin | Stop thinking. Draw it. Build it.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZGMELF4GDL');
+    </script>
 </head>
 
-<body>
+<body class="lang-en chinese-mode">
     <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000;">
         <button id="lang-toggle-btn" class="lang-btn">English</button>
     </nav>
 
-    <main class="container">
-        <div class="content">
-            <h1 class="fade-in-up">
-                <span class="en">AUSTIN</span>
-                <span class="zh">Austin</span>
-            </h1>
-            <p class="subtitle fade-in-up delay">
-                <span class="en">You have something you want to build.<br>Let's figure out how to make it happen.</span>
-                <span class="zh">你有想做的東西。<br>我們來想怎麼搞定它。</span>
-            </p>
-            <a href="projects.html" class="btn fade-in-up delay">
+    <main style="max-width: 700px; margin: 0 auto; padding: 7rem 2rem 5rem; text-align: center;">
+
+        <!-- Hero -->
+        <h1 class="fade-in-up">
+            <span class="en">AUSTIN</span>
+            <span class="zh">Austin</span>
+        </h1>
+        <p class="subtitle fade-in-up delay">
+            <span class="en">Stop thinking. Draw it. Build it.</span>
+            <span class="zh">別想了，畫出來，做出來。</span>
+        </p>
+
+        <!-- Buttons -->
+        <div class="fade-in-up delay" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 4.5rem;">
+            <a href="projects.html" class="btn">
                 <span class="en">View Projects</span>
                 <span class="zh">看我的作品</span>
             </a>
-            <a href="contact.html" class="btn fade-in-up delay"
-                style="background-color: transparent; border: 1.5px solid var(--accent-color); color: var(--accent-color); margin-left: 1rem; box-shadow: none;">
+            <a href="services.html" class="btn"
+                style="background-color: transparent; border: 1.5px solid var(--accent-color); color: var(--accent-color); box-shadow: none;">
+                <span class="en">See Services</span>
+                <span class="zh">了解服務方案</span>
+            </a>
+            <a href="contact.html" class="btn"
+                style="background-color: transparent; border: 1.5px solid var(--accent-color); color: var(--accent-color); box-shadow: none;">
                 <span class="en">Let's Talk</span>
                 <span class="zh">聊聊你的需求</span>
             </a>
         </div>
 
-        <section class="about-section fade-in-up delay-2"
-            style="margin-top: 4rem; max-width: 800px; margin-left: auto; margin-right: auto; text-align: left;">
-            <h2>
+        <!-- About -->
+        <section class="fade-in-up delay-2" style="text-align: left; margin-bottom: 2.5rem;">
+            <h2 style="font-size: 1.6rem; margin-bottom: 1.25rem;">
                 <span class="en">What I Do</span>
                 <span class="zh">我能幫你做什麼</span>
             </h2>
-            <div class="about-text">
-                <p style="background: #fff3ec; border-left: 3px solid var(--accent-color); padding: 0.85rem 1.1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; color: #444; font-size: 1rem; line-height: 1.7;">
-                    <span class="en">Not just drawing or calculating — I stay with you from a rough idea all the way to something you can hold in your hands.</span>
-                    <span class="zh">不只是畫圖或算數——我陪你從一個模糊的想法，走到一個可以拿在手上的東西。</span>
+            <p style="font-size: 1.2rem; color: var(--text-color); line-height: 1.6; margin-bottom: 1.25rem; font-weight: 400;">
+                <span class="en">You have an idea but don't know how to build it.</span>
+                <span class="zh">你有想法，但不知道怎麼做出來。</span>
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <p style="line-height: 2; color: var(--text-secondary);">
+                    <span style="color: #e85d00; margin-right: 0.4rem;">✦</span>
+                    <span class="en">From sketch to prototype — I make ideas tangible</span>
+                    <span class="zh">從草圖到原型，我幫你把想法具體化</span>
                 </p>
-                <p>
-                    <span class="en">3D modeling, engineering drawings, structural & CFD analysis, prototyping, DFM, and basic circuit design. I work across disciplines so things don't fall apart at the handoff.</span>
-                    <span class="zh">3D 建模、工程圖、結構與流體分析、打樣、製造可行性評估、簡單電路設計——跨領域整合，讓每個環節都能接得起來。</span>
+                <p style="line-height: 2; color: var(--text-secondary);">
+                    <span style="color: #e85d00; margin-right: 0.4rem;">✦</span>
+                    <span class="en">Mechanical, electrical, prototyping — one person, end to end</span>
+                    <span class="zh">機構、電路、打樣，一個人整合到底</span>
                 </p>
-                <p>
-                    <span class="en">I work with hardware startups, makers, and manufacturers who want to build their own parts. You don't need a complete brief — a rough idea is enough to start a conversation.</span>
-                    <span class="zh">服務對象：硬體新創、創客、想自製零件的製造加工業者。不用準備完整需求，有個模糊的想法就可以來聊。</span>
+                <p style="line-height: 2; color: var(--text-secondary);">
+                    <span style="color: #e85d00; margin-right: 0.4rem;">✦</span>
+                    <span class="en">No spec sheet needed. No technical background required.</span>
+                    <span class="zh">不需要規格書，不需要你懂技術</span>
                 </p>
             </div>
         </section>
+
+        <!-- Diagnostic Entry -->
+        <section class="fade-in-up delay-3"
+            style="background: #fff3ec; border: 1.5px solid rgba(232,93,0,0.2); border-radius: 16px; padding: 2.5rem 2rem;">
+            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-color);">
+                <span class="en">Got an idea but not sure where to start?</span>
+                <span class="zh">有想法，但不知道從哪裡開始？</span>
+            </h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem;">
+                <span class="en">3 questions. 2 minutes. I'll help you figure out where to start.</span>
+                <span class="zh">花 2 分鐘回答 3 個問題，我幫你釐清方向。</span>
+            </p>
+            <a href="diagnostic.html" class="btn">
+                <span class="en">Let's Figure It Out</span>
+                <span class="zh">開始釐清</span>
+            </a>
+        </section>
+
     </main>
 
     <script>

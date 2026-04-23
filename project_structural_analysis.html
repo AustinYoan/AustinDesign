@@ -4,12 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Austin Design | Structural Mastery</title>
+    <title>結構分析 | Austin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZGMELF4GDL');
+    </script>
     <style>
         /* --- 互動圖片樣式 --- */
         .locked-wrap {
@@ -69,7 +77,11 @@
 </head>
 
 <body class="lang-en chinese-mode">
-    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000;">
+    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000; display: flex; gap: 1rem; align-items: center;">
+        <a href="index.html" class="lang-btn" style="text-decoration: none;">
+            <span class="en">Home</span>
+            <span class="zh">首頁</span>
+        </a>
         <button id="lang-toggle-btn" class="lang-btn">English</button>
     </nav>
 

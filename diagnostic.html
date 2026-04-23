@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>釐清你的想法 | Austin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZGMELF4GDL');
+    </script>
+    <style>
+        :root {
+            --bg:     #f7f5f2;
+            --text:   #1e1e1e;
+            --text2:  #666666;
+            --accent: #e85d00;
+            --card:   #ffffff;
+            --border: rgba(0,0,0,0.08);
+            --font:   'Outfit', sans-serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:var(--bg); color:var(--text); font-family:var(--font); min-height:100vh; }
+
+        /* bilingual */
+        body.chinese-mode .en { display:none; }
+        body:not(.chinese-mode) .zh { display:none; }
+
+        /* nav */
+        nav { position:fixed; top:0; right:0; padding:20px; z-index:1000; display:flex; gap:1rem; align-items:center; }
+        .nav-home { color:var(--text2); text-decoration:none; font-size:.9rem; transition:color .3s; }
+        .nav-home:hover { color:var(--accent); }
+        .lang-btn {
+            background:transparent; border:1.5px solid var(--accent); color:var(--accent);
+            padding:.4rem 1.2rem; border-radius:30px; font-family:var(--font); font-size:.9rem;
+            cursor:pointer; transition:all .3s;
+        }
+        .lang-btn:hover { background:var(--accent); color:#fff; }
+
+        /* page layout */
+        .page-wrap {
+            min-height:100vh; display:flex; flex-direction:column;
+            align-items:center; justify-content:center; padding:6rem 1.5rem 3rem;
+        }
+        .diag-card {
+            background:var(--card); border-radius:16px;
+            border:.5px solid var(--border); box-shadow:0 4px 24px rgba(0,0,0,.07);
+            max-width:680px; width:100%; padding:2.5rem 3rem;
+        }
+
+        /* progress */
+        .prog-wrap { margin-bottom:2rem; }
+        .prog-label { font-size:.78rem; color:var(--text2); margin-bottom:.6rem; text-transform:uppercase; letter-spacing:.05em; }
+        .prog-track { height:4px; background:var(--border); border-radius:4px; overflow:hidden; }
+        .prog-fill { height:100%; background:var(--accent); border-radius:4px; transition:width .5s cubic-bezier(.25,.8,.25,1); }
+        .prog-dots { display:flex; gap:.5rem; margin-top:.75rem; }
+        .dot { width:8px; height:8px; border-radius:50%; background:var(--border); transition:background .3s; }
+        .dot.active { background:var(--accent); }
+        .dot.done   { background:rgba(232,93,0,.35); }
+
+        /* screens */
+        .screen { display:none; }
+        .screen.visible { display:block; animation:slideUp .4s ease forwards; }
+        @keyframes slideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+        /* question */
+        .q-num  { font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--accent); margin-bottom:.75rem; }
+        .q-title { font-size:1.45rem; font-weight:700; line-height:1.4; margin-bottom:.5rem; }
+        .q-hint  { font-size:.9rem; color:var(--text2); margin-bottom:1.75rem; }
+
+        /* options */
+        .options { display:flex; flex-direction:column; gap:.75rem; margin-bottom:1.75rem; }
+        .opt {
+            background:var(--bg); border:1.5px solid var(--border); border-radius:10px;
+            padding:1rem 1.25rem; text-align:left; font-family:var(--font); font-size:1rem;
+            color:var(--text); cursor:pointer; transition:all .2s; line-height:1.5;
+        }
+        .opt:hover { border-color:var(--accent); background:#fff8f4; }
+        .opt.selected { border-color:var(--accent); background:#fff3ec; font-weight:700; }
+        .opt.selected::before { content:"✓ "; color:var(--accent); }
+        .opt.dimmed { opacity:.4; cursor:not-allowed; }
+        .opt.dimmed:hover { border-color:var(--border); background:var(--bg); }
+
+        /* textarea */
+        .ta-label { display:block; font-size:.85rem; color:var(--text2); margin-bottom:.6rem; }
+        textarea {
+            width:100%; padding:.85rem 1rem; font-family:var(--font); font-size:.95rem;
+            color:var(--text); background:var(--bg); border:1.5px solid var(--border);
+            border-radius:10px; resize:vertical; outline:none; line-height:1.6;
+            transition:border-color .2s;
+        }
+        textarea:focus { border-color:var(--accent); }
+
+        /* next button */
+        .next-btn {
+            background:var(--accent); color:#fff; border:none;
+            padding:.875rem 2.5rem; font-size:1rem; font-weight:700; border-radius:50px;
+            cursor:pointer; font-family:var(--font);
+            box-shadow:0 4px 15px rgba(232,93,0,.2);
+            opacity:.35; pointer-events:none; transition:all .3s;
+        }
+        .next-btn.on { opacity:1; pointer-events:all; }
+        .next-btn.on:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(232,93,0,.35); }
+
+        /* result shared */
+        .r-badge {
+            display:inline-block; background:rgba(232,93,0,.1); color:var(--accent);
+            font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em;
+            padding:.35rem .9rem; border-radius:30px; border:1px solid rgba(232,93,0,.25);
+            margin-bottom:1.25rem;
+        }
+        .r-title { font-size:1.6rem; font-weight:700; line-height:1.35; margin-bottom:1.25rem; }
+        .r-section { margin-bottom:1.5rem; }
+        .r-section-label { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--accent); margin-bottom:.5rem; }
+        .r-text { font-size:.97rem; line-height:1.8; color:var(--text2); }
+        .r-q3 {
+            background:#fff3ec; border-left:3px solid var(--accent); border-radius:0 8px 8px 0;
+            padding:.85rem 1.1rem; font-size:.95rem; line-height:1.7; color:var(--text);
+            margin-bottom:1.5rem;
+        }
+        .r-tags { display:flex; flex-wrap:wrap; gap:.45rem; margin-bottom:1.75rem; }
+        .r-tag { background:#f0f0ee; color:#555; font-size:.82rem; padding:.3rem .85rem; border-radius:20px; }
+        .r-divider { height:1px; background:var(--border); margin:1.5rem 0; }
+        .r-disclaimer { font-size:.87rem; color:var(--text2); font-style:italic; margin-bottom:1.5rem; }
+        .r-cta { display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+
+        /* cta buttons */
+        .btn-main {
+            display:inline-block; background:var(--accent); color:#fff; text-decoration:none;
+            padding:.875rem 2rem; font-size:1rem; font-weight:700; border-radius:50px;
+            box-shadow:0 4px 15px rgba(232,93,0,.2); transition:all .3s;
+        }
+        .btn-main:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(232,93,0,.35); }
+        .btn-sec {
+            display:inline-block; border:1.5px solid var(--border); color:var(--text);
+            text-decoration:none; padding:.875rem 1.75rem; font-size:.95rem; border-radius:50px; transition:all .3s;
+        }
+        .btn-sec:hover { border-color:var(--accent); color:var(--accent); }
+        .btn-restart {
+            background:none; border:none; color:var(--text2); font-family:var(--font);
+            font-size:.9rem; cursor:pointer; text-decoration:underline;
+            text-underline-offset:3px; padding:.5rem 0; transition:color .2s;
+        }
+        .btn-restart:hover { color:var(--accent); }
+
+        /* freetext result */
+        .ft-quote {
+            background:var(--bg); border-left:3px solid var(--accent); border-radius:0 8px 8px 0;
+            padding:.85rem 1.1rem; font-size:.95rem; line-height:1.7;
+            color:var(--text); margin-bottom:1.25rem; font-style:italic;
+        }
+        .email-label { display:block; font-size:.88rem; color:var(--text2); margin-bottom:.6rem; font-weight:700; }
+        .email-row { display:flex; gap:.6rem; margin-bottom:1.5rem; }
+        .email-input {
+            flex:1; padding:.75rem 1rem; font-family:var(--font); font-size:.95rem;
+            color:var(--text); background:var(--bg); border:1.5px solid var(--border);
+            border-radius:10px; outline:none; transition:border-color .2s;
+        }
+        .email-input:focus { border-color:var(--accent); }
+        .email-submit {
+            background:var(--accent); color:#fff; border:none;
+            padding:.75rem 1.5rem; font-family:var(--font); font-size:1rem; font-weight:700;
+            border-radius:10px; cursor:pointer; white-space:nowrap; transition:all .3s;
+        }
+        .email-submit:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(232,93,0,.3); }
+        .success-msg {
+            display:none; background:#f0faf0; border:1.5px solid #52c774;
+            border-radius:10px; padding:1rem 1.25rem;
+            font-size:.97rem; color:#1a6e2e; margin-bottom:1.5rem;
+        }
+
+        @media (max-width:600px) {
+            .diag-card { padding:2rem 1.5rem; }
+            .r-title { font-size:1.35rem; }
+            .q-title { font-size:1.3rem; }
+            .r-cta { flex-direction:column; align-items:flex-start; }
+            .email-row { flex-direction:column; }
+        }
+    </style>
+</head>
+
+<body class="lang-en chinese-mode">
+
+<nav>
+    <a href="index.html" class="nav-home">
+        <span class="en">← Home</span>
+        <span class="zh">← 首頁</span>
+    </a>
+    <button id="lang-btn" class="lang-btn">English</button>
+</nav>
+
+<div class="page-wrap">
+<div class="diag-card">
+
+    <!-- Progress -->
+    <div class="prog-wrap">
+        <div class="prog-label" id="prog-label">
+            <span class="en">Question 1 of 3</span>
+            <span class="zh">第 1 題，共 3 題</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:33%"></div></div>
+        <div class="prog-dots">
+            <div class="dot active" id="d1"></div>
+            <div class="dot" id="d2"></div>
+            <div class="dot" id="d3"></div>
+        </div>
+    </div>
+
+    <!-- ── Q1 ─────────────────────────────────────────────── -->
+    <div class="screen visible" id="q1">
+        <div class="q-num"><span class="en">Question 1</span><span class="zh">第一題</span></div>
+        <h2 class="q-title">
+            <span class="en">Where are you right now?</span>
+            <span class="zh">你目前在哪個階段？</span>
+        </h2>
+        <p class="q-hint">
+            <span class="en">Pick the one that fits best.</span>
+            <span class="zh">選最接近你現況的那個。</span>
+        </p>
+        <div class="options">
+            <button class="opt" data-q="1" data-val="A">
+                <span class="en">I have an idea or sketch, not sure if it's buildable</span>
+                <span class="zh">只有想法或草圖，還不確定能不能做</span>
+            </button>
+            <button class="opt" data-q="1" data-val="B">
+                <span class="en">I have a rough prototype, need help refining it</span>
+                <span class="zh">已有雛形或概念，需要有人幫我優化</span>
+            </button>
+            <button class="opt" data-q="1" data-val="C">
+                <span class="en">Direction is set, need to integrate mechanical / electrical / software</span>
+                <span class="zh">產品方向確定，需要整合機械／電路／軟體</span>
+            </button>
+        </div>
+        <button class="next-btn" id="next1">
+            <span class="en">Next →</span><span class="zh">下一題 →</span>
+        </button>
+    </div>
+
+    <!-- ── Q2 ─────────────────────────────────────────────── -->
+    <div class="screen" id="q2">
+        <div class="q-num"><span class="en">Question 2</span><span class="zh">第二題</span></div>
+        <h2 class="q-title">
+            <span class="en">What's your project mainly about?</span>
+            <span class="zh">你的專案主要涉及哪些？</span>
+        </h2>
+        <p class="q-hint">
+            <span class="en">Pick up to 3.</span>
+            <span class="zh">最多選 3 個。</span>
+        </p>
+        <div class="options">
+            <button class="opt" data-q="2" data-val="mech">
+                <span class="en">Mechanical structure / form design</span>
+                <span class="zh">機械結構 / 外觀造型</span>
+            </button>
+            <button class="opt" data-q="2" data-val="elec">
+                <span class="en">Electronics / sensors</span>
+                <span class="zh">電子電路 / 感測器</span>
+            </button>
+            <button class="opt" data-q="2" data-val="soft">
+                <span class="en">Software / cloud / mobile integration</span>
+                <span class="zh">軟體 / 雲端 / 手機連動</span>
+            </button>
+            <button class="opt" data-q="2" data-val="sim">
+                <span class="en">Fluid / thermal / structural analysis</span>
+                <span class="zh">流體 / 熱 / 結構分析</span>
+            </button>
+            <button class="opt" data-q="2" data-val="proto">
+                <span class="en">Prototyping / manufacturing (injection, CNC, 3D printing)</span>
+                <span class="zh">打樣 / 製造工藝（射出、CNC、3D 列印）</span>
+            </button>
+        </div>
+        <div style="margin-bottom:1.5rem;">
+            <label class="ta-label">
+                <span class="en">Or describe it in your own words (optional)</span>
+                <span class="zh">或是用你自己的話描述（選填）</span>
+            </label>
+            <textarea id="q2-text" rows="3"
+                placeholder="例如：我想做一台可以自動分類的機器…"></textarea>
+        </div>
+        <button class="next-btn" id="next2">
+            <span class="en">Next →</span><span class="zh">下一題 →</span>
+        </button>
+    </div>
+
+    <!-- ── Q3 ─────────────────────────────────────────────── -->
+    <div class="screen" id="q3">
+        <div class="q-num"><span class="en">Question 3</span><span class="zh">第三題</span></div>
+        <h2 class="q-title">
+            <span class="en">What worries you most?</span>
+            <span class="zh">你最擔心的是什麼？</span>
+        </h2>
+        <p class="q-hint">
+            <span class="en">Pick the one that hits hardest.</span>
+            <span class="zh">選最讓你卡住的那個。</span>
+        </p>
+        <div class="options">
+            <button class="opt" data-q="3" data-val="feasible">
+                <span class="en">Not sure if this idea is actually buildable</span>
+                <span class="zh">不知道這個想法能不能被做出來</span>
+            </button>
+            <button class="opt" data-q="3" data-val="vendor">
+                <span class="en">Tried vendors before — they couldn't do it or got it wrong</span>
+                <span class="zh">找過廠商但做不到，或做出來不對</span>
+            </button>
+            <button class="opt" data-q="3" data-val="budget">
+                <span class="en">No idea about budget or timeline</span>
+                <span class="zh">預算和時程完全沒概念</span>
+            </button>
+            <button class="opt" data-q="3" data-val="start">
+                <span class="en">Don't know where to begin</span>
+                <span class="zh">不知道從哪個步驟開始</span>
+            </button>
+        </div>
+        <button class="next-btn" id="next3">
+            <span class="en">See My Results →</span><span class="zh">看結果 →</span>
+        </button>
+    </div>
+
+    <!-- ── Result: Freetext branch ────────────────────────── -->
+    <div class="screen" id="res-freetext">
+        <div class="r-badge">
+            <span class="en">Needs a closer look</span>
+            <span class="zh">需要進一步了解</span>
+        </div>
+        <h2 class="r-title">
+            <span class="en">What you described needs a real look before I can give you a useful direction.</span>
+            <span class="zh">你說的這件事，我需要親自看過才能給你準確的方向。</span>
+        </h2>
+        <div class="ft-quote" id="ft-quote"></div>
+        <p class="r-text" style="margin-bottom:1.5rem;">
+            <span class="en">This kind of requirement usually goes beyond a standard framework. A form can't give you a meaningful answer here. I'll review what you've written and get back to you within 24 hours.</span>
+            <span class="zh">這類需求通常超出標準框架，用表單沒辦法給你一個有意義的答案。我會在 24 小時內看過你的描述，直接回覆你。</span>
+        </p>
+        <div id="ft-form">
+            <label class="email-label">
+                <span class="en">Leave your email and I'll reach out directly</span>
+                <span class="zh">留下你的 Email，我主動聯絡你</span>
+            </label>
+            <div class="email-row">
+                <input type="email" id="ft-email" class="email-input" placeholder="your@email.com" />
+                <button class="email-submit" id="ft-send">
+                    <span class="en">Send</span><span class="zh">送出</span>
+                </button>
+            </div>
+        </div>
+        <div class="success-msg" id="ft-success">
+            <span class="en">✓ Got it. I'll get back to you within 24 hours.</span>
+            <span class="zh">✓ 收到了。我會在 24 小時內回覆你。</span>
+        </div>
+        <button class="btn-restart" id="restart-ft">
+            <span class="en">Start over</span><span class="zh">重新開始</span>
+        </button>
+    </div>
+
+    <!-- ── Result: Static branch ──────────────────────────── -->
+    <div class="screen" id="res-static">
+        <div class="r-badge">
+            <span class="en">Your Starting Point</span>
+            <span class="zh">初步方向</span>
+        </div>
+        <h2 class="r-title" id="r-title"></h2>
+        <div class="r-section">
+            <div class="r-section-label">
+                <span class="en">Blind spot to watch</span>
+                <span class="zh">常見盲點</span>
+            </div>
+            <p class="r-text" id="r-blind"></p>
+        </div>
+        <div class="r-section">
+            <div class="r-section-label">
+                <span class="en">Recommended first step</span>
+                <span class="zh">建議的第一步</span>
+            </div>
+            <p class="r-text" id="r-step"></p>
+        </div>
+        <div class="r-q3" id="r-q3"></div>
+        <div class="r-tags" id="r-tags"></div>
+        <div class="r-divider"></div>
+        <p class="r-disclaimer">
+            <span class="en">This is just an initial direction. A full assessment requires understanding more about your project.</span>
+            <span class="zh">這只是初步方向。完整評估需要進一步了解你的專案細節。</span>
+        </p>
+        <div class="r-cta">
+            <a href="contact.html" class="btn-main"
+                onclick="if(typeof gtag==='function'){gtag('event','contact_click',{'source':'diagnostic_result'})}">
+                <span class="en">Book a 30-min Feasibility Check</span>
+                <span class="zh">預約 30 分鐘，確認可行性</span>
+            </a>
+            <a href="projects.html" class="btn-sec">
+                <span class="en">See my past projects</span>
+                <span class="zh">先看看我做過的案子</span>
+            </a>
+            <button class="btn-restart" id="restart-static">
+                <span class="en">Start over</span><span class="zh">重新開始</span>
+            </button>
+        </div>
+    </div>
+
+</div><!-- .diag-card -->
+</div><!-- .page-wrap -->
+
+<script>
+// ── Language ──────────────────────────────────────────────────────────
+const pageBody = document.body;
+const langBtn  = document.getElementById('lang-btn');
+const q2text   = document.getElementById('q2-text');
+const PH = {
+    zh: '例如：我想做一台可以自動分類的機器…',
+    en: 'e.g. I want to build a machine that automatically sorts items...'
+};
+langBtn.addEventListener('click', () => {
+    pageBody.classList.toggle('chinese-mode');
+    const ch = pageBody.classList.contains('chinese-mode');
+    langBtn.textContent = ch ? 'English' : '中文';
+    q2text.placeholder  = ch ? PH.zh : PH.en;
+});
+
+// ── State ─────────────────────────────────────────────────────────────
+const st = { q1: null, q2: [], q3: null, freetext: '' };
+
+// ── Options ───────────────────────────────────────────────────────────
+document.querySelectorAll('.opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const q   = btn.dataset.q;
+        const val = btn.dataset.val;
+        if (q === '2') {
+            if (btn.classList.contains('selected')) {
+                btn.classList.remove('selected');
+                st.q2 = st.q2.filter(v => v !== val);
+            } else {
+                if (st.q2.length >= 3) return;
+                btn.classList.add('selected');
+                st.q2.push(val);
+            }
+            document.querySelectorAll('[data-q="2"]').forEach(b =>
+                b.classList.toggle('dimmed', !b.classList.contains('selected') && st.q2.length >= 3));
+            document.getElementById('next2').classList.toggle('on', st.q2.length > 0);
+        } else {
+            document.querySelectorAll(`[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            if (q === '1') { st.q1 = val; document.getElementById('next1').classList.add('on'); }
+            if (q === '3') { st.q3 = val; document.getElementById('next3').classList.add('on'); }
+        }
+    });
+});
+
+// ── Progress ──────────────────────────────────────────────────────────
+const PROG_LABELS = {
+    zh: { 1:'第 1 題，共 3 題', 2:'第 2 題，共 3 題', 3:'第 3 題，共 3 題', 4:'完成' },
+    en: { 1:'Question 1 of 3',  2:'Question 2 of 3',  3:'Question 3 of 3',  4:'Done' }
+};
+function goTo(id, step) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('visible'));
+    document.getElementById(id).classList.add('visible');
+    document.getElementById('prog-fill').style.width = ({1:'33%',2:'66%',3:'100%',4:'100%'})[step] || '33%';
+    document.getElementById('prog-label').innerHTML =
+        `<span class="en">${PROG_LABELS.en[step]}</span><span class="zh">${PROG_LABELS.zh[step]}</span>`;
+    [1,2,3].forEach(i => {
+        const d = document.getElementById('d'+i);
+        d.className = 'dot';
+        if (i < step) d.classList.add('done');
+        else if (i === step) d.classList.add('active');
+    });
+}
+
+// ── Navigation ────────────────────────────────────────────────────────
+document.getElementById('next1').addEventListener('click', () => goTo('q2', 2));
+document.getElementById('next2').addEventListener('click', () => { st.freetext = q2text.value.trim(); goTo('q3', 3); });
+document.getElementById('next3').addEventListener('click', () => showResult());
+
+// ── Result key logic ──────────────────────────────────────────────────
+function getKey(q1, q2) {
+    const hasMech = q2.includes('mech');
+    const hasElec = q2.includes('elec');
+    const hasSoft = q2.includes('soft');
+    const hasSim  = q2.includes('sim');
+    const n = q2.length;
+    if (n >= 3)                            return q1 + '_multi';
+    if (hasMech && hasElec)                return q1 + '_mechElec';
+    if (hasMech && hasSoft && q1 === 'A')  return 'A_mechSoft';
+    if (hasSim  && q1 === 'B')             return 'B_withSim';
+    if (n === 1 && hasMech)                return q1 + '_mech';
+    if (n === 1 && hasElec)                return q1 + '_elec';
+    if (n === 1 && hasSoft && q1 === 'A')  return 'A_soft';
+    return q1 + '_multi';
+}
+
+// ── Results data (15 combinations) ───────────────────────────────────
+const RESULTS = {
+    A_mech: {
+        zh:{ title:'先確認怎麼做，再來談做什麼。',
+             blind:'機械案子的成本差距，通常不是在設計，而是在製造工藝的選擇。射出、CNC、3D 列印，三種工藝做出來的東西可能長一樣，但成本差到十倍。這件事要在設計初期就決定，不能等圖畫好了再來想。',
+             step: '先畫一張草圖，標出哪些地方要動、哪些地方要固定。不需要精確，但要讓我看得出結構的邏輯。' },
+        en:{ title:'First figure out how. Then we\'ll figure out what.',
+             blind:'The cost difference in mechanical projects usually isn\'t in the design — it\'s in the manufacturing process. Injection molding, CNC, and 3D printing can produce similar results, but the cost gap can be 10x. This needs to be decided early, not after the drawings are done.',
+             step: 'Sketch out which parts need to move and which need to be fixed. It doesn\'t need to be precise — just enough to show the structural logic.' }
+    },
+    A_elec: {
+        zh:{ title:'先確認有沒有現成的，再來談要不要自己做。',
+             blind:'很多人以為做電路就是從頭設計一塊板子，但大部分的功能都有現成模組可以用，尤其是在驗證想法的階段。先用現成模組快速做出可以動的東西，確認方向對了，再來談客製化，才不會花時間在錯的事情上。',
+             step: '把你想要這個裝置做到的事情，用一句話說清楚。不是技術規格，是它要解決什麼問題。' },
+        en:{ title:'Check what\'s already out there before deciding to build from scratch.',
+             blind:'Most people think building electronics means designing a PCB from scratch. But most functions have off-the-shelf modules — especially for idea validation. Get something working first, confirm the direction is right, then think about custom design.',
+             step: 'Describe in one sentence what you want this device to do — not in technical specs, but what problem it solves.' }
+    },
+    A_soft: {
+        zh:{ title:'先定義資料怎麼流，再來談功能要什麼。',
+             blind:'純軟體或雲端的專案，最常卡住的地方不是功能做不出來，而是一開始沒有想清楚「資料從哪裡來、往哪裡去、誰能看到」。這三件事想清楚之前，列出來的功能清單通常只是在繞圈子。',
+             step: '畫一張最簡單的流程圖：使用者做了什麼動作，系統應該發生什麼事。這比任何功能清單都有用。' },
+        en:{ title:'Define the data flow first. Features come after.',
+             blind:'Software and cloud projects usually don\'t stall because features can\'t be built — they stall because no one defined where data comes from, where it goes, and who can access it. Without clarity on these three things, your feature list is just going in circles.',
+             step: 'Draw the simplest flow: what the user does, what the system should do in response. This is worth more than any feature list.' }
+    },
+    A_mechElec: {
+        zh:{ title:'這兩件事要同時想，不能一件一件來。',
+             blind:'機械和電路分開設計是最常見的陷阱。最後外殼做好了，PCB 塞不進去；或者板子做好了，沒有地方走線。整合問題不是到最後才會出現的，它從第一張草圖就要開始考慮。',
+             step: '先決定最大的限制是什麼：體積、重量、還是預算？這個限制會決定機械和電路各自能有多少空間。' },
+        en:{ title:'These two need to be designed together, not one after the other.',
+             blind:'Designing the mechanical and electrical parts separately is the most common trap. The enclosure is done but the PCB doesn\'t fit, or the board is done but there\'s nowhere to route the cables. Integration problems don\'t appear at the end — they start from the first sketch.',
+             step: 'First decide what the biggest constraint is: size, weight, or budget? This determines how much space the mechanical and electrical sides each get.' }
+    },
+    A_mechSoft: {
+        zh:{ title:'機械和軟體之間，有一塊你可能忘了。',
+             blind:'機械和軟體要溝通，中間一定需要一塊控制板——收感測器的資料、驅動馬達、跟雲端說話。這塊如果沒有在一開始就規劃進去，後面銜接會很麻煩，甚至要整個重來。',
+             step: '列出這個裝置要「感知」什麼、要「執行」什麼。這兩個清單，就是控制板需要處理的事情。' },
+        en:{ title:'There\'s a piece between mechanical and software you might have missed.',
+             blind:'For mechanical and software to communicate, you need a control board in between — to read sensor data, drive motors, and talk to the cloud. If this isn\'t planned from the start, the integration gets messy, and sometimes you have to start over.',
+             step: 'List what this device needs to sense and what it needs to actuate. Those two lists define what the control board needs to handle.' }
+    },
+    A_multi: {
+        zh:{ title:'這個專案需要有人從一開始就看全局。',
+             blind:'涉及越多領域，整合的複雜度是倍增的，不是相加的。每個部分可能各自做得很好，但交接的地方才是真正的風險所在。這種案子最常出現的問題是：每個廠商都說自己沒問題，但東西就是湊不起來。',
+             step: '先把你的想法拆成幾個獨立的子系統，每個子系統用一句話描述它要做什麼。這樣我才能判斷整合點在哪裡。' },
+        en:{ title:'This project needs someone watching the big picture from day one.',
+             blind:'The more domains involved, the complexity multiplies — it doesn\'t just add. Each part might work fine on its own, but the interfaces between them are where the real risk lives. The most common problem: every vendor says their part is fine, but nothing fits together.',
+             step: 'Break your idea into separate subsystems, and describe each one in a sentence. That\'s how I can identify where the integration risks are.' }
+    },
+    B_mech: {
+        zh:{ title:'方向對了。現在的問題是怎麼少打一輪樣。',
+             blind:'雛形階段的機械案子，最浪費時間的事情通常是「改了這裡，那裡又跑掉」。在修改之前做一次結構模擬，可以在電腦上先找出弱點，不用等到打樣出來才知道要改哪裡。',
+             step: '把你目前覺得最不確定的地方標出來——是強度、是組裝方式、還是公差？先從那裡開始優化。' },
+        en:{ title:'Direction is right. Now the question is how to skip a round of prototyping.',
+             blind:'At the prototype stage, the biggest time sink is usually \'fix one thing, another breaks.\' Running a structural simulation before making changes lets you find weaknesses on screen — you don\'t have to wait for a prototype to know what needs fixing.',
+             step: 'Mark the part you\'re most uncertain about — is it strength, assembly method, or tolerances? Start the optimization there.' }
+    },
+    B_elec: {
+        zh:{ title:'雛形能動了。現在要確認它能一直動。',
+             blind:'雛形 PCB 最常遇到的兩個問題：散熱和訊號干擾。在實驗室環境下可以，放到真實環境裡就出問題。這兩件事在正式版的 PCB 設計之前要先測過，不然量產之後才發現，成本會很高。',
+             step: '讓你的雛形在模擬真實使用環境的條件下跑一段時間。溫度、振動、電源波動——看看哪個條件會讓它出問題。' },
+        en:{ title:'The prototype works. Now make sure it keeps working.',
+             blind:'Prototype PCBs most commonly fail at two things: heat dissipation and signal interference. Works fine in a lab, breaks in the real world. Both need to be tested before committing to production PCB design — finding out after manufacturing is expensive.',
+             step: 'Run your prototype under conditions that simulate real-world use. Temperature, vibration, power fluctuation — see which condition makes it fail.' }
+    },
+    B_mechElec: {
+        zh:{ title:'兩個分開都能動，不代表整合在一起沒問題。',
+             blind:'機械和電路的整合測試，最常出現的問題是在介面的地方：連接器鬆動、走線被機構夾到、震動讓接點接觸不良。這些問題在桌上測試看不出來，要放到實際的組裝狀態下才會現形。',
+             step: '把兩個部分組裝在一起，模擬最極端的使用情境——最大的力、最快的動作、最長的連續運作時間。先讓它在受控環境下出問題。' },
+        en:{ title:'Both working separately doesn\'t mean they\'ll work together.',
+             blind:'Integration testing between mechanical and electrical most commonly fails at the interfaces: loose connectors, wires pinched by mechanisms, vibration causing poor contact. These don\'t show up on a bench — they appear in actual assembled conditions.',
+             step: 'Assemble both parts and simulate the most extreme use case — maximum force, fastest motion, longest continuous run. Let it fail in a controlled environment first.' }
+    },
+    B_withSim: {
+        zh:{ title:'你有考慮到模擬這件事，這已經比大部分人想得多了。',
+             blind:'很多人做模擬是為了「確認沒問題」，但模擬最大的價值其實是「找出你沒想到的問題」。如果模擬結果跟你預期的一樣，那只是確認；如果不一樣，那才是值錢的地方。',
+             step: '先跑一次最壞情況的模擬——最大載荷、最高溫、最長使用時間。如果這個都過了，其他情況就不用太擔心。' },
+        en:{ title:'You\'re already thinking about simulation. That puts you ahead of most.',
+             blind:'Most people run simulations to confirm everything\'s fine. But the real value of simulation is finding problems you didn\'t expect. If the results match your expectations, that\'s just confirmation. If they don\'t — that\'s where the value is.',
+             step: 'Run a worst-case simulation first — maximum load, highest temperature, longest use time. If it passes that, the other conditions are much less of a concern.' }
+    },
+    B_multi: {
+        zh:{ title:'每個子系統各自沒問題，不代表整合在一起沒問題。',
+             blind:'複雜系統的雛形階段，最常出現的問題是「各自為政」——機械的人改了機構，沒有通知電路的人；軟體更新了協定，硬體還沒跟上。需要有人在這個階段統一管理所有子系統的介面定義。',
+             step: '把每個子系統之間的「介面」列清楚：誰傳什麼訊號給誰、用什麼格式、誰負責定義。這份清單是整合測試的基礎。' },
+        en:{ title:'Every subsystem working doesn\'t mean the whole system works.',
+             blind:'In complex system prototypes, the most common problem is misalignment — the mechanical side changes something without telling the electrical side; software updates a protocol before hardware catches up. Someone needs to own the interface definitions across all subsystems.',
+             step: 'List the interfaces between each subsystem: who sends what signal to whom, in what format, and who defines it. This list is the foundation of integration testing.' }
+    },
+    C_mech: {
+        zh:{ title:'準備量產，現在最重要的事叫做 DFM。',
+             blind:'DFM（可製造性設計）的意思是：你的設計，在量產的時候能不能被穩定地做出來？很多設計在打樣時沒問題，量產之後良率卻很低，原因通常是公差設得太緊、組裝步驟太複雜、或是材料在量產時難以取得。這些問題要在送模具之前解決。',
+             step: '找一家你打算合作的製造商，請他們對你目前的設計做一次 DFM review。他們指出的問題，比任何工程師的意見都直接。' },
+        en:{ title:'Ready for production. The most important thing now is DFM.',
+             blind:'DFM (Design for Manufacturability) means: can your design be produced consistently at scale? Many designs pass prototyping but fail in mass production — tolerances too tight, assembly too complex, or materials hard to source at volume. These need to be solved before tooling.',
+             step: 'Find a manufacturer you plan to work with and ask them to do a DFM review on your current design. The problems they flag are more direct than any engineer\'s opinion.' }
+    },
+    C_elec: {
+        zh:{ title:'設計做好了，供應鏈的風險你確認過嗎？',
+             blind:'量產 PCB 最常出現的意外不是設計問題，而是零件停產或長交期。你設計裡用的某顆 IC，可能在你要量產的時候突然缺貨或漲價。在確認量產之前，把 BOM 裡的每一個關鍵零件都確認一次替代料，是省掉後面很多麻煩的事。',
+             step: '把你的 BOM 裡面所有單一供應商的零件找出來，確認每一個都有替代料。沒有替代料的，要評估換掉的影響。' },
+        en:{ title:'Design is done. Have you checked the supply chain risk?',
+             blind:'The most common surprise in PCB production isn\'t design — it\'s component discontinuation or long lead times. An IC in your design might be out of stock or doubled in price when you\'re ready to produce. Before committing to production, confirm alternate sources for every critical component in your BOM.',
+             step: 'Find every single-source component in your BOM and confirm alternates for each. For those without alternates, evaluate the impact of switching.' }
+    },
+    C_mechElec: {
+        zh:{ title:'整合是最後一哩路，也最容易在這裡出問題。',
+             blind:'機械和電路各自量產，最後組裝的時候才發現公差累積導致配合有問題，這是最常見也最貴的教訓。解決方法是在量產之前做一次「首件組裝測試」：用第一批量產件走一遍完整的組裝流程，把所有介面問題在大量生產之前找出來。',
+             step: '在正式量產之前，先做 10–20 套的試產，走完整個組裝流程，記錄所有遇到的問題。這 10–20 套的成本，會幫你省掉後面 1000 套的麻煩。' },
+        en:{ title:'Integration is the last mile — and where most things go wrong.',
+             blind:'Manufacturing mechanical and electrical parts separately, then discovering tolerance stack-up issues during final assembly — this is the most common and most expensive lesson. The fix is a first article assembly test before full production: go through the complete assembly process to find all interface issues before mass production.',
+             step: 'Before full production, do a pilot run of 10–20 units and go through the complete assembly. Document every issue. The cost of those 10–20 units will save you from problems in the next 1,000.' }
+    },
+    C_multi: {
+        zh:{ title:'系統整合做好了，量產才有意義。',
+             blind:'多系統整合的量產，最常出現的問題是「單獨測試都過，整合測試就出問題」。原因通常是每個子系統各自定義了自己的邊界條件，但整合在一起的時候邊界條件衝突了。這個問題要在量產前的系統整合測試階段解決，不能帶進量產。',
+             step: '做一份系統整合測試清單，列出每個子系統在整合狀態下要通過哪些測試。這份清單要在量產前全部打勾。' },
+        en:{ title:'Get system integration right first. Then production makes sense.',
+             blind:'In multi-system production, the most common problem is \'passes individual tests, fails integrated testing.\' Usually because each subsystem defined its own boundary conditions, which conflict when put together. This must be resolved in pre-production system integration testing — it can\'t go into production.',
+             step: 'Create a system integration test checklist — for each subsystem, what tests does it need to pass in integrated state. Every item needs to be checked off before production.' }
+    }
+};
+
+// ── Q3 overlays ───────────────────────────────────────────────────────
+const Q3TEXT = {
+    feasible: {
+        zh:'可行性是第一步要確認的事。有些想法看起來很難，其實有現成解法；有些看起來簡單，細節藏著大坑。這正是諮詢要做的事。',
+        en:'Feasibility is the first thing to confirm. Some ideas that seem hard have existing solutions; some that seem simple hide serious complications. That\'s exactly what a consultation is for.'
+    },
+    vendor: {
+        zh:'這通常有兩個原因：需求沒說清楚，或找錯人了。兩件事都可以解決，但要先知道是哪一個。',
+        en:'This usually has two causes: the requirements weren\'t clear enough, or you found the wrong vendor. Both are fixable — but first you need to know which one it is.'
+    },
+    budget: {
+        zh:'這很正常。大部分人在這個階段都沒概念。諮詢之後我會給你一個範圍——不是精確報價，但夠你判斷要不要繼續推進。',
+        en:'That\'s normal. Most people at this stage don\'t have a clear idea. After a consultation I\'ll give you a range — not an exact quote, but enough to decide whether to move forward.'
+    },
+    start: {
+        zh:'你已經走完第一步了。大部分人卡在這裡是因為選項太多、不知道哪個優先。我來幫你排順序。',
+        en:'You\'ve already taken the first step. Most people get stuck here because there are too many options and no clear priority. I\'ll help you sort that out.'
+    }
+};
+
+const TAG_LABELS = {
+    mech:  { zh:'機械結構 / 外觀造型',    en:'Mechanical / Form Design' },
+    elec:  { zh:'電子電路 / 感測器',       en:'Electronics / Sensors' },
+    soft:  { zh:'軟體 / 雲端 / 手機連動',  en:'Software / Cloud / Mobile' },
+    sim:   { zh:'流體 / 熱 / 結構分析',    en:'Simulation / Analysis' },
+    proto: { zh:'打樣 / 製造工藝',          en:'Prototyping / Manufacturing' }
+};
+
+// ── Show result ───────────────────────────────────────────────────────
+function showResult() {
+    // GA4 conversion event
+    if (typeof gtag === 'function') {
+        gtag('event', 'diagnostic_complete', {
+            'stage':   st.q1,
+            'concern': st.q3
+        });
+    }
+    if (st.freetext) {
+        showFreetextResult();
+        goTo('res-freetext', 4);
+    } else {
+        showStaticResult();
+        goTo('res-static', 4);
+    }
+}
+
+function showFreetextResult() {
+    const escaped = st.freetext.replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'})[c]);
+    document.getElementById('ft-quote').innerHTML =
+        `<span class="en">You described: "${escaped}"</span>` +
+        `<span class="zh">你描述的：「${escaped}」</span>`;
+    document.getElementById('ft-form').style.display    = 'block';
+    document.getElementById('ft-success').style.display = 'none';
+    document.getElementById('ft-email').value = '';
+    document.getElementById('ft-email').style.borderColor = '';
+}
+
+function showStaticResult() {
+    const key = getKey(st.q1, st.q2);
+    const r   = RESULTS[key];
+    if (!r) return;
+
+    document.getElementById('r-title').innerHTML =
+        `<span class="en">${r.en.title}</span><span class="zh">${r.zh.title}</span>`;
+    document.getElementById('r-blind').innerHTML =
+        `<span class="en">${r.en.blind}</span><span class="zh">${r.zh.blind}</span>`;
+    document.getElementById('r-step').innerHTML =
+        `<span class="en">${r.en.step}</span><span class="zh">${r.zh.step}</span>`;
+
+    const q3el = document.getElementById('r-q3');
+    const q3   = Q3TEXT[st.q3];
+    if (q3) {
+        q3el.innerHTML = `<span class="en">${q3.en}</span><span class="zh">${q3.zh}</span>`;
+        q3el.style.display = 'block';
+    } else {
+        q3el.style.display = 'none';
+    }
+
+    const tagsEl = document.getElementById('r-tags');
+    tagsEl.innerHTML = '';
+    st.q2.forEach(val => {
+        if (TAG_LABELS[val]) {
+            const span = document.createElement('span');
+            span.className = 'r-tag';
+            span.innerHTML = `<span class="en">${TAG_LABELS[val].en}</span><span class="zh">${TAG_LABELS[val].zh}</span>`;
+            tagsEl.appendChild(span);
+        }
+    });
+}
+
+// ── Freetext email submit ─────────────────────────────────────────────
+document.getElementById('ft-send').addEventListener('click', () => {
+    const emailEl = document.getElementById('ft-email');
+    const addr    = emailEl.value.trim();
+    if (!addr || !addr.includes('@')) {
+        emailEl.style.borderColor = '#cc0000';
+        emailEl.focus();
+        return;
+    }
+    emailEl.style.borderColor = '';
+
+    const subject  = '新專案諮詢｜Austin 診斷工具';
+    const msgBody  = `來自：${addr}\n\n描述：${st.freetext}\n\n第一題：${st.q1}\n第二題勾選：${st.q2.join(', ')}`;
+    window.location.href = `mailto:austinyoan@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msgBody)}`;
+
+    setTimeout(() => {
+        document.getElementById('ft-form').style.display    = 'none';
+        document.getElementById('ft-success').style.display = 'block';
+    }, 400);
+});
+
+// ── Restart ───────────────────────────────────────────────────────────
+function restartAll() {
+    st.q1 = null; st.q2 = []; st.q3 = null; st.freetext = '';
+    document.querySelectorAll('.opt').forEach(b => b.classList.remove('selected','dimmed'));
+    document.querySelectorAll('.next-btn').forEach(b => b.classList.remove('on'));
+    q2text.value = '';
+    goTo('q1', 1);
+}
+document.getElementById('restart-static').addEventListener('click', restartAll);
+document.getElementById('restart-ft').addEventListener('click', restartAll);
+</script>
+</body>
+</html>
