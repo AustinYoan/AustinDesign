@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技術筆記 | Austin</title>
+    <meta name="description" content="做過的事、踩過的坑、想清楚的事。Austin 的工程技術筆記：嵌入式系統、CFD 模擬、製造工藝。">
+    <meta property="og:title" content="技術筆記 | Austin">
+    <meta property="og:description" content="做過的事、踩過的坑、想清楚的事。Things I've built, broken, and figured out.">
+    <meta property="og:url" content="https://austindesign.tw/blog.html">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZGMELF4GDL');
+    </script>
+    <style>
+        /* ── Page Layout ── */
+        .blog-page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 7rem 2rem 5rem;
+        }
+
+        /* ── Hero ── */
+        .blog-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .blog-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+        .blog-hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* ── Blog Grid ── */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        @media (max-width: 900px) {
+            .blog-grid { grid-template-columns: repeat(2, 1fr); }
+            .blog-hero h1 { font-size: 2rem; }
+        }
+        @media (max-width: 600px) {
+            .blog-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Blog Card ── */
+        .blog-card-wrap {
+            position: relative;
+        }
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.75rem;
+            border: 1.5px solid var(--border-color);
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            height: 100%;
+            box-sizing: border-box;
+        }
+        .blog-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 28px rgba(255, 102, 0, 0.12);
+        }
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+        .blog-card-date {
+            opacity: 0.6;
+        }
+        .blog-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .blog-card-tag {
+            font-size: 0.78rem;
+            color: var(--accent-color);
+            background: rgba(255, 102, 0, 0.08);
+            padding: 0.2rem 0.55rem;
+            border-radius: 20px;
+            font-weight: 400;
+        }
+        .blog-card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            line-height: 1.45;
+            color: var(--text-color);
+            margin: 0;
+        }
+        .blog-card-summary {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        /* ── Coming Soon Overlay ── */
+        .coming-soon-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.62);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .blog-card-wrap:hover .coming-soon-overlay {
+            opacity: 0.5;
+        }
+        .coming-soon-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #fff;
+            background: rgba(255, 102, 0, 0.85);
+            padding: 0.4rem 1.1rem;
+            border-radius: 30px;
+        }
+        .coming-soon-label .zh { font-style: normal; }
+        .coming-soon-label .en { font-style: normal; }
+
+        /* ── Footer Nav ── */
+        .blog-footer-nav {
+            text-align: center;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+
+<body class="lang-en chinese-mode">
+    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000; display: flex; gap: 1rem; align-items: center;">
+        <a href="index.html" class="lang-btn" style="text-decoration: none;">
+            <span class="en">Home</span>
+            <span class="zh">首頁</span>
+        </a>
+        <button id="lang-toggle-btn" class="lang-btn">English</button>
+    </nav>
+
+    <main class="blog-page">
+
+        <!-- Hero -->
+        <div class="blog-hero fade-in-up">
+            <h1>
+                <span class="zh">技術筆記</span>
+                <span class="en">Field Notes</span>
+            </h1>
+            <p>
+                <span class="zh">做過的事、踩過的坑、想清楚的事。</span>
+                <span class="en">Things I've built, broken, and figured out.</span>
+            </p>
+        </div>
+
+        <!-- Blog Cards -->
+        <div class="blog-grid fade-in-up delay">
+
+            <!-- Card 1: RS485 -->
+            <div class="blog-card-wrap">
+                <div class="blog-card">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-date">
+                            <span class="zh">即將發佈</span>
+                            <span class="en">Coming soon</span>
+                        </span>
+                    </div>
+                    <div class="blog-card-tags">
+                        <span class="blog-card-tag">#嵌入式系統</span>
+                        <span class="blog-card-tag">#硬體除錯</span>
+                    </div>
+                    <p class="blog-card-title">
+                        <span class="zh">RS485 通訊為什麼一直出問題</span>
+                        <span class="en">Why RS485 Keeps Failing You</span>
+                    </p>
+                    <p class="blog-card-summary">
+                        <span class="zh">終端電阻、接地、匹配阻抗——三個最常被忽略的原因。</span>
+                        <span class="en">Termination, grounding, impedance matching — the three things everyone skips.</span>
+                    </p>
+                </div>
+                <div class="coming-soon-overlay">
+                    <span class="coming-soon-label">
+                        <span class="zh">即將推出</span>
+                        <span class="en">Coming Soon</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Card 2: CFD -->
+            <div class="blog-card-wrap">
+                <div class="blog-card">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-date">
+                            <span class="zh">即將發佈</span>
+                            <span class="en">Coming soon</span>
+                        </span>
+                    </div>
+                    <div class="blog-card-tags">
+                        <span class="blog-card-tag">#CFD</span>
+                        <span class="blog-card-tag">#流體力學</span>
+                    </div>
+                    <p class="blog-card-title">
+                        <span class="zh">CFD 模擬前你應該先問的五個問題</span>
+                        <span class="en">5 Questions Before You Run Any CFD Simulation</span>
+                    </p>
+                    <p class="blog-card-summary">
+                        <span class="zh">模擬結果跟現實差很多？通常是邊界條件設錯了。</span>
+                        <span class="en">Results don't match reality? It's probably your boundary conditions.</span>
+                    </p>
+                </div>
+                <div class="coming-soon-overlay">
+                    <span class="coming-soon-label">
+                        <span class="zh">即將推出</span>
+                        <span class="en">Coming Soon</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Card 3: DFM -->
+            <div class="blog-card-wrap">
+                <div class="blog-card">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-date">
+                            <span class="zh">即將發佈</span>
+                            <span class="en">Coming soon</span>
+                        </span>
+                    </div>
+                    <div class="blog-card-tags">
+                        <span class="blog-card-tag">#製造工藝</span>
+                        <span class="blog-card-tag">#DFM</span>
+                    </div>
+                    <p class="blog-card-title">
+                        <span class="zh">從草圖到可以量產：DFM 到底在看什麼</span>
+                        <span class="en">From Sketch to Production: What DFM Actually Means</span>
+                    </p>
+                    <p class="blog-card-summary">
+                        <span class="zh">設計師最常踩的坑，是在打樣通過之後才發現量產做不了。</span>
+                        <span class="en">The most common trap: a prototype that passes, but can't be manufactured at scale.</span>
+                    </p>
+                </div>
+                <div class="coming-soon-overlay">
+                    <span class="coming-soon-label">
+                        <span class="zh">即將推出</span>
+                        <span class="en">Coming Soon</span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Nav -->
+        <div class="blog-footer-nav fade-in-up delay-2">
+            <a href="index.html" class="lang-btn" style="text-decoration: none;">
+                <span class="en">Back to Home</span>
+                <span class="zh">返回首頁</span>
+            </a>
+        </div>
+
+    </main>
+
+    <script>
+        const langBtn = document.getElementById('lang-toggle-btn');
+        const body = document.body;
+
+        langBtn.addEventListener('click', () => {
+            body.classList.toggle('chinese-mode');
+            langBtn.textContent = body.classList.contains('chinese-mode') ? 'English' : '中文';
+        });
+    </script>
+</body>
+
+</html>
