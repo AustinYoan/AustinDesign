@@ -130,6 +130,21 @@
 
         .q4-hint { margin-top:1rem; padding:.85rem 1.1rem; border-radius:10px; background:#fff3ec;
             font-size:.88rem; color:#9a4a00; line-height:1.7; }
+        .upload-zone {
+            margin-top:1rem; border:1.5px dashed rgba(232,93,0,.35); border-radius:14px;
+            background:#fff8f4; padding:1rem; cursor:pointer; transition:all .2s;
+        }
+        .upload-zone:hover, .upload-zone.dragging { border-color:var(--accent); background:#fff3ec; }
+        .upload-title { font-size:.95rem; font-weight:700; margin-bottom:.25rem; }
+        .upload-note { font-size:.82rem; color:var(--text2); line-height:1.6; }
+        .upload-input { display:none; }
+        .image-preview { display:grid; grid-template-columns:repeat(auto-fill,minmax(86px,1fr)); gap:.65rem; margin-top:.85rem; }
+        .image-item { position:relative; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#fff; aspect-ratio:1; }
+        .image-item img { width:100%; height:100%; object-fit:cover; display:block; }
+        .image-remove {
+            position:absolute; top:5px; right:5px; width:24px; height:24px; border:none; border-radius:50%;
+            background:rgba(30,30,30,.78); color:#fff; font-size:16px; line-height:24px; cursor:pointer;
+        }
 
         .back-link { background:none; border:none; color:var(--text2); font-family:var(--font); font-size:.9rem;
             cursor:pointer; padding:.3rem 0; margin-bottom:1.25rem; transition:color .2s; }
@@ -197,6 +212,7 @@
         .btn-main { display:inline-block; background:var(--accent); color:#fff; text-decoration:none;
             padding:.875rem 2rem; font-size:1rem; font-weight:700; border-radius:50px;
             box-shadow:0 4px 15px rgba(232,93,0,.2); transition:all .3s; cursor:pointer; border:none; font-family:var(--font); }
+        .btn-main:disabled { opacity:.55; cursor:not-allowed; transform:none; box-shadow:none; }
         .btn-main:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(232,93,0,.35); }
         .btn-sec { display:inline-block; border:1.5px solid var(--border); color:var(--text);
             text-decoration:none; padding:.875rem 1.75rem; font-size:.95rem; border-radius:50px; transition:all .3s; }
@@ -204,6 +220,20 @@
         .btn-restart { background:none; border:none; color:var(--text2); font-family:var(--font);
             font-size:.9rem; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:.5rem 0; transition:color .2s; }
         .btn-restart:hover { color:var(--accent); }
+        .submit-panel { margin-top:1.25rem; background:#fff; border:1px solid var(--border); border-radius:16px; padding:1.25rem; }
+        .submit-title { font-size:1.05rem; font-weight:700; margin-bottom:.35rem; }
+        .submit-note { font-size:.86rem; color:var(--text2); line-height:1.7; margin-bottom:1rem; }
+        .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:.75rem; margin-bottom:.75rem; }
+        .field { display:flex; flex-direction:column; gap:.35rem; }
+        .field label { font-size:.76rem; font-weight:700; color:var(--text2); }
+        .field input, .field textarea {
+            width:100%; border:1px solid var(--border); border-radius:10px; padding:.75rem .85rem;
+            font-family:var(--font); font-size:.92rem; color:var(--text); background:var(--bg);
+        }
+        .field textarea { min-height:84px; resize:vertical; }
+        .submit-status { min-height:1.4rem; margin-top:.75rem; font-size:.86rem; line-height:1.6; color:var(--text2); }
+        .submit-status.ok { color:#2d7a4f; }
+        .submit-status.err { color:#cc4125; }
 
         @media (max-width:600px) {
             .diag-card { padding:2rem 1.5rem; }
@@ -234,6 +264,11 @@
    引導式漏斗診斷 → 專案地圖（沿用 austindesign.tw 視覺，雙語）
    ========================================================================= */
 function bi(zh, en){ return '<span class="zh">'+zh+'</span><span class="en">'+en+'</span>'; }
+
+var SUPABASE_URL = 'https://zqhrqcgusvpkcmqkobzg.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_6SMW8-N4SD61xZaZxer5bA_vakk5qsA';
+var SUPABASE_BUCKET = 'diagnostic-uploads';
+var SUPABASE_TABLE = 'diagnostic_submissions';
 
 /* 第 1 層：大方向 */
 var INTENT = [
@@ -350,7 +385,7 @@ function helpByScore(s){
    狀態
    ========================================================================= */
 var state = { view:'landing', step:0,
-  answers:{ intent:null, sub:null, focus:[], focusPrimary:null, data:[] } };
+  answers:{ intent:null, sub:null, focus:[], focusPrimary:null, data:[], images:[] } };
 
 function flow(){
   var f = ['intent'];
@@ -360,7 +395,7 @@ function flow(){
   }
   return f;
 }
-function resetAnswers(){ return { intent:null, sub:null, focus:[], focusPrimary:null, data:[] }; }
+function resetAnswers(){ return { intent:null, sub:null, focus:[], focusPrimary:null, data:[], images:[] }; }
 
 /* =========================================================================
    操作
@@ -390,11 +425,148 @@ function toggleData(i){
   else{ next=arr.filter(function(x){return x!==none;}); next = next.indexOf(i)>-1?next.filter(function(x){return x!==i;}):next.concat(i); }
   state.answers.data=next; refreshWizardSelection();
 }
+function handleImageFiles(fileList){
+  var files=Array.prototype.slice.call(fileList||[]).filter(function(file){ return file.type && file.type.indexOf('image/')===0; });
+  if(files.length===0) return;
+  var slots=Math.max(0,6-state.answers.images.length);
+  files.slice(0,slots).forEach(function(file){
+    var reader=new FileReader();
+    reader.onload=function(){
+      state.answers.images.push({name:file.name||'pasted-image', type:file.type||'image/png', file:file, data:reader.result});
+      markPhotoDataFromImages();
+      refreshWizardSelection();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function markPhotoDataFromImages(){
+  if(state.answers.images.length===0) return;
+  var preferred=state.answers.intent===2?1:0;
+  var arr=state.answers.data.filter(function(i){return i!==12;});
+  if(arr.indexOf(preferred)===-1) arr.push(preferred);
+  if(state.answers.intent===2 && arr.indexOf(10)===-1) arr.push(10);
+  state.answers.data=arr;
+}
+function removeImage(i){
+  state.answers.images.splice(i,1);
+  refreshWizardSelection();
+}
+function onUploadDrop(ev){
+  ev.preventDefault();
+  ev.currentTarget.classList.remove('dragging');
+  handleImageFiles(ev.dataTransfer.files);
+}
+function onUploadPaste(ev){
+  handleImageFiles(ev.clipboardData.files);
+}
+function escapeHTML(value){
+  return String(value==null?'':value).replace(/[&<>"']/g,function(ch){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+  });
+}
+function supabaseHeaders(json){
+  var h = { apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY };
+  if(json) h['Content-Type']='application/json';
+  return h;
+}
+function fileExt(name,type){
+  var m=String(name||'').match(/\.([a-z0-9]+)$/i);
+  if(m) return m[1].toLowerCase();
+  if(type==='image/png') return 'png';
+  if(type==='image/webp') return 'webp';
+  return 'jpg';
+}
+function makeSubmissionId(){
+  if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return String(Date.now())+'-'+Math.random().toString(16).slice(2);
+}
+async function uploadDiagnosticImages(submissionId){
+  var paths=[];
+  var imgs=state.answers.images||[];
+  for(var i=0;i<imgs.length;i++){
+    var img=imgs[i];
+    if(!img.file) continue;
+    var ext=fileExt(img.name,img.type);
+    var path='public/'+submissionId+'/'+String(i+1)+'-'+Date.now()+'.'+ext;
+    var res=await fetch(SUPABASE_URL+'/storage/v1/object/'+SUPABASE_BUCKET+'/'+path,{
+      method:'POST',
+      headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+SUPABASE_KEY, 'Content-Type':img.type||'application/octet-stream', 'x-upsert':'false' },
+      body:img.file
+    });
+    if(!res.ok){
+      var msg=await res.text();
+      throw new Error('Image upload failed: '+msg);
+    }
+    paths.push(path);
+  }
+  return paths;
+}
+function currentResultMeta(){
+  var a=state.answers, score=readiness(), part=isPart(), rm=part?PART_RM:PRODUCT_RM, cur;
+  if(part){ cur=partCurrentStation(score); }
+  else{
+    cur=(a.intent===0)?[1,2,3,4][a.sub!=null?a.sub:0]:0;
+    if(score>80) cur=Math.min(cur+1,rm.length-1);
+  }
+  return {score:score, current_code:rm[cur][0], current_name:rm[cur][1], risk:riskInfo().zh};
+}
+async function submitDiagnostic(){
+  var status=document.getElementById('submit-status');
+  var btn=document.getElementById('submit-diagnostic-btn');
+  var name=(document.getElementById('contact-name')||{}).value||'';
+  var email=(document.getElementById('contact-email')||{}).value||'';
+  var line=(document.getElementById('contact-line')||{}).value||'';
+  var note=(document.getElementById('user-note')||{}).value||'';
+  if(!email.trim() && !line.trim()){
+    status.className='submit-status err';
+    status.textContent='請至少留下 Email 或 LINE，否則我無法回覆你。';
+    return;
+  }
+  btn.disabled=true;
+  status.className='submit-status';
+  status.textContent='正在上傳診斷資料...';
+  try{
+    var submissionId=makeSubmissionId();
+    var imagePaths=await uploadDiagnosticImages(submissionId);
+    var meta=currentResultMeta();
+    var payload={
+      id:submissionId,
+      intent:state.answers.intent,
+      sub:state.answers.sub,
+      focus:state.answers.focus,
+      focus_primary:state.answers.focusPrimary,
+      data:state.answers.data,
+      readiness:meta.score,
+      image_paths:imagePaths,
+      user_note:note,
+      contact_name:name,
+      contact_email:email,
+      contact_line:line
+    };
+    var res=await fetch(SUPABASE_URL+'/rest/v1/'+SUPABASE_TABLE,{
+      method:'POST',
+      headers:Object.assign(supabaseHeaders(true),{Prefer:'return=minimal'}),
+      body:JSON.stringify(payload)
+    });
+    if(!res.ok){
+      var msg=await res.text();
+      throw new Error('Database insert failed: '+msg);
+    }
+    status.className='submit-status ok';
+    status.textContent='已送出，我會依你留下的聯絡方式回覆。';
+    btn.textContent='已送出';
+  }catch(err){
+    status.className='submit-status err';
+    status.textContent='送出失敗：請確認 Supabase table、bucket 和 RLS policy 已建立。';
+    console.error(err);
+    btn.disabled=false;
+  }
+}
 function advance(){ if(state.step<flow().length-1){ state.step++; render(); } else { finish(); } }
 function onContinue(){
   var key=flow()[state.step];
   if(key==='focus' && state.answers.focus.length===0) return;
-  if(key==='data'  && state.answers.data.length===0) return;
+  if(key==='data'  && state.answers.data.length===0 && state.answers.images.length===0) return;
   advance();
 }
 function onBack(){ if(state.step===0){ state.view='landing'; } else { state.step--; } render(); }
@@ -442,6 +614,8 @@ function refreshWizardSelection(){
     setOptionState(buttons, function(i){ return a.data.indexOf(i)>-1; });
     setHidden(document.getElementById('data-hint'), a.data.indexOf(12)===-1);
     setHidden(document.getElementById('data-next'), a.data.length===0);
+    var preview=document.getElementById('image-preview');
+    if(preview) preview.innerHTML=imagePreviewHTML();
   }
 }
 
@@ -449,10 +623,67 @@ function refreshWizardSelection(){
    診斷邏輯
    ========================================================================= */
 function isPart(){ var i=state.answers.intent; return i===1||i===2; }
+function selectedData(){
+  return (state.answers.data||[]).filter(function(i){return i!==12;});
+}
+function hasData(i){
+  return selectedData().indexOf(i)>-1;
+}
+function hasImages(){
+  return (state.answers.images||[]).length>0;
+}
+function hasPhotoEvidence(){
+  return hasImages() || hasData(0) || hasData(1) || hasData(10);
+}
+function hasFocus(i){
+  return (state.answers.focus||[]).indexOf(i)>-1 || state.answers.focusPrimary===i;
+}
 function readiness(){
-  var p=(state.answers.data||[]).filter(function(i){return i!==12;});
-  var s=p.length===0?15:Math.min(95,22+p.length*10);
+  var p=selectedData();
+  if(p.length===0 && !hasImages()) return 15;
+  if(state.answers.intent===2){
+    var sPart=20;
+    if(hasData(10) || hasImages()) sPart+=20; // failure photos or uploaded evidence
+    if(hasData(1))  sPart+=10; // part photos
+    if(hasData(8))  sPart+=15; // process info
+    if(hasData(7))  sPart+=15; // material info
+    if(hasData(6))  sPart+=15; // key dimensions
+    if(hasData(9))  sPart+=10; // usage scenario
+    if(hasData(5))  sPart+=10; // video
+    if(hasData(0))  sPart+=5;  // product photos
+    return Math.round(Math.min(95,sPart)/5)*5;
+  }
+  var s=Math.min(95,22+p.length*10);
   return Math.round(s/5)*5;
+}
+function partCurrentStation(score){
+  var a=state.answers, p=selectedData();
+  var failureCase = a.intent===2 && (a.sub===0 || a.sub===2);
+  if(!failureCase){
+    return score<=30?0:score<=60?1:score<=80?2:3;
+  }
+  if(p.length===0 && !hasImages()) return 0;
+  if((hasData(10) || hasImages()) && (hasData(8) || hasData(7) || hasData(6) || hasFocus(3) || hasFocus(2) || hasFocus(0))) return 2;
+  if(hasPhotoEvidence() || hasData(5)) return 1;
+  return score<=45?1:2;
+}
+function recommendedGaps(part){
+  if(state.answers.intent===2){
+    var items=[];
+    if(!hasData(10) && !hasImages()) items.push({zh:'失效照片或裂紋 / 變形 / 磨耗近照', en:'Failure photos or close-ups of crack / deformation / wear'});
+    if(!hasData(1) && !hasImages()) items.push({zh:'零件整體照片與問題位置近照', en:'Overall part photo and close-up of the problem area'});
+    if(!hasData(8)) items.push({zh:'製程條件、批次、良率或失效發生時機', en:'Process conditions, batch, yield, or when the failure happens'});
+    if(!hasData(7)) items.push({zh:'材料牌號、材質證明或供應商材料資訊', en:'Material grade, certificate, or supplier material info'});
+    if(!hasData(6)) items.push({zh:'關鍵尺寸、配合尺寸或受力位置尺寸', en:'Key dimensions, fit dimensions, or loaded-area dimensions'});
+    if(!hasData(9)) items.push({zh:'使用 / 裝配狀態與實際工況', en:'Use / assembly state and real operating condition'});
+    return items.slice(0,3);
+  }
+  var prov=selectedData().map(function(i){return DATA[i].zh;});
+  return REC.filter(function(r){
+    if(r.zh.indexOf('尺寸')>-1) return !prov.some(function(p){return p.indexOf('尺寸')>-1;});
+    if(r.zh.indexOf('材料')>-1) return !prov.some(function(p){return p.indexOf('材料')>-1;});
+    return true;
+  }).slice(0,3);
 }
 function tfPair(){ var fp=state.answers.focusPrimary; return (fp==null||fp===10)?null:FOCUS[fp]; }
 function riskInfo(){ var fp=state.answers.focusPrimary; return (fp==null)?RISK[10]:RISK[fp]; }
@@ -494,6 +725,25 @@ function optHTML(handler, selected, main, sub, shape){
     '<span class="opt-dot '+shape+'"></span>' +
     '<span><span class="opt-main">'+main+'</span>'+(sub?'<span class="opt-sub">'+sub+'</span>':'')+'</span></button>';
 }
+function imagePreviewHTML(){
+  var imgs=state.answers.images||[];
+  if(imgs.length===0) return '';
+  var h='';
+  for(var i=0;i<imgs.length;i++){
+    h+='<div class="image-item"><img src="'+imgs[i].data+'" alt="'+escapeHTML(imgs[i].name)+'"><button class="image-remove" onclick="event.stopPropagation(); removeImage('+i+')" aria-label="Remove image">×</button></div>';
+  }
+  return h;
+}
+function uploadHTML(){
+  return '<div class="upload-zone" tabindex="0" onclick="document.getElementById(\'image-input\').click()" ' +
+    'onpaste="onUploadPaste(event)" ondragover="event.preventDefault(); this.classList.add(\'dragging\')" ' +
+    'ondragleave="this.classList.remove(\'dragging\')" ondrop="onUploadDrop(event)">' +
+    '<div class="upload-title">'+bi('拖曳、貼上或點選上傳照片','Drag, paste, or choose photos')+'</div>' +
+    '<div class="upload-note">'+bi('可放失效照片、零件近照、裝配狀態。送出前只在本頁預覽，按送出後才會上傳。','Add failure photos, part close-ups, or assembly state. Preview only until you submit.')+'</div>' +
+    '<input id="image-input" class="upload-input" type="file" accept="image/*" multiple onchange="handleImageFiles(this.files); this.value=\'\'">' +
+    '<div id="image-preview" class="image-preview">'+imagePreviewHTML()+'</div>' +
+  '</div>';
+}
 function renderWizard(){
   var key=flow()[state.step]; var a=state.answers; var inner='';
 
@@ -526,10 +776,11 @@ function renderWizard(){
     var d='';
     for(var m=0;m<DATA.length;m++){ d+=optHTML('toggleData('+m+')', a.data.indexOf(m)>-1, bi(DATA[m].zh,DATA[m].en), '', 'square'); }
     var hint = '<div id="data-hint" class="q4-hint'+(a.data.indexOf(12)>-1?'':' is-hidden')+'">'+bi('建議至少準備：產品整體照片、問題位置近照、使用或裝配狀態照片。','Suggested minimum: an overall product photo, a close-up of the problem area, and a photo of the use/assembly state.')+'</div>';
-    var cont2 = '<button id="data-next" class="next-btn'+(a.data.length>0?'':' is-hidden')+'" onclick="onContinue()">'+bi('完成診斷 →','See my map →')+'</button>';
+    var hasEvidence = a.data.length>0 || a.images.length>0;
+    var cont2 = '<button id="data-next" class="next-btn'+(hasEvidence?'':' is-hidden')+'" onclick="onContinue()">'+bi('完成診斷 →','See my map →')+'</button>';
     inner='<h2 class="q-title">'+bi('你目前有哪些資料？','What materials do you have right now?')+'</h2>' +
       '<p class="q-hint">'+bi('可複選，選好後按完成診斷。','Select all that apply, then continue.')+'</p>' +
-      '<div class="options">'+d+'</div>'+hint+cont2;
+      '<div class="options">'+d+'</div>'+uploadHTML()+hint+cont2;
   }
 
   return '<div class="diag-card wizard-card"><div class="screen">' +
@@ -545,7 +796,7 @@ function renderResults(){
   var rm=part?PART_RM:PRODUCT_RM; var last=rm.length-1;
 
   var cur;
-  if(part){ cur = score<=30?0:score<=60?1:score<=80?2:3; }
+  if(part){ cur = partCurrentStation(score); }
   else{
     if(a.intent===0){ cur=[1,2,3,4][a.sub!=null?a.sub:0]; } else { cur=0; }
     if(score>80) cur=Math.min(cur+1,last);
@@ -557,12 +808,7 @@ function renderResults(){
   var obZh = obBase.zh + (tf?('，主要落在「'+tf.zh+'」這一類。'):'。');
   var obEn = obBase.en + (tf?(', mainly in the "'+tf.en+'" category.'):'.');
 
-  var prov=(a.data||[]).filter(function(i){return i!==12;}).map(function(i){return DATA[i].zh;});
-  var sug=REC.filter(function(r){
-    if(r.zh.indexOf('尺寸')>-1) return !prov.some(function(p){return p.indexOf('尺寸')>-1;});
-    if(r.zh.indexOf('材料')>-1) return !prov.some(function(p){return p.indexOf('材料')>-1;});
-    return true;
-  }).slice(0,3);
+  var sug=recommendedGaps(part);
   var gapZh = sug.length?sug.map(function(r){return r.zh;}).join('、'):GAP_OK.zh;
   var gapEn = sug.length?sug.map(function(r){return r.en;}).join(', '):GAP_OK.en;
 
@@ -627,6 +873,19 @@ function renderResults(){
         '<div class="help-v">'+bi(ns.help.zh,ns.help.en)+'</div>' +
         '<a class="btn-main" href="contact.html" onclick="if(typeof gtag===\'function\'){gtag(\'event\',\'contact_click\',{\'source\':\'diagnostic_result\'})}">'+bi(ns.cta.zh,ns.cta.en)+'</a>' +
       '</div>' +
+    '</div>' +
+    '<div class="r-divider"></div>' +
+    '<div class="submit-panel">' +
+      '<div class="submit-title">'+bi('送出診斷資料與照片','Submit diagnosis and photos')+'</div>' +
+      '<div class="submit-note">'+bi('留下 Email 或 LINE，我會依照你的診斷結果與照片回覆。照片會上傳到 AustinDesign 的 Supabase 專案。','Leave an Email or LINE ID so I can reply based on your diagnosis and photos. Photos will be uploaded to AustinDesign Supabase.')+'</div>' +
+      '<div class="form-grid">' +
+        '<div class="field"><label for="contact-name">'+bi('姓名 / 公司','Name / company')+'</label><input id="contact-name" autocomplete="name"></div>' +
+        '<div class="field"><label for="contact-email">Email</label><input id="contact-email" type="email" autocomplete="email"></div>' +
+        '<div class="field"><label for="contact-line">LINE</label><input id="contact-line" autocomplete="off"></div>' +
+      '</div>' +
+      '<div class="field"><label for="user-note">'+bi('補充說明','Notes')+'</label><textarea id="user-note" placeholder="'+(pageBody.classList.contains('chinese-mode')?'例如：失效時間、使用環境、材料、批次、你希望我先看哪裡':'Failure timing, environment, material, batch, or what you want me to check first')+'"></textarea></div>' +
+      '<button id="submit-diagnostic-btn" class="btn-main" style="margin-top:1rem;" onclick="submitDiagnostic()">'+bi('送出診斷資料','Submit diagnosis')+'</button>' +
+      '<div id="submit-status" class="submit-status"></div>' +
     '</div>' +
     '<div class="r-divider"></div>' +
     '<p class="r-disclaimer">'+bi('這只是初步方向。完整評估需要進一步了解你的專案細節。','This is just an initial direction. A full assessment requires understanding more about your project.')+'</p>' +
