@@ -53,7 +53,7 @@
         /* page layout */
         .page-wrap {
             min-height:100vh; display:flex; flex-direction:column;
-            align-items:center; justify-content:center; padding:6rem 1.5rem 3rem;
+            align-items:center; justify-content:flex-start; padding:6rem 1.5rem 3rem;
         }
         .diag-card {
             background:var(--card); border-radius:16px;
@@ -61,6 +61,9 @@
             max-width:680px; width:100%; padding:2.5rem 3rem;
         }
         .diag-card.wide { max-width:860px; }
+        .landing-card { margin-top:0; }
+        .wizard-card { min-height:520px; }
+        .result-card { margin-bottom:2rem; }
 
         /* landing */
         .land { text-align:center; padding:1rem 0; }
@@ -458,7 +461,7 @@ function riskInfo(){ var fp=state.answers.focusPrimary; return (fp==null)?RISK[1
    畫面 1：Landing
    ========================================================================= */
 function renderLanding(){
-  return '<div class="diag-card"><div class="land screen">' +
+  return '<div class="diag-card landing-card"><div class="land screen">' +
     '<div class="land-mark"><span></span></div>' +
     '<div class="land-eyebrow">'+bi('硬體產品開發診斷','Hardware Product Diagnosis')+'</div>' +
     '<h1>'+bi('生成你的專案地圖','Generate your project map')+'</h1>' +
@@ -529,7 +532,7 @@ function renderWizard(){
       '<div class="options">'+d+'</div>'+hint+cont2;
   }
 
-  return '<div class="diag-card"><div class="screen">' +
+  return '<div class="diag-card wizard-card"><div class="screen">' +
     '<button class="back-link" onclick="onBack()">'+bi('← 返回','← Back')+'</button>' +
     progHTML() + inner + '</div></div>';
 }
@@ -602,7 +605,7 @@ function renderResults(){
   var pathLabel = part ? (a.intent===1?{zh:'你的改善路線',en:'Your improvement path'}:{zh:'你的健檢路線',en:'Your health-check path'})
                        : {zh:'你的開發路線',en:'Your development path'};
 
-  return '<div class="diag-card wide"><div class="screen">' +
+  return '<div class="diag-card wide result-card"><div class="screen">' +
     '<div class="map-head"><div class="map-eyebrow">'+bi('專屬開發地圖 · 為你生成','Your custom roadmap')+'</div><div class="map-ref">'+projectRef+'</div></div>' +
     '<h2 class="map-title">'+bi(pt.zh,pt.en)+'</h2>' +
     '<div class="strip">' +
@@ -644,6 +647,7 @@ function render(){
   else if(state.view==='wizard') html=renderWizard();
   else html=renderResults();
   document.getElementById('app').innerHTML=html;
+  window.scrollTo({top:0, left:0, behavior:'auto'});
 }
 
 /* 語言切換（沿用站台行為） */

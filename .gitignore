@@ -1,0 +1,14 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+*.tmp
+
+# Python tool (baghouse_dpm) — never commit virtualenvs / caches
+**/venv/
+**/__pycache__/
+*.pyc
+
+# Local publish helper
+publish.bat
