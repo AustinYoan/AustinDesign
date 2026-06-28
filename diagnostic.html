@@ -123,6 +123,7 @@
             transition:all .3s;
         }
         .next-btn:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(232,93,0,.35); }
+        .next-btn.is-hidden, .primary-wrap.is-hidden, .q4-hint.is-hidden { display:none; }
 
         .q4-hint { margin-top:1rem; padding:.85rem 1.1rem; border-radius:10px; background:#fff3ec;
             font-size:.88rem; color:#9a4a00; line-height:1.7; }
@@ -363,8 +364,8 @@ function resetAnswers(){ return { intent:null, sub:null, focus:[], focusPrimary:
    ========================================================================= */
 var _t = null;
 function onStart(){ state.view='wizard'; state.step=0; state.answers=resetAnswers(); render(); }
-function selectIntent(i){ state.answers.intent=i; state.answers.sub=null; render(); clearTimeout(_t); _t=setTimeout(advance,260); }
-function selectSub(i){ state.answers.sub=i; render(); clearTimeout(_t); _t=setTimeout(advance,260); }
+function selectIntent(i){ state.answers.intent=i; state.answers.sub=null; refreshWizardSelection(); clearTimeout(_t); _t=setTimeout(advance,260); }
+function selectSub(i){ state.answers.sub=i; refreshWizardSelection(); clearTimeout(_t); _t=setTimeout(advance,260); }
 function toggleFocus(i){
   var arr=state.answers.focus.slice(); var none=10; var next;
   if(i===none){ next = arr.indexOf(none)>-1?[]:[none]; }
@@ -377,14 +378,14 @@ function toggleFocus(i){
   state.answers.focus=next;
   var fp=state.answers.focusPrimary;
   state.answers.focusPrimary = next.length===0?null:(next.indexOf(fp)>-1?fp:next[0]);
-  render();
+  refreshWizardSelection();
 }
-function setPrimary(i){ state.answers.focusPrimary=i; render(); }
+function setPrimary(i){ state.answers.focusPrimary=i; refreshWizardSelection(); }
 function toggleData(i){
   var arr=state.answers.data.slice(); var none=12; var next;
   if(i===none){ next = arr.indexOf(none)>-1?[]:[none]; }
   else{ next=arr.filter(function(x){return x!==none;}); next = next.indexOf(i)>-1?next.filter(function(x){return x!==i;}):next.concat(i); }
-  state.answers.data=next; render();
+  state.answers.data=next; refreshWizardSelection();
 }
 function advance(){ if(state.step<flow().length-1){ state.step++; render(); } else { finish(); } }
 function onContinue(){
@@ -401,6 +402,45 @@ function finish(){
   }
 }
 function restart(){ state.view='landing'; state.step=0; state.answers=resetAnswers(); render(); }
+
+function setHidden(el, hidden){
+  if(el) el.classList.toggle('is-hidden', hidden);
+}
+function setOptionState(buttons, selectedFn){
+  for(var i=0;i<buttons.length;i++){
+    buttons[i].classList.toggle('selected', !!selectedFn(i));
+  }
+}
+function primaryHTML(){
+  var a=state.answers;
+  if(a.focus.length!==2) return '';
+  var chips='';
+  for(var p=0;p<a.focus.length;p++){
+    var fi=a.focus[p];
+    chips+='<button class="chip'+(a.focusPrimary===fi?' on':'')+'" onclick="setPrimary('+fi+')">'+bi(FOCUS[fi].zh,FOCUS[fi].en)+'</button>';
+  }
+  return '<div class="primary-label">'+bi('主要項目','Which one matters most?')+'</div><div class="primary-chips">'+chips+'</div>';
+}
+function refreshWizardSelection(){
+  if(state.view!=='wizard'){ render(); return; }
+  var app=document.getElementById('app');
+  if(!app){ return; }
+  var key=flow()[state.step], a=state.answers;
+  var buttons=app.querySelectorAll('.options .opt');
+  if(key==='intent') setOptionState(buttons, function(i){ return a.intent===i; });
+  else if(key==='sub') setOptionState(buttons, function(i){ return a.sub===i; });
+  else if(key==='focus'){
+    setOptionState(buttons, function(i){ return a.focus.indexOf(i)>-1; });
+    var primary=document.getElementById('primary-wrap');
+    if(primary){ primary.innerHTML=primaryHTML(); setHidden(primary, a.focus.length!==2); }
+    setHidden(document.getElementById('focus-next'), a.focus.length===0);
+  }
+  else if(key==='data'){
+    setOptionState(buttons, function(i){ return a.data.indexOf(i)>-1; });
+    setHidden(document.getElementById('data-hint'), a.data.indexOf(12)===-1);
+    setHidden(document.getElementById('data-next'), a.data.length===0);
+  }
+}
 
 /* =========================================================================
    診斷邏輯
@@ -473,15 +513,8 @@ function renderWizard(){
   else if(key==='focus'){
     var f='';
     for(var k=0;k<FOCUS.length;k++){ f+=optHTML('toggleFocus('+k+')', a.focus.indexOf(k)>-1, bi(FOCUS[k].zh,FOCUS[k].en), '', 'square'); }
-    var primary='';
-    if(a.focus.length===2){
-      var chips='';
-      for(var p=0;p<a.focus.length;p++){ var fi=a.focus[p];
-        chips+='<button class="chip'+(a.focusPrimary===fi?' on':'')+'" onclick="setPrimary('+fi+')">'+bi(FOCUS[fi].zh,FOCUS[fi].en)+'</button>';
-      }
-      primary='<div class="primary-wrap"><div class="primary-label">'+bi('其中最主要的是？','Which one matters most?')+'</div><div class="primary-chips">'+chips+'</div></div>';
-    }
-    var cont = a.focus.length>0 ? '<button class="next-btn" onclick="onContinue()">'+bi('繼續 →','Continue →')+'</button>' : '';
+    var primary='<div id="primary-wrap" class="primary-wrap'+(a.focus.length===2?'':' is-hidden')+'">'+primaryHTML()+'</div>';
+    var cont = '<button id="focus-next" class="next-btn'+(a.focus.length>0?'':' is-hidden')+'" onclick="onContinue()">'+bi('繼續 →','Continue →')+'</button>';
     inner='<h2 class="q-title">'+bi('你最擔心或最想釐清的是？','What worries you most, or most want to clarify?')+'</h2>' +
       '<p class="q-hint">'+bi('最多選 2 項；選「不確定」也可以。','Pick up to 2 — or choose "Not sure".')+'</p>' +
       '<div class="options">'+f+'</div>'+primary+cont;
@@ -489,8 +522,8 @@ function renderWizard(){
   else if(key==='data'){
     var d='';
     for(var m=0;m<DATA.length;m++){ d+=optHTML('toggleData('+m+')', a.data.indexOf(m)>-1, bi(DATA[m].zh,DATA[m].en), '', 'square'); }
-    var hint = a.data.indexOf(12)>-1 ? '<div class="q4-hint">'+bi('建議至少準備：產品整體照片、問題位置近照、使用或裝配狀態照片。','Suggested minimum: an overall product photo, a close-up of the problem area, and a photo of the use/assembly state.')+'</div>' : '';
-    var cont2 = a.data.length>0 ? '<button class="next-btn" onclick="onContinue()">'+bi('完成診斷 →','See my map →')+'</button>' : '';
+    var hint = '<div id="data-hint" class="q4-hint'+(a.data.indexOf(12)>-1?'':' is-hidden')+'">'+bi('建議至少準備：產品整體照片、問題位置近照、使用或裝配狀態照片。','Suggested minimum: an overall product photo, a close-up of the problem area, and a photo of the use/assembly state.')+'</div>';
+    var cont2 = '<button id="data-next" class="next-btn'+(a.data.length>0?'':' is-hidden')+'" onclick="onContinue()">'+bi('完成診斷 →','See my map →')+'</button>';
     inner='<h2 class="q-title">'+bi('你目前有哪些資料？','What materials do you have right now?')+'</h2>' +
       '<p class="q-hint">'+bi('可複選，選好後按完成診斷。','Select all that apply, then continue.')+'</p>' +
       '<div class="options">'+d+'</div>'+hint+cont2;
