@@ -616,6 +616,8 @@ function refreshWizardSelection(){
     setHidden(document.getElementById('data-next'), a.data.length===0);
     var preview=document.getElementById('image-preview');
     if(preview) preview.innerHTML=imagePreviewHTML();
+    var submitPreview=document.getElementById('submit-image-preview');
+    if(submitPreview) submitPreview.innerHTML=imagePreviewHTML();
   }
 }
 
@@ -742,6 +744,16 @@ function uploadHTML(){
     '<div class="upload-note">'+bi('可放失效照片、零件近照、裝配狀態。送出前只在本頁預覽，按送出後才會上傳。','Add failure photos, part close-ups, or assembly state. Preview only until you submit.')+'</div>' +
     '<input id="image-input" class="upload-input" type="file" accept="image/*" multiple onchange="handleImageFiles(this.files); this.value=\'\'">' +
     '<div id="image-preview" class="image-preview">'+imagePreviewHTML()+'</div>' +
+  '</div>';
+}
+function submitUploadHTML(){
+  return '<div class="upload-zone" tabindex="0" onclick="document.getElementById(\'submit-image-input\').click()" ' +
+    'onpaste="onUploadPaste(event)" ondragover="event.preventDefault(); this.classList.add(\'dragging\')" ' +
+    'ondragleave="this.classList.remove(\'dragging\')" ondrop="onUploadDrop(event)">' +
+    '<div class="upload-title">'+bi('補充照片','Add photos')+'</div>' +
+    '<div class="upload-note">'+bi('可在這裡再貼上、拖曳或點選補充照片，按送出後才會上傳。','Paste, drag, or choose extra photos here. They upload only after submission.')+'</div>' +
+    '<input id="submit-image-input" class="upload-input" type="file" accept="image/*" multiple onchange="handleImageFiles(this.files); this.value=\'\'">' +
+    '<div id="submit-image-preview" class="image-preview">'+imagePreviewHTML()+'</div>' +
   '</div>';
 }
 function renderWizard(){
@@ -883,6 +895,7 @@ function renderResults(){
         '<div class="field"><label for="contact-email">Email</label><input id="contact-email" type="email" autocomplete="email"></div>' +
         '<div class="field"><label for="contact-line">LINE</label><input id="contact-line" autocomplete="off"></div>' +
       '</div>' +
+      submitUploadHTML() +
       '<div class="field"><label for="user-note">'+bi('補充說明','Notes')+'</label><textarea id="user-note" placeholder="'+(pageBody.classList.contains('chinese-mode')?'例如：失效時間、使用環境、材料、批次、你希望我先看哪裡':'Failure timing, environment, material, batch, or what you want me to check first')+'"></textarea></div>' +
       '<button id="submit-diagnostic-btn" class="btn-main" style="margin-top:1rem;" onclick="submitDiagnostic()">'+bi('送出診斷資料','Submit diagnosis')+'</button>' +
       '<div id="submit-status" class="submit-status"></div>' +
