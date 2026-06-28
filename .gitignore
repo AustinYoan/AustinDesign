@@ -12,3 +12,5 @@ desktop.ini
 
 # Local publish helper
 publish.bat
+deploy_email_notify.bat
+*.local.sql
