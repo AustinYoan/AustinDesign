@@ -434,7 +434,7 @@ function handleImageFiles(fileList){
     reader.onload=function(){
       state.answers.images.push({name:file.name||'pasted-image', type:file.type||'image/png', file:file, data:reader.result});
       markPhotoDataFromImages();
-      refreshWizardSelection();
+      refreshImageUploads();
     };
     reader.readAsDataURL(file);
   });
@@ -449,7 +449,7 @@ function markPhotoDataFromImages(){
 }
 function removeImage(i){
   state.answers.images.splice(i,1);
-  refreshWizardSelection();
+  refreshImageUploads();
 }
 function onUploadDrop(ev){
   ev.preventDefault();
@@ -458,6 +458,16 @@ function onUploadDrop(ev){
 }
 function onUploadPaste(ev){
   handleImageFiles(ev.clipboardData.files);
+}
+function refreshImageUploads(){
+  var preview=document.getElementById('image-preview');
+  if(preview) preview.innerHTML=imagePreviewHTML();
+  var submitPreview=document.getElementById('submit-image-preview');
+  if(submitPreview) submitPreview.innerHTML=imagePreviewHTML();
+  var dataNext=document.getElementById('data-next');
+  if(dataNext) setHidden(dataNext, state.answers.data.length===0 && state.answers.images.length===0);
+  var buttons=document.querySelectorAll('.options .opt');
+  if(buttons.length) setOptionState(buttons, function(i){ return state.answers.data.indexOf(i)>-1; });
 }
 function escapeHTML(value){
   return String(value==null?'':value).replace(/[&<>"']/g,function(ch){
