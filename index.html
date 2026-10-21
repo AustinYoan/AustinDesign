@@ -17,6 +17,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+    <script src="site.js" defer></script>
+    <script>
+        // Hold the hero animation until the Chinese font has loaded (1 s at most)
+        (function (root) {
+            var done = function () { root.classList.remove('fonts-loading'); };
+            root.classList.add('fonts-loading');
+            if (document.fonts && document.fonts.load) {
+                Promise.all([
+                    document.fonts.load('900 1em "Noto Sans TC"', '工程'),
+                    document.fonts.load('400 1em "Noto Sans TC"', '工程')
+                ]).then(done, done);
+            } else {
+                done();
+            }
+            setTimeout(done, 1000);
+        })(document.documentElement);
+    </script>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
@@ -443,13 +461,6 @@
             .cases {
                 grid-template-columns: 1fr;
             }
-            .case {
-                flex-direction: row;
-            }
-            .case img {
-                width: 40%;
-                aspect-ratio: auto;
-            }
             .trust-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -523,13 +534,6 @@
             }
             .discipline {
                 padding: 1.1rem 1rem;
-            }
-            .case {
-                flex-direction: column;
-            }
-            .case img {
-                width: 100%;
-                aspect-ratio: 16 / 10;
             }
             .trust-grid {
                 grid-template-columns: 1fr;
@@ -887,7 +891,7 @@
                 </div>
                 <div class="cases">
                     <a href="project_cyclonic_purity.html" class="case">
-                        <img src="assets/home/case-cyclone.jpg" alt="咖啡烘豆機旋風集塵 CFD 流場模擬" loading="lazy">
+                        <span class="case-media"><img src="assets/home/case-cyclone.jpg" alt="咖啡烘豆機旋風集塵 CFD 流場模擬" loading="lazy"></span>
                         <div class="case-body">
                             <div class="case-tags"><span class="case-tag">CFD</span><span class="case-tag"><span class="en">Mechanical</span><span class="zh">機構設計</span></span></div>
                             <h3><span class="en">Cyclone dust separator for a coffee roaster</span><span class="zh">咖啡烘豆機旋風集塵系統</span></h3>
@@ -896,7 +900,7 @@
                         </div>
                     </a>
                     <a href="project_industrial_ecology.html" class="case">
-                        <img src="assets/home/case-baghouse.jpg" alt="袋式集塵器製造現場" loading="lazy">
+                        <span class="case-media"><img src="assets/home/case-baghouse.jpg" alt="袋式集塵器製造現場" loading="lazy"></span>
                         <div class="case-body">
                             <div class="case-tags"><span class="case-tag">3D CAD</span><span class="case-tag">CFD</span><span class="case-tag"><span class="en">On-site</span><span class="zh">現場監造</span></span></div>
                             <h3><span class="en">Industrial environmental equipment</span><span class="zh">大型工業環保設備</span></h3>
@@ -905,7 +909,7 @@
                         </div>
                     </a>
                     <a href="project_kinetic_structure.html" class="case">
-                        <img src="assets/home/case-park.jpg" alt="20 米公園滑軌遊具完工照" loading="lazy">
+                        <span class="case-media"><img src="assets/home/case-park.jpg" alt="20 米公園滑軌遊具完工照" loading="lazy"></span>
                         <div class="case-body">
                             <div class="case-tags"><span class="case-tag">FEA</span><span class="case-tag">CFD</span><span class="case-tag"><span class="en">Motion</span><span class="zh">運動分析</span></span></div>
                             <h3><span class="en">20 m park zip-rail ride</span><span class="zh">20 米公園滑軌遊具</span></h3>

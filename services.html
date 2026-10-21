@@ -15,6 +15,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+    <script src="site.js" defer></script>
+    <script>
+        // Hold the hero animation until the Chinese font has loaded (1 s at most)
+        (function (root) {
+            var done = function () { root.classList.remove('fonts-loading'); };
+            root.classList.add('fonts-loading');
+            if (document.fonts && document.fonts.load) {
+                Promise.all([
+                    document.fonts.load('900 1em "Noto Sans TC"', '工程'),
+                    document.fonts.load('400 1em "Noto Sans TC"', '工程')
+                ]).then(done, done);
+            } else {
+                done();
+            }
+            setTimeout(done, 1000);
+        })(document.documentElement);
+    </script>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>

@@ -15,6 +15,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+    <script src="site.js" defer></script>
+    <script>
+        // Hold the hero animation until the Chinese font has loaded (1 s at most)
+        (function (root) {
+            var done = function () { root.classList.remove('fonts-loading'); };
+            root.classList.add('fonts-loading');
+            if (document.fonts && document.fonts.load) {
+                Promise.all([
+                    document.fonts.load('900 1em "Noto Sans TC"', '工程'),
+                    document.fonts.load('400 1em "Noto Sans TC"', '工程')
+                ]).then(done, done);
+            } else {
+                done();
+            }
+            setTimeout(done, 1000);
+        })(document.documentElement);
+    </script>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
@@ -359,7 +377,7 @@
                 </div>
                 <div class="cases two">
                     <a href="project_ergo_care.html" class="case">
-                        <img src="assets/home/product-icecream.jpg" alt="電動冰淇淋挖杓原型" loading="lazy">
+                        <span class="case-media"><img src="assets/home/product-icecream.jpg" alt="電動冰淇淋挖杓原型" loading="lazy"></span>
                         <div class="case-body">
                             <div class="case-tags"><span class="case-tag"><span class="en">Prototype</span><span class="zh">原型開發</span></span><span class="case-tag"><span class="en">3D printing</span><span class="zh">3D 列印</span></span></div>
                             <h3><span class="en">Electric ice-cream scoop</span><span class="zh">電動冰淇淋挖杓</span></h3>
@@ -368,7 +386,7 @@
                         </div>
                     </a>
                     <a href="project_glass_bottle.html" class="case">
-                        <img src="assets/home/product-bottle.jpg" alt="玉山造型玻璃酒瓶成品" loading="lazy">
+                        <span class="case-media"><img src="assets/home/product-bottle.jpg" alt="玉山造型玻璃酒瓶成品" loading="lazy"></span>
                         <div class="case-body">
                             <div class="case-tags"><span class="case-tag"><span class="en">Surface modelling</span><span class="zh">曲面建模</span></span><span class="case-tag">DFM</span></div>
                             <h3><span class="en">Premium glass bottle</span><span class="zh">高端玻璃酒瓶</span></h3>
