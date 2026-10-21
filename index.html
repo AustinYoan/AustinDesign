@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Austin | Stop thinking. Draw it. Build it.</title>
-    <meta name="description" content="台北機械電子整合工程師，幫你把模糊的想法變成可以製造的產品。從草圖到原型，機構、電路、打樣一個人整合到底。">
-    <meta name="keywords" content="機構設計外包,產品開發工程師,硬體原型開發,機械設計接案,台灣接案工程師,ESP32開發,AIoT開發">
+    <title>是睿科技｜外包工程師服務：機構設計・分析模擬・電控韌體</title>
+    <meta name="description" content="工程師離職、新人未到、專案爆量時，是睿科技提供遠端外包工程師，接手機構設計、CFD/FEA 分析模擬與電控韌體。短期銜接、長期配合都可以。">
+    <meta name="keywords" content="機構設計外包,機構工程師外包,工程外包,外部工程部,CFD分析外包,FEA分析外包,韌體開發外包,工程師離職銜接">
     <link rel="canonical" href="https://austindesign.tw/">
-    <meta property="og:title" content="Austin | 別想了，畫出來，做出來。">
-    <meta property="og:description" content="台北機械電子整合工程師，幫你把模糊的想法變成可以製造的產品。">
+    <meta property="og:title" content="是睿科技｜工程師走了，案子不能停。">
+    <meta property="og:description" content="遠端外包工程師：機構設計・分析模擬・電控韌體。人力空窗時接手，短期銜接、長期配合都可以。">
     <meta property="og:url" content="https://austindesign.tw/">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://austindesign.tw/assets/home/hero-cad-cfd.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <!-- Google tag (gtag.js) -->
@@ -25,105 +26,1083 @@
         gtag('js', new Date());
         gtag('config', 'G-ZGMELF4GDL');
     </script>
+    <style>
+        .home {
+            overflow: hidden;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 9rem 0 5rem;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.045) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: -1px -1px;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 160px;
+            background: linear-gradient(transparent, var(--bg-color));
+            pointer-events: none;
+        }
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fff;
+            border: 0.5px solid var(--line);
+            border-radius: 50px;
+            padding: 0.4rem 1rem 0.4rem 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-bottom: 1.75rem;
+        }
+        .hero-pill b {
+            background: var(--accent-color);
+            color: #fff;
+            font-size: 0.75rem;
+            border-radius: 50px;
+            padding: 0.15rem 0.6rem;
+        }
+        .hero h1 {
+            font-size: 3.6rem;
+            font-weight: 900;
+            line-height: 1.18;
+            letter-spacing: -0.02em;
+            text-transform: none;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent-color);
+        }
+        .hero-sub {
+            font-size: 1.15rem;
+            line-height: 1.85;
+            color: var(--text-secondary);
+            margin-bottom: 2.25rem;
+            max-width: 520px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .hero-buttons .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.2;
+        }
+        .hero-buttons a span {
+            text-align: center;
+        }
+        .hero-checks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .hero-checks span.item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            width: auto;
+        }
+        .hero-checks .icon {
+            width: 18px;
+            height: 18px;
+            color: var(--accent-color);
+            stroke-width: 2;
+        }
+        .hero-visual {
+            position: relative;
+        }
+        .hero-img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3.2;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(22, 25, 29, 0.18);
+            border: 6px solid #fff;
+        }
+        .float-card {
+            position: absolute;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 12px 32px rgba(22, 25, 29, 0.14);
+            padding: 0.85rem 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        .float-card strong {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+        .float-card small {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        .float-card .icon-badge {
+            margin: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        .float-card .icon-badge .icon {
+            width: 22px;
+            height: 22px;
+        }
+        .float-top {
+            top: -22px;
+            left: -28px;
+        }
+        .float-bottom {
+            bottom: -24px;
+            right: -18px;
+        }
+        .live-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #22a559;
+            box-shadow: 0 0 0 4px rgba(34, 165, 89, 0.15);
+            flex-shrink: 0;
+        }
+
+        /* Discipline strip */
+        .disciplines {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .discipline {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 1.75rem 1.5rem;
+        }
+        .discipline + .discipline {
+            border-left: 0.5px solid var(--line);
+        }
+        .discipline .icon {
+            width: 30px;
+            height: 30px;
+            color: var(--accent-color);
+        }
+        .discipline strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.1rem;
+        }
+        .discipline small {
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+        }
+
+        /* Situations */
+        .situations {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .situation {
+            position: relative;
+            background: #fff;
+            border: 0.5px solid var(--line);
+            border-radius: 18px;
+            padding: 2rem 1.75rem 1.75rem;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .situation:hover {
+            transform: translateY(-6px);
+            border-color: rgba(232, 93, 0, 0.5);
+            box-shadow: 0 18px 40px rgba(232, 93, 0, 0.12);
+        }
+        .situation-num {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.75rem;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.06);
+            line-height: 1;
+        }
+        /* Legacy style.css sets `a span { width: 100% }`; undo it inside cards */
+        .situation-num,
+        .situation-plan > span,
+        .case-tag {
+            width: auto;
+        }
+        .situation-q {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.55;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        .situation-foot {
+            border-top: 0.5px solid var(--line);
+            padding-top: 1.1rem;
+        }
+        .situation-plan {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.35rem;
+        }
+        .situation-end {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .standby-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            background: var(--accent-soft);
+            border: 1px solid rgba(232, 93, 0, 0.18);
+            border-radius: 18px;
+            padding: 1.5rem 1.75rem;
+        }
+        /* Comparison (dark band) */
+        .compare {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 1rem;
+        }
+        .compare th,
+        .compare td {
+            padding: 1.15rem 1.5rem;
+            text-align: left;
+            line-height: 1.55;
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+            vertical-align: top;
+        }
+        .compare th {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .compare td:first-child {
+            font-weight: 700;
+            color: #fff;
+            white-space: nowrap;
+            width: 18%;
+        }
+        .compare td.them {
+            color: rgba(255, 255, 255, 0.55);
+        }
+        .compare th.us,
+        .compare td.us {
+            background: rgba(232, 93, 0, 0.12);
+        }
+        .compare th.us {
+            color: #ff8a3d;
+            border-radius: 14px 14px 0 0;
+        }
+        .compare td.us {
+            color: #fff;
+            font-weight: 500;
+        }
+        .compare tr:last-child td {
+            border-bottom: none;
+        }
+        .compare tr:last-child td.us {
+            border-radius: 0 0 14px 14px;
+        }
+
+        /* Trust grid */
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 0.5px solid var(--line);
+            border-radius: 18px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .trust {
+            padding: 1.75rem;
+            border-right: 0.5px solid var(--line);
+            border-bottom: 0.5px solid var(--line);
+        }
+        .trust:nth-child(3n) {
+            border-right: none;
+        }
+        .trust:nth-last-child(-n+3) {
+            border-bottom: none;
+        }
+        .trust h3 {
+            color: var(--text-color);
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+        }
+        .trust p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+
+        /* Founder + CTA */
+        .closing {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 1.5rem;
+        }
+        .founder {
+            background: #fff;
+            border: 0.5px solid var(--line);
+            border-radius: 18px;
+            padding: 2.25rem;
+        }
+        .founder-top {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            margin-bottom: 1.25rem;
+        }
+        .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--accent-soft);
+            border: 1.5px solid rgba(232, 93, 0, 0.3);
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+        .founder h3 {
+            color: var(--text-color);
+            font-size: 1.25rem;
+            margin-bottom: 0.15rem;
+        }
+        .founder .role {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .founder p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 960px) {
+            .hero-grid,
+            .closing {
+                grid-template-columns: 1fr;
+            }
+            .hero-visual {
+                max-width: 620px;
+            }
+            .disciplines {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .discipline:nth-child(3) {
+                border-left: none;
+            }
+            .discipline:nth-child(n+3) {
+                border-top: 0.5px solid var(--line);
+            }
+            .situations,
+            .cases {
+                grid-template-columns: 1fr;
+            }
+            .case {
+                flex-direction: row;
+            }
+            .case img {
+                width: 40%;
+                aspect-ratio: auto;
+            }
+            .trust-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .trust:nth-child(3n) {
+                border-right: 0.5px solid var(--line);
+            }
+            .trust:nth-child(2n) {
+                border-right: none;
+            }
+            .trust:nth-last-child(-n+3) {
+                border-bottom: 0.5px solid var(--line);
+            }
+            .trust:nth-last-child(-n+2) {
+                border-bottom: none;
+            }
+            .timeline {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .tl-step {
+                padding: 0 0 2.25rem 4.75rem;
+                min-height: 56px;
+            }
+            .tl-step::before {
+                top: 56px;
+                bottom: 0;
+                left: 27px;
+                right: auto;
+                width: 2px;
+                height: auto;
+                background: repeating-linear-gradient(180deg, #c9c4bd 0 8px, transparent 8px 14px);
+            }
+            .tl-step.is-us::before {
+                top: 56px;
+                left: 25px;
+                width: 6px;
+                height: auto;
+            }
+            .tl-step:last-child::before {
+                display: none;
+            }
+        }
+        @media (max-width: 640px) {
+            .hero {
+                padding: 6.5rem 0 3.5rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem !important;
+            }
+            .hero-sub {
+                font-size: 1.02rem;
+            }
+            .hero-buttons .btn,
+            .hero-buttons .btn-ghost {
+                width: 100%;
+            }
+            .float-top {
+                top: -16px;
+                left: 8px;
+            }
+            .float-bottom {
+                right: 8px;
+                bottom: -20px;
+            }
+            .disciplines {
+                grid-template-columns: 1fr;
+            }
+            .discipline + .discipline {
+                border-left: none;
+                border-top: 0.5px solid var(--line);
+            }
+            .discipline {
+                padding: 1.1rem 1rem;
+            }
+            .case {
+                flex-direction: column;
+            }
+            .case img {
+                width: 100%;
+                aspect-ratio: 16 / 10;
+            }
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+            .trust,
+            .trust:nth-child(3n),
+            .trust:nth-last-child(-n+3) {
+                border-right: none;
+                border-bottom: 0.5px solid var(--line);
+            }
+            .trust:last-child {
+                border-bottom: none;
+            }
+            .compare th,
+            .compare td {
+                padding: 0.85rem 0.6rem;
+                font-size: 0.85rem;
+            }
+            .compare td:first-child {
+                white-space: normal;
+            }
+            .standby-strip,
+            .individual-strip {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .strip-main {
+                align-items: flex-start;
+            }
+            .founder,
+            .cta-card {
+                padding: 1.75rem 1.4rem;
+            }
+        }
+    </style>
 </head>
 
 <body class="lang-en chinese-mode">
-    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000;">
-        <button id="lang-toggle-btn" class="lang-btn">English</button>
-    </nav>
+    <!-- Line icons (inlined so they also show when the file is opened directly) -->
+    <svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+    <symbol id="chat" viewBox="0 0 24 24">
+        <path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/>
+        <path d="M8 10h8M8 13h5"/>
+    </symbol>
+    <symbol id="laptop" viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="11" rx="1.5"/>
+        <path d="M2 19h20"/>
+        <path d="M10 10.5l2 2 3-3.5"/>
+    </symbol>
+    <symbol id="user-plus" viewBox="0 0 24 24">
+        <circle cx="9" cy="8" r="4"/>
+        <path d="M2 21v-1a7 7 0 0 1 14 0v1"/>
+        <path d="M19 8v6M16 11h6"/>
+    </symbol>
+    <symbol id="doc-check" viewBox="0 0 24 24">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+        <path d="M14 3v5h5"/>
+        <path d="M9 14l2 2 4-4"/>
+    </symbol>
+    <symbol id="doc-handover" viewBox="0 0 24 24">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+        <path d="M14 3v5h5"/>
+        <path d="M9 15h6M13 13l2 2-2 2"/>
+    </symbol>
+    <symbol id="bridge" viewBox="0 0 24 24">
+        <path d="M2 16h20"/>
+        <path d="M4 4v12M20 4v12"/>
+        <path d="M4 5c4 7 12 7 16 0"/>
+        <path d="M8 9v7M12 10.3V16M16 9v7"/>
+        <path d="M6 20h12"/>
+    </symbol>
+    <symbol id="building" viewBox="0 0 24 24">
+        <rect x="4" y="3" width="10" height="18" rx="1"/>
+        <path d="M14 9h5a1 1 0 0 1 1 1v11"/>
+        <path d="M2 21h20"/>
+        <path d="M8 7h2M8 11h2M8 15h2M17 13h0M17 17h0"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 24 24">
+        <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/>
+        <path d="M9 12l2 2 4-4"/>
+    </symbol>
+    <symbol id="calendar" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="2"/>
+        <path d="M3 10h18M8 3v4M16 3v4"/>
+        <path d="M7.5 14.5h5M7.5 17.5h8"/>
+    </symbol>
+    <symbol id="cloud" viewBox="0 0 24 24">
+        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+    </symbol>
+    <symbol id="clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 2"/>
+    </symbol>
+    <symbol id="lock" viewBox="0 0 24 24">
+        <rect x="5" y="11" width="14" height="10" rx="2"/>
+        <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        <path d="M12 15v2"/>
+    </symbol>
+    <symbol id="factory" viewBox="0 0 24 24">
+        <path d="M3 21V10l5 3v-3l5 3v-3l5 3V4h3v17z"/>
+        <path d="M7 17h2M12 17h2"/>
+    </symbol>
+    <symbol id="cube" viewBox="0 0 24 24">
+        <path d="M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5z"/>
+        <path d="M3.5 7.25L12 12l8.5-4.75M12 12v9.5"/>
+    </symbol>
+    <symbol id="flow" viewBox="0 0 24 24">
+        <path d="M3 7c3-3 6 3 9 0s6-3 9 0"/>
+        <path d="M3 12c3-3 6 3 9 0s6-3 9 0"/>
+        <path d="M3 17c3-3 6 3 9 0s6-3 9 0"/>
+    </symbol>
+    <symbol id="chip" viewBox="0 0 24 24">
+        <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+        <rect x="9.5" y="9.5" width="5" height="5"/>
+        <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>
+    </symbol>
+    <symbol id="check" viewBox="0 0 24 24">
+        <path d="M5 12.5l4.5 4.5L19 7.5"/>
+    </symbol>
+    <symbol id="mesh" viewBox="0 0 24 24">
+        <path d="M3 20L12 4l9 16z"/>
+        <path d="M7.5 12h9M7.5 12l4.5 8 4.5-8"/>
+    </symbol>
+    <symbol id="bulb" viewBox="0 0 24 24">
+        <path d="M9 18h6M10 21h4"/>
+        <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>
+    </symbol>
+    <symbol id="mail" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3.5 6.5l8.5 6.5 8.5-6.5"/>
+    </symbol>
+    <symbol id="phone" viewBox="0 0 24 24">
+        <path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/>
+    </symbol>
+    <symbol id="pin" viewBox="0 0 24 24">
+        <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/>
+        <circle cx="12" cy="9.5" r="2.5"/>
+    </symbol>
+    </svg>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">是睿科技 <small>SOLVERIGHT</small></a>
+        <nav class="site-links">
+            <a href="services.html" class="hide-mobile"><span class="en">Plans</span><span class="zh">合作方式</span></a>
+            <a href="projects.html" class="hide-mobile"><span class="en">Projects</span><span class="zh">作品</span></a>
+            <a href="product.html" class="hide-mobile"><span class="en">Product Dev</span><span class="zh">產品開發</span></a>
+            <a href="contact.html" class="nav-cta"><span class="en">Contact</span><span class="zh">聯絡</span></a>
+            <button id="lang-toggle-btn" class="lang-btn">English</button>
+        </nav>
+    </header>
 
-    <main style="max-width: 700px; margin: 0 auto; padding: 7rem 2rem 5rem; text-align: center;">
+    <main class="home">
 
         <!-- Hero -->
-        <h1 class="fade-in-up">
-            <span class="en">AUSTIN</span>
-            <span class="zh">Austin</span>
-        </h1>
-        <p class="subtitle fade-in-up delay">
-            <span class="en">Stop thinking. Draw it. Build it.</span>
-            <span class="zh">別想了，畫出來，做出來。</span>
-        </p>
-
-        <!-- Buttons -->
-        <div class="fade-in-up delay" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 4.5rem;">
-            <a href="projects.html" class="btn">
-                <span class="en">View Projects</span>
-                <span class="zh">看我的作品</span>
-            </a>
-            <a href="services.html" class="btn"
-                style="background-color: transparent; border: 1.5px solid var(--accent-color); color: var(--accent-color); box-shadow: none;">
-                <span class="en">See Services</span>
-                <span class="zh">了解服務方案</span>
-            </a>
-            <a href="contact.html" class="btn"
-                style="background-color: transparent; border: 1.5px solid var(--accent-color); color: var(--accent-color); box-shadow: none;">
-                <span class="en">Let's Talk</span>
-                <span class="zh">聊聊你的需求</span>
-            </a>
-        </div>
-
-        <!-- About -->
-        <section class="fade-in-up delay-2" style="text-align: left; margin-bottom: 2.5rem;">
-            <h2 style="font-size: 1.6rem; margin-bottom: 1.25rem;">
-                <span class="en">What I Do</span>
-                <span class="zh">我能幫你做什麼</span>
-            </h2>
-            <p style="font-size: 1.2rem; color: var(--text-color); line-height: 1.6; margin-bottom: 1.25rem; font-weight: 400;">
-                <span class="en">You have an idea but don't know how to build it.</span>
-                <span class="zh">你有想法，但不知道怎麼做出來。</span>
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                <p style="line-height: 2; color: var(--text-secondary);">
-                    <span style="color: #e85d00; margin-right: 0.4rem;">✦</span>
-                    <span class="en">From sketch to prototype — I make ideas tangible</span>
-                    <span class="zh">從草圖到原型，我幫你把想法具體化</span>
-                </p>
-                <p style="line-height: 2; color: var(--text-secondary);">
-                    <span style="color: #e85d00; margin-right: 0.4rem;">✦</span>
-                    <span class="en">Mechanical, electrical, prototyping — one person, end to end</span>
-                    <span class="zh">機構、電路、打樣，一個人整合到底</span>
-                </p>
-                <p style="line-height: 2; color: var(--text-secondary);">
-                    <span style="color: #e85d00; margin-right: 0.4rem;">✦</span>
-                    <span class="en">No spec sheet needed. No technical background required.</span>
-                    <span class="zh">不需要規格書，不需要你懂技術</span>
-                </p>
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div class="fade-in-up">
+                    <div class="hero-pill">
+                        <b><span class="en">Remote</span><span class="zh">遠端</span></b>
+                        <span class="en">Outsourced engineering team</span>
+                        <span class="zh">外包工程團隊・服務全台</span>
+                    </div>
+                    <h1>
+                        <span class="en">Your engineer left.<br><em>Your project can't stop.</em></span>
+                        <span class="zh">工程師走了，<br><em>案子不能停。</em></span>
+                    </h1>
+                    <p class="hero-sub">
+                        <span class="en">When you're short-handed, Solveright steps in on mechanical design, simulation and firmware — for a few weeks or for the long run.</span>
+                        <span class="zh">人力出現空窗時，是睿遠端接手機構設計、分析模擬、電控韌體的工作。短期銜接、長期配合都可以。</span>
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="contact.html" class="btn">
+                            <span class="en">Free Needs Assessment</span>
+                            <span class="zh">免費需求評估</span>
+                        </a>
+                        <a href="#situations" class="btn-ghost">
+                            <span class="en">See how we work</span>
+                            <span class="zh">看合作方式</span>
+                        </a>
+                    </div>
+                    <div class="hero-checks">
+                        <span class="item"><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Free assessment</span><span class="zh">免費評估</span></span>
+                        <span class="item"><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">NDA first</span><span class="zh">先簽保密協議</span></span>
+                        <span class="item"><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Weekly reports</span><span class="zh">每週進度回報</span></span>
+                    </div>
+                </div>
+                <div class="hero-visual fade-in-up delay">
+                    <img class="hero-img" src="assets/home/hero-cad-cfd.jpg" alt="工業集塵設備 3D 建模與 CFD 流場分析">
+                    <div class="float-card float-top">
+                        <span class="live-dot"></span>
+                        <div>
+                            <strong><span class="en">Weekly report sent</span><span class="zh">本週進度已回報</span></strong>
+                            <small><span class="en">Drawings synced to cloud</span><span class="zh">圖檔已同步至雲端</span></small>
+                        </div>
+                    </div>
+                    <div class="float-card float-bottom">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#flow"/></svg></span>
+                        <div>
+                            <strong><span class="en">3D design + CFD</span><span class="zh">3D 建模 ＋ CFD 驗證</span></strong>
+                            <small><span class="en">Industrial dust collector</span><span class="zh">工業集塵設備</span></small>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Diagnostic Entry -->
-        <section class="fade-in-up delay-3"
-            style="background: #fff3ec; border: 1.5px solid rgba(232,93,0,0.2); border-radius: 16px; padding: 2.5rem 2rem;">
-            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-color);">
-                <span class="en">Got an idea but not sure where to start?</span>
-                <span class="zh">有想法，但不知道從哪裡開始？</span>
-            </h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem;">
-                <span class="en">3 questions. 2 minutes. I'll help you figure out where to start.</span>
-                <span class="zh">花 2 分鐘回答 3 個問題，我幫你釐清方向。</span>
-            </p>
-            <a href="diagnostic.html" class="btn">
-                <span class="en">Let's Figure It Out</span>
-                <span class="zh">開始釐清</span>
-            </a>
+        <!-- Disciplines -->
+        <section class="band-white">
+            <div class="wrap disciplines">
+                <div class="discipline">
+                    <svg class="icon" aria-hidden="true"><use href="#cube"/></svg>
+                    <div>
+                        <strong><span class="en">Mechanical design</span><span class="zh">機構設計</span></strong>
+                        <small><span class="en">Structure · drawings · BOM</span><span class="zh">結構・出圖・BOM</span></small>
+                    </div>
+                </div>
+                <div class="discipline">
+                    <svg class="icon" aria-hidden="true"><use href="#flow"/></svg>
+                    <div>
+                        <strong><span class="en">CFD analysis</span><span class="zh">CFD 流場分析</span></strong>
+                        <small><span class="en">Flow · separation · wind load</span><span class="zh">流場・分離效率・風載</span></small>
+                    </div>
+                </div>
+                <div class="discipline">
+                    <svg class="icon" aria-hidden="true"><use href="#mesh"/></svg>
+                    <div>
+                        <strong><span class="en">FEA analysis</span><span class="zh">FEA 結構分析</span></strong>
+                        <small><span class="en">Stress · vibration</span><span class="zh">應力・振動</span></small>
+                    </div>
+                </div>
+                <div class="discipline">
+                    <svg class="icon" aria-hidden="true"><use href="#chip"/></svg>
+                    <div>
+                        <strong><span class="en">Controls · PCB</span><span class="zh">電控韌體・PCB</span></strong>
+                        <small><span class="en">Firmware · sensing · boards</span><span class="zh">韌體・感測・電路板</span></small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gap timeline -->
+        <section class="band">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">WHAT WE DO</span><span class="zh">我們補的是什麼</span></div>
+                    <h2 class="sec-title">
+                        <span class="en">People will always leave.<br>The work won't wait.</span>
+                        <span class="zh">人員流動一定會發生，<br>工程需求不會停下來等。</span>
+                    </h2>
+                    <p class="sec-sub">
+                        <span class="en">We cover the gap between the engineer who left and the one who's coming — and hand everything over cleanly.</span>
+                        <span class="zh">從原工程師離開，到新人接得起來之間的空窗，由是睿接手，最後完整交接。</span>
+                    </p>
+                </div>
+                <div class="timeline">
+                    <div class="tl-step">
+                        <div class="tl-node"><svg class="icon" aria-hidden="true"><use href="#chat"/></svg></div>
+                        <div class="tl-when"><span class="en">01 · BEFORE THEY LEAVE</span><span class="zh">01・離職之前</span></div>
+                        <div class="tl-what"><span class="en">Contact us early</span><span class="zh">提早聯絡我們</span></div>
+                        <p class="tl-note"><span class="en">While your engineer is still here, we take the handover in person.</span><span class="zh">趁原工程師還在，直接到廠當面交接。</span></p>
+                    </div>
+                    <div class="tl-step is-us">
+                        <div class="tl-node"><svg class="icon" aria-hidden="true"><use href="#laptop"/></svg></div>
+                        <div class="tl-when"><span class="en">02 · THE GAP</span><span class="zh">02・人力空窗</span></div>
+                        <div class="tl-what"><span class="en">Solveright takes over</span><span class="zh">是睿遠端接手</span></div>
+                        <p class="tl-note"><span class="en">Work keeps moving, with a progress report every week and files in the cloud.</span><span class="zh">進度不中斷，每週回報，圖檔隨時可查。</span></p>
+                    </div>
+                    <div class="tl-step">
+                        <div class="tl-node"><svg class="icon" aria-hidden="true"><use href="#user-plus"/></svg></div>
+                        <div class="tl-when"><span class="en">03 · NEW HIRE ARRIVES</span><span class="zh">03・新人到職</span></div>
+                        <div class="tl-what"><span class="en">Clean handover</span><span class="zh">完整交接給新人</span></div>
+                        <p class="tl-note"><span class="en">Handover documents so your new engineer is productive fast.</span><span class="zh">附交接文件，新人很快就能上手。</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Situations -->
+        <section id="situations" class="band band-white">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">HOW WE WORK</span><span class="zh">合作方式</span></div>
+                    <h2 class="sec-title">
+                        <span class="en">Which situation are you in?</span>
+                        <span class="zh">你現在是哪一種狀況？</span>
+                    </h2>
+                    <p class="sec-sub">
+                        <span class="en">Pick the one that fits. Every plan is quoted after a free assessment.</span>
+                        <span class="zh">對號入座就好，每種方式都是免費評估後再報價。</span>
+                    </p>
+                </div>
+                <div class="situations">
+                    <a href="services.html#project" class="situation">
+                        <span class="situation-num">01</span>
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#doc-check"/></svg></span>
+                        <div class="situation-q">
+                            <span class="en">"We have one job that needs to get done."</span>
+                            <span class="zh">「有一件事要做完。」</span>
+                        </div>
+                        <div class="situation-foot">
+                            <div class="situation-plan"><span class="en">Single Project</span><span class="zh">單案委託</span><span aria-hidden="true">→</span></div>
+                            <div class="situation-end"><span class="en">Drawings, a CFD study, a PCB. Done when delivered.</span><span class="zh">一套圖面、一份分析、一塊電路板，交付就結案。</span></div>
+                        </div>
+                    </a>
+                    <a href="services.html#bridge" class="situation">
+                        <span class="situation-num">02</span>
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#bridge"/></svg></span>
+                        <div class="situation-q">
+                            <span class="en">"Someone left, and the new hire isn't here yet."</span>
+                            <span class="zh">「有人離職，新人還沒來。」</span>
+                        </div>
+                        <div class="situation-foot">
+                            <div class="situation-plan"><span class="en">Bridge Support</span><span class="zh">銜接支援</span><span aria-hidden="true">→</span></div>
+                            <div class="situation-end"><span class="en">Monthly, usually 1–3 months, with an on-site handover.</span><span class="zh">以月計，通常 1–3 個月，含一次到廠交接。</span></div>
+                        </div>
+                    </a>
+                    <a href="services.html#longterm" class="situation">
+                        <span class="situation-num">03</span>
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#building"/></svg></span>
+                        <div class="situation-q">
+                            <span class="en">"We always have work, but don't want another headcount."</span>
+                            <span class="zh">「一直有需求，但不想多養一個人。」</span>
+                        </div>
+                        <div class="situation-foot">
+                            <div class="situation-plan"><span class="en">External Eng. Dept.</span><span class="zh">長期外部工程部</span><span aria-hidden="true">→</span></div>
+                            <div class="situation-end"><span class="en">Fixed monthly fee, scale up or down each month.</span><span class="zh">固定月費，可以按月調整等級。</span></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="standby-strip">
+                    <div class="strip-main">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#shield"/></svg></span>
+                        <div>
+                            <h3><span class="en">Not short-handed right now? Keep this page.</span><span class="zh">現在不缺人？先存下這頁。</span></h3>
+                            <p><span class="en">Standby Support keeps us familiar with your files, so we can step in the day someone leaves.</span><span class="zh">「備援方案」平常就熟悉你的圖檔，有人離職時，當天就能接手。</span></p>
+                        </div>
+                    </div>
+                    <a href="services.html#standby" class="text-link"><span class="en">About Standby →</span><span class="zh">了解備援方案 →</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cases -->
+        <section class="band">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">PROJECTS</span><span class="zh">實際案例</span></div>
+                    <h2 class="sec-title">
+                        <span class="en">Engineering we've actually delivered</span>
+                        <span class="zh">做過的工程，看得到成果</span>
+                    </h2>
+                    <p class="sec-sub">
+                        <span class="en">From design and simulation to fabrication and installation.</span>
+                        <span class="zh">從設計、分析，一路到製造與現場安裝。</span>
+                    </p>
+                </div>
+                <div class="cases">
+                    <a href="project_cyclonic_purity.html" class="case">
+                        <img src="assets/home/case-cyclone.jpg" alt="咖啡烘豆機旋風集塵 CFD 流場模擬" loading="lazy">
+                        <div class="case-body">
+                            <div class="case-tags"><span class="case-tag">CFD</span><span class="case-tag"><span class="en">Mechanical</span><span class="zh">機構設計</span></span></div>
+                            <h3><span class="en">Cyclone dust separator for a coffee roaster</span><span class="zh">咖啡烘豆機旋風集塵系統</span></h3>
+                            <p><span class="en">Smaller footprint with the same separation efficiency, validated by CFD and taken to production.</span><span class="zh">縮小體積、維持分離效率，CFD 驗證後量產。</span></p>
+                            <span class="text-link"><span class="en">View project →</span><span class="zh">看案例 →</span></span>
+                        </div>
+                    </a>
+                    <a href="project_industrial_ecology.html" class="case">
+                        <img src="assets/home/case-baghouse.jpg" alt="袋式集塵器製造現場" loading="lazy">
+                        <div class="case-body">
+                            <div class="case-tags"><span class="case-tag">3D CAD</span><span class="case-tag">CFD</span><span class="case-tag"><span class="en">On-site</span><span class="zh">現場監造</span></span></div>
+                            <h3><span class="en">Industrial environmental equipment</span><span class="zh">大型工業環保設備</span></h3>
+                            <p><span class="en">Baghouse, SCR and cyclone systems: 3D modelling, CFD validation and on-site supervision.</span><span class="zh">袋式集塵器、SCR 脫硝、旋風集塵：3D 建模、CFD 驗證到現場監造。</span></p>
+                            <span class="text-link"><span class="en">View project →</span><span class="zh">看案例 →</span></span>
+                        </div>
+                    </a>
+                    <a href="project_kinetic_structure.html" class="case">
+                        <img src="assets/home/case-park.jpg" alt="20 米公園滑軌遊具完工照" loading="lazy">
+                        <div class="case-body">
+                            <div class="case-tags"><span class="case-tag">FEA</span><span class="case-tag">CFD</span><span class="case-tag"><span class="en">Motion</span><span class="zh">運動分析</span></span></div>
+                            <h3><span class="en">20 m park zip-rail ride</span><span class="zh">20 米公園滑軌遊具</span></h3>
+                            <p><span class="en">Motion analysis, code-compliant structural checks and typhoon wind-load simulation. Smooth on the first ride.</span><span class="zh">運動分析、法規結構計算、颱風風載模擬，第一次乘坐就沒有卡頓。</span></p>
+                            <span class="text-link"><span class="en">View project →</span><span class="zh">看案例 →</span></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="more-row">
+                    <a href="projects.html" class="btn-ghost"><span class="en">All projects</span><span class="zh">看全部作品</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <section class="band band-dark">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">FOR YOUR BOSS</span><span class="zh">給主管的說明</span></div>
+                    <h2 class="sec-title">
+                        <span class="en">Hire someone, or hand it to Solveright?</span>
+                        <span class="zh">自己請一個人，還是交給是睿？</span>
+                    </h2>
+                </div>
+                <table class="compare">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th><span class="en">HIRE SOMEONE</span><span class="zh">自己聘一位</span></th>
+                            <th class="us"><span class="en">SOLVERIGHT</span><span class="zh">交給是睿</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="en">Start</span><span class="zh">多久能開工</span></td>
+                            <td class="them"><span class="en">Recruiting often takes 1–3 months</span><span class="zh">招募通常要 1–3 個月</span></td>
+                            <td class="us"><span class="en">Right after the assessment</span><span class="zh">評估確認後即可開工</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Cost</span><span class="zh">人事負擔</span></td>
+                            <td class="them"><span class="en">Salary, insurance, bonus, equipment, a desk</span><span class="zh">薪資、勞健保、年終、設備、座位</span></td>
+                            <td class="us"><span class="en">A service fee only, no headcount</span><span class="zh">只付服務費，不佔人事編制</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">If they leave</span><span class="zh">人又離職</span></td>
+                            <td class="them"><span class="en">Start recruiting again</span><span class="zh">從頭再招一次</span></td>
+                            <td class="us"><span class="en">We handle continuity</span><span class="zh">由我們負責銜接</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Less work</span><span class="zh">需求變少</span></td>
+                            <td class="them"><span class="en">Hard to adjust</span><span class="zh">很難調整</span></td>
+                            <td class="us"><span class="en">Adjust monthly, or switch to Standby</span><span class="zh">按月調整，或轉為備援</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Disciplines</span><span class="zh">跨領域</span></td>
+                            <td class="them"><span class="en">Usually one specialty per person</span><span class="zh">一個人通常專精一項</span></td>
+                            <td class="us"><span class="en">Mechanical, simulation and controls together</span><span class="zh">機構、分析、電控一起處理</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Trust -->
+        <section class="band">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">REMOTE, VISIBLE</span><span class="zh">遠端合作</span></div>
+                    <h2 class="sec-title">
+                        <span class="en">Not at your desk. Never out of sight.</span>
+                        <span class="zh">不在你公司，進度一樣看得見。</span>
+                    </h2>
+                </div>
+                <div class="trust-grid">
+                    <div class="trust">
+                        <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#calendar"/></svg></span>
+                        <h3><span class="en">Weekly report</span><span class="zh">每週週報</span></h3>
+                        <p><span class="en">What got done, what's blocked, what's next.</span><span class="zh">做了什麼、卡在哪裡、下週計畫。</span></p>
+                    </div>
+                    <div class="trust">
+                        <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#cloud"/></svg></span>
+                        <h3><span class="en">Shared cloud files</span><span class="zh">雲端檔案隨時可查</span></h3>
+                        <p><span class="en">Drawings and documents synced as we work.</span><span class="zh">圖檔與文件同步更新，隨時打開看。</span></p>
+                    </div>
+                    <div class="trust">
+                        <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#clock"/></svg></span>
+                        <h3><span class="en">Agreed response time</span><span class="zh">固定回覆時效</span></h3>
+                        <p><span class="en">Set before we start and written into the contract.</span><span class="zh">合作前約定，寫進合約。</span></p>
+                    </div>
+                    <div class="trust">
+                        <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#lock"/></svg></span>
+                        <h3><span class="en">NDA first</span><span class="zh">先簽保密協議</span></h3>
+                        <p><span class="en">Signed before any files change hands.</span><span class="zh">開工前簽 NDA，再交換任何檔案。</span></p>
+                    </div>
+                    <div class="trust">
+                        <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#doc-handover"/></svg></span>
+                        <h3><span class="en">Handover documents</span><span class="zh">交接文件</span></h3>
+                        <p><span class="en">Every engagement ends with a complete handover.</span><span class="zh">每次合作結束，都整理完整交接。</span></p>
+                    </div>
+                    <div class="trust">
+                        <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#factory"/></svg></span>
+                        <h3><span class="en">On-site when it matters</span><span class="zh">關鍵時刻到廠</span></h3>
+                        <p><span class="en">Remote by default; Bridge Support includes one on-site handover.</span><span class="zh">預設遠端執行，銜接支援含一次到廠交接。</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Founder + CTA -->
+        <section id="founder" class="band band-white">
+            <div class="wrap">
+                <div class="closing">
+                    <div class="founder">
+                        <div class="founder-top">
+                            <!-- 換成照片：<img class="avatar" src="assets/founder.jpg" alt="陳佑安"> -->
+                            <div class="avatar">陳</div>
+                            <div>
+                                <h3><span class="en">Austin Chen</span><span class="zh">陳佑安</span></h3>
+                                <div class="role"><span class="en">Founder &amp; Technical Lead</span><span class="zh">創辦人・技術負責人</span></div>
+                            </div>
+                        </div>
+                        <p>
+                            <span class="en">A background spanning mechanical and electronic integration, with hands-on work from sketches and structural analysis to control firmware. Every Solveright engagement is quality-checked by the technical lead.</span>
+                            <span class="zh">機械與電子整合背景，從草圖、結構分析到電控韌體都親手做過。是睿的每一個合作案，都由技術負責人把關品質。</span>
+                        </p>
+                        <a href="projects.html" class="text-link"><span class="en">See past work →</span><span class="zh">看過去的作品 →</span></a>
+                    </div>
+                    <div class="cta-card">
+                        <h2>
+                            <span class="en">Tell us your situation.<br>The assessment is free.</span>
+                            <span class="zh">說明你的狀況，<br>我們先免費評估。</span>
+                        </h2>
+                        <p>
+                            <span class="en">We'll tell you which plan fits and send a quote. No commitment.</span>
+                            <span class="zh">評估後告訴你適合哪種方式，並提供報價，不用先承諾任何事。</span>
+                        </p>
+                        <a href="contact.html" class="btn-white">
+                            <span class="en">Free Needs Assessment →</span>
+                            <span class="zh">免費需求評估 →</span>
+                        </a>
+                        <div class="cta-note"><span class="en">We reply within 1–2 business days.</span><span class="zh">1–2 個工作天內回覆。</span></div>
+                    </div>
+                </div>
+                <div class="individual-strip">
+                    <div class="strip-main">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#bulb"/></svg></span>
+                        <div>
+                            <h3><span class="en">An individual or a startup with a product idea?</span><span class="zh">個人或新創，有一個產品想法？</span></h3>
+                            <p><span class="en">From idea to something real: consult, blueprint, execution.</span><span class="zh">從想法到做出來：諮詢、藍圖、開發執行。</span></p>
+                        </div>
+                    </div>
+                    <a href="product.html" class="text-link"><span class="en">Product Development →</span><span class="zh">產品開發 →</span></a>
+                </div>
+            </div>
         </section>
 
     </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">是睿科技<small>SOLVERIGHT</small></div>
+                    <p>
+                        <span class="en">Solveright Inc. Remote outsourced engineers for mechanical design, simulation and controls. Based in Taipei, serving all of Taiwan.</span>
+                        <span class="zh">是睿科技股份有限公司。遠端外包工程團隊：機構設計、分析模擬、電控韌體。台北，遠端服務全台。</span>
+                    </p>
+                </div>
+                <div>
+                    <h4><span class="en">SITE</span><span class="zh">網站</span></h4>
+                    <ul>
+                        <li><a href="services.html"><span class="en">Plans</span><span class="zh">合作方式</span></a></li>
+                        <li><a href="projects.html"><span class="en">Projects</span><span class="zh">作品</span></a></li>
+                        <li><a href="product.html"><span class="en">Product Development</span><span class="zh">產品開發（個人與新創）</span></a></li>
+                        <li><a href="blog.html"><span class="en">Notes</span><span class="zh">技術筆記</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4><span class="en">CONTACT</span><span class="zh">聯絡</span></h4>
+                    <ul>
+                        <li><a href="mailto:austinyoan@gmail.com">austinyoan@gmail.com</a></li>
+                        <li><a href="tel:+886961353313">+886 961-353-313</a></li>
+                        <li><a href="contact.html"><span class="en">LINE · Free assessment</span><span class="zh">LINE・免費需求評估</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>© Solveright Inc.</p>
+        </div>
+    </footer>
 
     <script>
         const langBtn = document.getElementById('lang-toggle-btn');
         const body = document.body;
 
         langBtn.addEventListener('click', () => {
-            // Toggle the class on the body
             body.classList.toggle('chinese-mode');
-
-            // Change button text based on current mode
-            if (body.classList.contains('chinese-mode')) {
-                langBtn.textContent = "English"; // Switch button label to English
-            } else {
-                langBtn.textContent = "中文";    // Switch button label back to Chinese
-            }
+            langBtn.textContent = body.classList.contains('chinese-mode') ? 'English' : '中文';
         });
     </script>
 </body>

@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服務方案 | Austin</title>
-    <meta name="description" content="快速諮詢、專案藍圖、完整執行合作。三種服務等級，從釐清想法到產品落地，找到最適合你的合作方式。">
-    <meta property="og:title" content="服務方案 | Austin">
-    <meta property="og:description" content="你需要的不只是一個會畫圖的人。NT$3,000 起，從釐清想法開始。">
+    <title>合作方式：單案委託・銜接支援・長期外部工程部 | 是睿科技</title>
+    <meta name="description" content="是睿科技的外包工程師合作方式：單案委託、工程師離職時的銜接支援、長期外部工程部月費，以及備援方案。遠端執行、每週週報，免費評估後報價。">
+    <meta property="og:title" content="合作方式 | 是睿科技">
+    <meta property="og:description" content="一次性的事？缺人過渡？還是長期需要？選一種就好，免費評估後報價。">
     <meta property="og:url" content="https://austindesign.tw/services.html">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://austindesign.tw/assets/home/hero-cad-cfd.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <!-- Google tag (gtag.js) -->
@@ -24,341 +25,680 @@
         gtag('config', 'G-ZGMELF4GDL');
     </script>
     <style>
-        .services-page {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 7rem 2rem 4rem;
+        html {
+            scroll-padding-top: 80px;
         }
-        .services-hero {
-            text-align: center;
-            margin-bottom: 4rem;
+        .jump-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 2rem;
         }
-        .services-hero h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            text-transform: none;
-            letter-spacing: -0.01em;
+        .jump-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: auto;
+            background: #fff;
+            border: 0.5px solid var(--line);
+            border-radius: 50px;
+            padding: 0.5rem 1.1rem 0.5rem 0.6rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: border-color 0.2s ease;
         }
-        .services-hero .sub {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 300;
+        .jump-links a:hover {
+            border-color: var(--accent-color);
         }
-        .tiers {
+        .jump-links .icon {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-color);
+        }
+        .jump-links a span {
+            width: auto;
+        }
+
+        /* Plan cards */
+        .plans {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-bottom: 5rem;
         }
-        .tier-card {
-            background: var(--card-bg);
-            border: 0.5px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.25rem 2rem;
+        .plan {
+            position: relative;
+            background: #fff;
+            border: 0.5px solid var(--line);
+            border-radius: 18px;
+            padding: 2rem 1.75rem 1.75rem;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .tier-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
-            box-shadow: 0 8px 24px rgba(232,93,0,0.1);
+        .plan:hover,
+        .plan:target {
+            border-color: rgba(232, 93, 0, 0.5);
+            box-shadow: 0 18px 40px rgba(232, 93, 0, 0.12);
         }
-        .tier-number {
-            font-size: 0.75rem;
+        .plan-num {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.75rem;
+            font-size: 2.6rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
+            color: rgba(0, 0, 0, 0.06);
+            line-height: 1;
         }
-        .tier-name {
-            font-size: 1.4rem;
-            font-weight: 700;
+        .plan h3 {
+            color: var(--text-color);
+            font-size: 1.45rem;
+            font-weight: 900;
             margin-bottom: 0.5rem;
         }
-        .tier-tagline {
-            font-size: 0.95rem;
+        .plan-for {
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.7;
             margin-bottom: 1.5rem;
+        }
+        .facts {
+            border-top: 0.5px solid var(--line);
             flex-grow: 1;
-        }
-        .tier-includes {
             margin-bottom: 1.5rem;
         }
-        .tier-includes-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-secondary);
-            margin-bottom: 0.75rem;
+        .fact {
+            display: grid;
+            grid-template-columns: 5.5rem 1fr;
+            gap: 0.75rem;
+            padding: 0.85rem 0;
+            border-bottom: 0.5px solid var(--line);
+            font-size: 0.93rem;
+            line-height: 1.6;
         }
-        .tier-items {
+        .fact dt {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        .fact dd ul {
             list-style: none;
-            padding: 0;
-            margin: 0;
             display: flex;
             flex-direction: column;
+            gap: 0.3rem;
+        }
+        .fact dd li {
+            display: flex;
             gap: 0.4rem;
         }
-        .tier-items li {
-            font-size: 0.9rem;
-            color: var(--text-color);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-            line-height: 1.5;
+        .fact dd li .icon {
+            width: 16px;
+            height: 16px;
+            margin-top: 0.25rem;
+            color: var(--accent-color);
+            stroke-width: 2;
         }
-        .tier-items li::before {
+        .plan-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+        }
+
+        /* Long-term levels */
+        .levels-layout {
+            display: grid;
+            grid-template-columns: 0.9fr 1.6fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .levels {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .level {
+            background: #fff;
+            border: 0.5px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem 1.4rem;
+        }
+        .level-pips {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 1rem;
+        }
+        .level-pips i {
+            width: 22px;
+            height: 6px;
+            border-radius: 6px;
+            background: #e8e3dc;
+        }
+        .level-pips i.on {
+            background: var(--accent-color);
+        }
+        .level h3 {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+        .level ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+        .level li::before {
             content: "—";
             color: var(--accent-color);
-            font-weight: 700;
-            flex-shrink: 0;
+            margin-right: 0.4rem;
         }
-        .tier-divider {
-            height: 1px;
-            background: var(--border-color);
-            margin: 1.25rem 0;
-        }
-        .tier-price {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-color);
-        }
-        .tier-price span {
-            font-size: 0.85rem;
-            font-weight: 300;
-            color: var(--text-secondary);
-        }
-        .services-cta {
-            text-align: center;
-            background: var(--card-bg);
-            border: 0.5px solid var(--border-color);
-            border-radius: 16px;
-            padding: 3rem 2rem;
-            margin-bottom: 3rem;
-        }
-        .services-cta p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.75rem;
-        }
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .btn-outline {
-            display: inline-block;
-            border: 1.5px solid var(--accent-color);
-            color: var(--accent-color);
-            text-decoration: none;
-            padding: 0.875rem 2rem;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-        .btn-outline:hover {
-            background: var(--accent-color);
-            color: #fff;
-        }
-        .btn, .btn-outline {
-            display: inline-flex;
+
+        /* Standby (dark band) */
+        .standby {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 3rem;
             align-items: center;
-            justify-content: center;
-            line-height: 1;
-            vertical-align: middle;
         }
-        @media (max-width: 900px) {
-            .tiers { grid-template-columns: 1fr; }
-            .services-hero h1 { font-size: 2rem; }
+        .standby-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 0.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 2rem;
+        }
+        .standby-box h3 {
+            color: #fff;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.1rem;
+        }
+        .standby-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .standby-box li {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+        .standby-box li .icon {
+            width: 22px;
+            height: 22px;
+            color: #ff8a3d;
+        }
+        .standby-box p {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            border-top: 0.5px solid rgba(255, 255, 255, 0.12);
+            padding-top: 1.1rem;
+        }
+        .standby .icon-badge {
+            background: rgba(232, 93, 0, 0.18);
+            color: #ff8a3d;
+        }
+
+        /* Process + commitments */
+        .timeline.steps-4 {
+            grid-template-columns: repeat(4, 1fr);
+            margin-bottom: 3.5rem;
+        }
+        .notes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .note {
+            background: #fff;
+            border: 0.5px solid var(--line);
+            border-radius: 18px;
+            padding: 2rem;
+        }
+        .note-head {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+        .note-head .icon-badge {
+            margin: 0;
+        }
+        .note h3 {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        .note ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .note li {
+            display: flex;
+            gap: 0.6rem;
+            line-height: 1.6;
+        }
+        .note li .icon {
+            width: 18px;
+            height: 18px;
+            margin-top: 0.2rem;
+            color: var(--accent-color);
+            stroke-width: 2;
+        }
+        .cta-row {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+        .cta-row .individual-strip {
+            margin-top: 0;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        @media (max-width: 960px) {
+            .plans,
+            .levels-layout,
+            .standby,
+            .notes,
+            .cta-row {
+                grid-template-columns: 1fr;
+            }
+            .levels-layout {
+                gap: 0;
+            }
+        }
+        @media (max-width: 640px) {
+            .levels {
+                grid-template-columns: 1fr;
+            }
+            .plan,
+            .note,
+            .standby-box {
+                padding: 1.6rem 1.3rem;
+            }
+            .fact {
+                grid-template-columns: 4.5rem 1fr;
+            }
         }
     </style>
 </head>
 
 <body class="lang-en chinese-mode">
-    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000; display: flex; gap: 1rem; align-items: center;">
-        <a href="index.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='var(--text-secondary)'">
-            <span class="en">← Home</span>
-            <span class="zh">← 首頁</span>
-        </a>
-        <button id="lang-toggle-btn" class="lang-btn">English</button>
-    </nav>
+    <!-- Line icons (inlined so they also show when the file is opened directly) -->
+    <svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+    <symbol id="chat" viewBox="0 0 24 24">
+        <path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/>
+        <path d="M8 10h8M8 13h5"/>
+    </symbol>
+    <symbol id="laptop" viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="11" rx="1.5"/>
+        <path d="M2 19h20"/>
+        <path d="M10 10.5l2 2 3-3.5"/>
+    </symbol>
+    <symbol id="user-plus" viewBox="0 0 24 24">
+        <circle cx="9" cy="8" r="4"/>
+        <path d="M2 21v-1a7 7 0 0 1 14 0v1"/>
+        <path d="M19 8v6M16 11h6"/>
+    </symbol>
+    <symbol id="doc-check" viewBox="0 0 24 24">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+        <path d="M14 3v5h5"/>
+        <path d="M9 14l2 2 4-4"/>
+    </symbol>
+    <symbol id="doc-handover" viewBox="0 0 24 24">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+        <path d="M14 3v5h5"/>
+        <path d="M9 15h6M13 13l2 2-2 2"/>
+    </symbol>
+    <symbol id="bridge" viewBox="0 0 24 24">
+        <path d="M2 16h20"/>
+        <path d="M4 4v12M20 4v12"/>
+        <path d="M4 5c4 7 12 7 16 0"/>
+        <path d="M8 9v7M12 10.3V16M16 9v7"/>
+        <path d="M6 20h12"/>
+    </symbol>
+    <symbol id="building" viewBox="0 0 24 24">
+        <rect x="4" y="3" width="10" height="18" rx="1"/>
+        <path d="M14 9h5a1 1 0 0 1 1 1v11"/>
+        <path d="M2 21h20"/>
+        <path d="M8 7h2M8 11h2M8 15h2M17 13h0M17 17h0"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 24 24">
+        <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/>
+        <path d="M9 12l2 2 4-4"/>
+    </symbol>
+    <symbol id="calendar" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="2"/>
+        <path d="M3 10h18M8 3v4M16 3v4"/>
+        <path d="M7.5 14.5h5M7.5 17.5h8"/>
+    </symbol>
+    <symbol id="cloud" viewBox="0 0 24 24">
+        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+    </symbol>
+    <symbol id="clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 2"/>
+    </symbol>
+    <symbol id="lock" viewBox="0 0 24 24">
+        <rect x="5" y="11" width="14" height="10" rx="2"/>
+        <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        <path d="M12 15v2"/>
+    </symbol>
+    <symbol id="factory" viewBox="0 0 24 24">
+        <path d="M3 21V10l5 3v-3l5 3v-3l5 3V4h3v17z"/>
+        <path d="M7 17h2M12 17h2"/>
+    </symbol>
+    <symbol id="cube" viewBox="0 0 24 24">
+        <path d="M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5z"/>
+        <path d="M3.5 7.25L12 12l8.5-4.75M12 12v9.5"/>
+    </symbol>
+    <symbol id="flow" viewBox="0 0 24 24">
+        <path d="M3 7c3-3 6 3 9 0s6-3 9 0"/>
+        <path d="M3 12c3-3 6 3 9 0s6-3 9 0"/>
+        <path d="M3 17c3-3 6 3 9 0s6-3 9 0"/>
+    </symbol>
+    <symbol id="chip" viewBox="0 0 24 24">
+        <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+        <rect x="9.5" y="9.5" width="5" height="5"/>
+        <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>
+    </symbol>
+    <symbol id="check" viewBox="0 0 24 24">
+        <path d="M5 12.5l4.5 4.5L19 7.5"/>
+    </symbol>
+    <symbol id="mesh" viewBox="0 0 24 24">
+        <path d="M3 20L12 4l9 16z"/>
+        <path d="M7.5 12h9M7.5 12l4.5 8 4.5-8"/>
+    </symbol>
+    <symbol id="bulb" viewBox="0 0 24 24">
+        <path d="M9 18h6M10 21h4"/>
+        <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>
+    </symbol>
+    <symbol id="mail" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3.5 6.5l8.5 6.5 8.5-6.5"/>
+    </symbol>
+    <symbol id="phone" viewBox="0 0 24 24">
+        <path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/>
+    </symbol>
+    <symbol id="pin" viewBox="0 0 24 24">
+        <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/>
+        <circle cx="12" cy="9.5" r="2.5"/>
+    </symbol>
+    </svg>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">是睿科技 <small>SOLVERIGHT</small></a>
+        <nav class="site-links">
+            <a href="services.html" class="hide-mobile active"><span class="en">Plans</span><span class="zh">合作方式</span></a>
+            <a href="projects.html" class="hide-mobile"><span class="en">Projects</span><span class="zh">作品</span></a>
+            <a href="product.html" class="hide-mobile"><span class="en">Product Dev</span><span class="zh">產品開發</span></a>
+            <a href="contact.html" class="nav-cta"><span class="en">Contact</span><span class="zh">聯絡</span></a>
+            <button id="lang-toggle-btn" class="lang-btn">English</button>
+        </nav>
+    </header>
 
-    <main class="services-page fade-in-up">
+    <main>
 
         <!-- Hero -->
-        <div class="services-hero">
-            <h1>
-                <span class="en">You need more than someone who can model it.</span>
-                <span class="zh">你需要的，不只是一個會畫圖的人。</span>
-            </h1>
-            <p class="sub">
-                <span class="en">Here's how we can work together.</span>
-                <span class="zh">以下是我們可以合作的方式。</span>
-            </p>
-        </div>
-
-        <!-- Service Tiers -->
-        <div class="tiers fade-in-up delay">
-
-            <!-- Tier 1 -->
-            <div class="tier-card">
-                <div class="tier-number">
-                    <span class="en">Tier 01</span>
-                    <span class="zh">等級一</span>
-                </div>
-                <div class="tier-name">
-                    <span class="en">Quick Consult</span>
-                    <span class="zh">快速諮詢</span>
-                </div>
-                <p class="tier-tagline">
-                    <span class="en">60 minutes to get your idea out of your head and into something we can actually discuss.</span>
-                    <span class="zh">60 分鐘，把你的想法說清楚。</span>
+        <section class="page-hero">
+            <div class="wrap fade-in-up">
+                <div class="sec-label"><span class="en">HOW WE WORK</span><span class="zh">合作方式</span></div>
+                <h1>
+                    <span class="en">One-off job? Covering a gap?<br><em>Or for the long run?</em></span>
+                    <span class="zh">一次性的事？缺人過渡？<br><em>還是長期需要？</em></span>
+                </h1>
+                <p class="lead">
+                    <span class="en">Pick the one that fits. Every plan is remote, reported weekly, and quoted after a free assessment.</span>
+                    <span class="zh">選一種就好。每種方式都是遠端執行、每週回報，免費評估後再報價。</span>
                 </p>
-                <div class="tier-includes">
-                    <div class="tier-includes-label">
-                        <span class="en">Includes</span>
-                        <span class="zh">包含</span>
+                <div class="jump-links">
+                    <a href="#project"><svg class="icon" aria-hidden="true"><use href="#doc-check"/></svg><span class="en">Single Project</span><span class="zh">單案委託</span></a>
+                    <a href="#bridge"><svg class="icon" aria-hidden="true"><use href="#bridge"/></svg><span class="en">Bridge Support</span><span class="zh">銜接支援</span></a>
+                    <a href="#longterm"><svg class="icon" aria-hidden="true"><use href="#building"/></svg><span class="en">External Eng. Dept.</span><span class="zh">長期外部工程部</span></a>
+                    <a href="#standby"><svg class="icon" aria-hidden="true"><use href="#shield"/></svg><span class="en">Standby</span><span class="zh">備援方案</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plans -->
+        <section class="band band-white">
+            <div class="wrap">
+                <div class="plans">
+                    <article class="plan" id="project">
+                        <span class="plan-num">01</span>
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#doc-check"/></svg></span>
+                        <h3><span class="en">Single Project</span><span class="zh">單案委託</span></h3>
+                        <p class="plan-for"><span class="en">You have a clear job that needs to get done.</span><span class="zh">有一件明確的事要做完。</span></p>
+                        <dl class="facts">
+                            <div class="fact"><dt><span class="en">Example</span><span class="zh">例如</span></dt><dd><span class="en">A set of drawings, a CFD study, a circuit board</span><span class="zh">一套圖面、一份 CFD 分析、一塊電路板</span></dd></div>
+                            <div class="fact"><dt><span class="en">Billing</span><span class="zh">計費</span></dt><dd><span class="en">Per project, agreed once</span><span class="zh">依案報價，一次談定</span></dd></div>
+                            <div class="fact"><dt><span class="en">Ends</span><span class="zh">何時結束</span></dt><dd><span class="en">When the deliverable is handed over</span><span class="zh">交付就結案</span></dd></div>
+                        </dl>
+                        <div class="plan-price"><span class="en">Quoted after a free assessment</span><span class="zh">免費評估後報價</span></div>
+                    </article>
+
+                    <article class="plan" id="bridge">
+                        <span class="plan-num">02</span>
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#bridge"/></svg></span>
+                        <h3><span class="en">Bridge Support</span><span class="zh">銜接支援</span></h3>
+                        <p class="plan-for"><span class="en">Your engineer left and the new hire isn't here yet. We keep the work moving.</span><span class="zh">工程師離職、新人還沒到，進行中的工作先由我們接手。</span></p>
+                        <dl class="facts">
+                            <div class="fact"><dt><span class="en">Billing</span><span class="zh">計費</span></dt><dd><span class="en">Monthly, usually 1–3 months</span><span class="zh">以月計，通常 1–3 個月</span></dd></div>
+                            <div class="fact"><dt><span class="en">Ends</span><span class="zh">何時結束</span></dt><dd><span class="en">When you've hired someone</span><span class="zh">補到人就結束</span></dd></div>
+                            <div class="fact"><dt><span class="en">Includes</span><span class="zh">包含</span></dt><dd><ul>
+                                <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">One on-site handover meeting</span><span class="zh">一次到廠交接會議</span></li>
+                                <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Handover documents for the new hire</span><span class="zh">結束時，交接文件給新人</span></li>
+                            </ul></dd></div>
+                        </dl>
+                        <div class="plan-price"><span class="en">Quoted after a free assessment</span><span class="zh">免費評估後報價</span></div>
+                    </article>
+
+                    <article class="plan" id="longterm">
+                        <span class="plan-num">03</span>
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#building"/></svg></span>
+                        <h3><span class="en">External Engineering Dept.</span><span class="zh">長期外部工程部</span></h3>
+                        <p class="plan-for"><span class="en">You always have engineering work, but don't want another headcount.</span><span class="zh">持續有工程需求，但不想增加人事編制。</span></p>
+                        <dl class="facts">
+                            <div class="fact"><dt><span class="en">Billing</span><span class="zh">計費</span></dt><dd><span class="en">Fixed monthly fee by scope level</span><span class="zh">固定月費，依等級區分工作範圍</span></dd></div>
+                            <div class="fact"><dt><span class="en">Flexibility</span><span class="zh">彈性</span></dt><dd><span class="en">Move up or down a level each month</span><span class="zh">可以按月調整等級</span></dd></div>
+                            <div class="fact"><dt><span class="en">Levels</span><span class="zh">等級</span></dt><dd><a href="#levels" class="text-link"><span class="en">Basic · Standard · Full ↓</span><span class="zh">基礎・標準・完整 ↓</span></a></dd></div>
+                        </dl>
+                        <div class="plan-price"><span class="en">Quoted after a free assessment</span><span class="zh">免費評估後報價</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Long-term levels -->
+        <section class="band" id="levels">
+            <div class="wrap levels-layout">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">EXTERNAL ENG. DEPT.</span><span class="zh">長期外部工程部</span></div>
+                    <h2 class="sec-title"><span class="en">Three levels, defined by scope</span><span class="zh">三個等級，<br>依工作範圍區分</span></h2>
+                    <p class="sec-sub"><span class="en">Not by hours. The exact scope and monthly deliverables are confirmed during the assessment and written into the contract.</span><span class="zh">不按時數計算。每個等級的具體範圍與每月交付量，會在評估時一起確認，並寫進合約。</span></p>
+                </div>
+                <div class="levels">
+                    <div class="level">
+                        <div class="level-pips"><i class="on"></i><i></i><i></i></div>
+                        <h3><span class="en">Basic</span><span class="zh">基礎</span></h3>
+                        <ul>
+                            <li><span class="en">Drafting</span><span class="zh">繪圖</span></li>
+                            <li><span class="en">Drawing revisions</span><span class="zh">圖面修改</span></li>
+                            <li><span class="en">BOM upkeep</span><span class="zh">BOM 整理</span></li>
+                        </ul>
                     </div>
-                    <ul class="tier-items">
-                        <li>
-                            <span class="en">Meeting notes + key takeaways</span>
-                            <span class="zh">會議記錄 + 重點整理</span>
-                        </li>
-                        <li>
-                            <span class="en">Initial feasibility assessment</span>
-                            <span class="zh">初步可行性評估</span>
-                        </li>
-                        <li>
-                            <span class="en">Recommended next steps</span>
-                            <span class="zh">建議下一步</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="tier-divider"></div>
-                <div class="tier-price">
-                    <span class="en">From NT$3,000</span>
-                    <span class="zh">NT$3,000 起</span>
-                </div>
-            </div>
-
-            <!-- Tier 2 -->
-            <div class="tier-card">
-                <div class="tier-number">
-                    <span class="en">Tier 02</span>
-                    <span class="zh">等級二</span>
-                </div>
-                <div class="tier-name">
-                    <span class="en">Project Blueprint</span>
-                    <span class="zh">專案藍圖</span>
-                </div>
-                <p class="tier-tagline">
-                    <span class="en">A complete technical plan — so you know exactly what to build, who to involve, and what it'll cost.</span>
-                    <span class="zh">完整的技術方案，讓你知道要花多少、要找誰、要做什麼。</span>
-                </p>
-                <div class="tier-includes">
-                    <div class="tier-includes-label">
-                        <span class="en">Includes</span>
-                        <span class="zh">包含</span>
+                    <div class="level">
+                        <div class="level-pips"><i class="on"></i><i class="on"></i><i></i></div>
+                        <h3><span class="en">Standard</span><span class="zh">標準</span></h3>
+                        <ul>
+                            <li><span class="en">Mechanical design</span><span class="zh">機構設計</span></li>
+                            <li><span class="en">Production drawings</span><span class="zh">出圖</span></li>
+                            <li><span class="en">Prototype follow-up</span><span class="zh">打樣跟進</span></li>
+                        </ul>
                     </div>
-                    <ul class="tier-items">
-                        <li>
-                            <span class="en">Technical spec document</span>
-                            <span class="zh">技術方案文件</span>
-                        </li>
-                        <li>
-                            <span class="en">BOM cost estimation</span>
-                            <span class="zh">BOM 預估</span>
-                        </li>
-                        <li>
-                            <span class="en">Timeline planning</span>
-                            <span class="zh">時程規劃</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="tier-divider"></div>
-                <div class="tier-price">
-                    <span class="en">From NT$15,000</span>
-                    <span class="zh">NT$15,000 起</span>
-                </div>
-            </div>
-
-            <!-- Tier 3 -->
-            <div class="tier-card">
-                <div class="tier-number">
-                    <span class="en">Tier 03</span>
-                    <span class="zh">等級三</span>
-                </div>
-                <div class="tier-name">
-                    <span class="en">Full Execution</span>
-                    <span class="zh">執行合作</span>
-                </div>
-                <p class="tier-tagline">
-                    <span class="en">From blueprint to finished product. I stay with you the whole way — the blueprint fee applies toward the project.</span>
-                    <span class="zh">從藍圖到成品，我陪你走完。藍圖費可折抵專案費用。</span>
-                </p>
-                <div class="tier-includes">
-                    <div class="tier-includes-label">
-                        <span class="en">Includes</span>
-                        <span class="zh">包含</span>
+                    <div class="level">
+                        <div class="level-pips"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+                        <h3><span class="en">Full</span><span class="zh">完整</span></h3>
+                        <ul>
+                            <li><span class="en">Design</span><span class="zh">設計</span></li>
+                            <li><span class="en">Simulation</span><span class="zh">分析模擬</span></li>
+                            <li><span class="en">Controls integration</span><span class="zh">電控整合</span></li>
+                        </ul>
                     </div>
-                    <ul class="tier-items">
-                        <li>
-                            <span class="en">Full development &amp; execution</span>
-                            <span class="zh">完整開發執行</span>
-                        </li>
-                        <li>
-                            <span class="en">Mechanical, electronics, software as needed</span>
-                            <span class="zh">機械、電子、軟體全整合</span>
-                        </li>
-                        <li>
-                            <span class="en">Blueprint fee credited to project</span>
-                            <span class="zh">藍圖費折抵專案費用</span>
-                        </li>
+                </div>
+            </div>
+        </section>
+
+        <!-- Standby -->
+        <section class="band band-dark" id="standby">
+            <div class="wrap standby">
+                <div>
+                    <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#shield"/></svg></span>
+                    <div class="sec-label"><span class="en">STANDBY SUPPORT</span><span class="zh">備援方案</span></div>
+                    <h2 class="sec-title"><span class="en">Not short-handed now?<br>Get ready anyway.</span><span class="zh">現在不缺人，<br>也可以先準備好。</span></h2>
+                    <p class="sec-sub"><span class="en">The next resignation is a matter of when, not if. With Standby, we already know your files when it happens, so we can step in the same day.</span><span class="zh">下一次人員異動遲早會來。有了備援方案，那一天來的時候，我們已經熟悉你的圖檔，當天就能接手。</span></p>
+                </div>
+                <div class="standby-box">
+                    <h3><span class="en">INCLUDES</span><span class="zh">包含</span></h3>
+                    <ul>
+                        <li><svg class="icon" aria-hidden="true"><use href="#doc-check"/></svg><span class="en">A small amount of drawing edits each month</span><span class="zh">每月處理少量圖面修改</span></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#cloud"/></svg><span class="en">Ongoing familiarity with your files and products</span><span class="zh">持續熟悉你的圖檔與產品</span></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#clock"/></svg><span class="en">Priority start for Bridge Support when someone leaves</span><span class="zh">有人離職時，優先啟動銜接支援</span></li>
                     </ul>
-                </div>
-                <div class="tier-divider"></div>
-                <div class="tier-price">
-                    <span class="en">Quoted per project</span>
-                    <span class="zh">依專案估價</span>
+                    <p><span class="en">A Single Project or Bridge Support can switch straight to Standby when it ends.</span><span class="zh">單案委託或銜接支援結束後，也可以直接轉為備援。</span></p>
                 </div>
             </div>
+        </section>
 
-        </div>
-
-        <!-- Footer CTA -->
-        <div class="services-cta fade-in-up delay-2">
-            <p>
-                <span class="en">Not sure which one fits? Figure out where you are first.</span>
-                <span class="zh">不確定你需要哪個？先釐清你的想法。</span>
-            </p>
-            <div class="cta-buttons">
-                <a href="diagnostic.html" class="btn">
-                    <span class="en">Start the Diagnostic</span>
-                    <span class="zh">開始診斷</span>
-                </a>
-                <a href="contact.html" class="btn-outline">
-                    <span class="en">Contact Directly</span>
-                    <span class="zh">直接聯絡</span>
-                </a>
+        <!-- Process + commitments -->
+        <section class="band">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">HOW IT STARTS</span><span class="zh">合作流程</span></div>
+                    <h2 class="sec-title"><span class="en">From first message to first report</span><span class="zh">從第一封信，到第一份週報</span></h2>
+                </div>
+                <div class="timeline steps-4">
+                    <div class="tl-step">
+                        <div class="tl-node"><svg class="icon" aria-hidden="true"><use href="#chat"/></svg></div>
+                        <div class="tl-when">STEP 01</div>
+                        <div class="tl-what"><span class="en">Tell us your situation</span><span class="zh">說明你的狀況</span></div>
+                        <p class="tl-note"><span class="en">Email, phone or LINE.</span><span class="zh">Email、電話或 LINE 都可以。</span></p>
+                    </div>
+                    <div class="tl-step">
+                        <div class="tl-node"><svg class="icon" aria-hidden="true"><use href="#doc-check"/></svg></div>
+                        <div class="tl-when">STEP 02</div>
+                        <div class="tl-what"><span class="en">Free assessment</span><span class="zh">免費評估</span></div>
+                        <p class="tl-note"><span class="en">We look at the work and suggest the right plan.</span><span class="zh">了解工作內容，建議適合的方式。</span></p>
+                    </div>
+                    <div class="tl-step">
+                        <div class="tl-node"><svg class="icon" aria-hidden="true"><use href="#lock"/></svg></div>
+                        <div class="tl-when">STEP 03</div>
+                        <div class="tl-what"><span class="en">Quote and NDA</span><span class="zh">報價與簽約</span></div>
+                        <p class="tl-note"><span class="en">Scope, deliverables and response time in writing.</span><span class="zh">範圍、交付內容、回覆時效都寫清楚。</span></p>
+                    </div>
+                    <div class="tl-step is-us">
+                        <div class="tl-node"><svg class="icon" aria-hidden="true"><use href="#calendar"/></svg></div>
+                        <div class="tl-when">STEP 04</div>
+                        <div class="tl-what"><span class="en">Start, report weekly</span><span class="zh">開工，每週回報</span></div>
+                        <p class="tl-note"><span class="en">You always know where things stand.</span><span class="zh">進度隨時看得見。</span></p>
+                    </div>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note-head">
+                            <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#shield"/></svg></span>
+                            <h3><span class="en">In every plan</span><span class="zh">所有方案的共同承諾</span></h3>
+                        </div>
+                        <ul>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Remote work, weekly progress report</span><span class="zh">遠端執行，每週週報</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Shared cloud files you can open anytime</span><span class="zh">雲端檔案隨時可查</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Response time agreed before we start</span><span class="zh">合作前約定回覆時效</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">NDA signed before any files change hands</span><span class="zh">開工前簽署保密協議</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Complete handover when we finish</span><span class="zh">結束時整理完整交接</span></li>
+                        </ul>
+                    </div>
+                    <div class="note">
+                        <div class="note-head">
+                            <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#factory"/></svg></span>
+                            <h3><span class="en">About on-site visits</span><span class="zh">關於到廠</span></h3>
+                        </div>
+                        <ul>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">All plans are remote by default</span><span class="zh">所有方案預設遠端執行</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Bridge Support includes one on-site handover — best scheduled before your engineer leaves</span><span class="zh">銜接支援含一次到廠交接，建議在原工程師離職前安排</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Other visits are billed separately, quoted by location</span><span class="zh">其他到廠需求另外計費，依地點報價</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="footer-nav" style="text-align: center;">
-            <a href="index.html" class="lang-btn">
-                <span class="en">Back to Home</span>
-                <span class="zh">返回首頁</span>
-            </a>
-        </div>
+        <!-- CTA -->
+        <section class="band band-white">
+            <div class="wrap cta-row">
+                <div class="cta-card">
+                    <h2><span class="en">Not sure which one fits?</span><span class="zh">不確定是哪一種？</span></h2>
+                    <p><span class="en">Tell us your situation and we'll help you decide, with a quote. The assessment is free.</span><span class="zh">說明你的狀況，我們幫你判斷適合哪種方式並報價，評估免費。</span></p>
+                    <a href="contact.html" class="btn-white"><span class="en">Free Needs Assessment →</span><span class="zh">免費需求評估 →</span></a>
+                    <div class="cta-note"><span class="en">We reply within 1–2 business days.</span><span class="zh">1–2 個工作天內回覆。</span></div>
+                </div>
+                <div class="individual-strip">
+                    <div class="strip-main">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#bulb"/></svg></span>
+                        <div>
+                            <h3><span class="en">An individual or a startup?</span><span class="zh">個人或新創？</span></h3>
+                            <p><span class="en">From idea to something real: consult, blueprint, execution.</span><span class="zh">從想法到做出來：諮詢、藍圖、開發執行。</span></p>
+                        </div>
+                    </div>
+                    <a href="product.html" class="text-link"><span class="en">Product Development →</span><span class="zh">看產品開發 →</span></a>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">是睿科技<small>SOLVERIGHT</small></div>
+                    <p>
+                        <span class="en">Solveright Inc. Remote outsourced engineers for mechanical design, simulation and controls. Based in Taipei, serving all of Taiwan.</span>
+                        <span class="zh">是睿科技股份有限公司。遠端外包工程團隊：機構設計、分析模擬、電控韌體。台北，遠端服務全台。</span>
+                    </p>
+                </div>
+                <div>
+                    <h4><span class="en">SITE</span><span class="zh">網站</span></h4>
+                    <ul>
+                        <li><a href="services.html"><span class="en">Plans</span><span class="zh">合作方式</span></a></li>
+                        <li><a href="projects.html"><span class="en">Projects</span><span class="zh">作品</span></a></li>
+                        <li><a href="product.html"><span class="en">Product Development</span><span class="zh">產品開發（個人與新創）</span></a></li>
+                        <li><a href="blog.html"><span class="en">Notes</span><span class="zh">技術筆記</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4><span class="en">CONTACT</span><span class="zh">聯絡</span></h4>
+                    <ul>
+                        <li><a href="mailto:austinyoan@gmail.com">austinyoan@gmail.com</a></li>
+                        <li><a href="tel:+886961353313">+886 961-353-313</a></li>
+                        <li><a href="contact.html"><span class="en">LINE · Free assessment</span><span class="zh">LINE・免費需求評估</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>© Solveright Inc.</p>
+        </div>
+    </footer>
 
     <script>
         const langBtn = document.getElementById('lang-toggle-btn');

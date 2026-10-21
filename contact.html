@@ -4,17 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聯絡 | Austin</title>
-    <meta name="description" content="有產品想法？想找機械電子整合工程師合作？歡迎直接聯絡 Austin，通常 1-2 個工作天內回覆。">
-    <meta property="og:title" content="聯絡 | Austin">
-    <meta property="og:description" content="你已經想了夠久了。來說說看。">
+    <title>聯絡・免費需求評估 | 是睿科技</title>
+    <meta name="description" content="工程師離職、專案缺人，或有產品想法？說明你的狀況，是睿科技免費評估後提供建議與報價，1–2 個工作天內回覆。">
+    <meta property="og:title" content="聯絡・免費需求評估 | 是睿科技">
+    <meta property="og:description" content="說明你的狀況，我們先免費評估。">
     <meta property="og:url" content="https://austindesign.tw/contact.html">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://austindesign.tw/assets/home/hero-cad-cfd.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- Google Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <!-- Google tag (gtag.js) -->
@@ -26,135 +25,403 @@
         gtag('config', 'G-ZGMELF4GDL');
     </script>
     <style>
-        body {
+        .contact-hero {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 3.5rem;
+            align-items: start;
+        }
+        .mini-steps {
+            list-style: none;
             display: flex;
             flex-direction: column;
+            gap: 0.9rem;
+            margin: 2rem 0 2.25rem;
+        }
+        .mini-steps li {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            font-weight: 500;
+        }
+        .mini-steps b {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1.5px solid #d8d3cc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .mini-steps li:last-child b {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
+        }
+        .reply-note {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
-        .contact-icon {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
+        /* Contact card */
+        .contact-panel {
+            background: #fff;
+            border: 0.5px solid var(--line);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(22, 25, 29, 0.1);
+            overflow: hidden;
+        }
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.35rem 1.75rem;
+            border-bottom: 0.5px solid var(--line);
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        a.contact-row:hover {
+            background: #fcfaf8;
+        }
+        .contact-row .icon-badge {
+            margin: 0;
+        }
+        .contact-row small {
+            display: block;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-bottom: 0.15rem;
+        }
+        .contact-row strong {
+            font-size: 1.05rem;
+            word-break: break-all;
+        }
+        .contact-row .arrow {
+            margin-left: auto;
+            color: var(--accent-color);
+            font-weight: 700;
+            width: auto;
+        }
+        .contact-line {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem 1.75rem;
+            background: #faf9f7;
+        }
+        .contact-line img {
+            width: 112px;
+            height: 112px;
+            border-radius: 10px;
+            border: 0.5px solid var(--line);
+            background: #fff;
+            padding: 6px;
+        }
+        .contact-line p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .contact-line strong {
+            display: block;
+            color: var(--text-color);
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
         }
 
-        .contact-icon .material-icons {
-            font-size: 1.25rem !important;
-            line-height: 1 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            width: auto !important;
-            height: auto !important;
+        /* What to write */
+        .write-layout {
+            display: grid;
+            grid-template-columns: 0.9fr 1.3fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .checklist {
+            list-style: none;
+            background: var(--bg-color);
+            border: 0.5px solid var(--line);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+        .checklist li {
+            display: grid;
+            grid-template-columns: 2.25rem 1fr;
+            gap: 0.75rem;
+            padding: 1.15rem 1.5rem;
+            border-bottom: 0.5px solid var(--line);
+            line-height: 1.6;
+        }
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        .checklist .num {
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        .checklist strong {
+            display: block;
+        }
+        .checklist small {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+        }
+
+        @media (max-width: 960px) {
+            .contact-hero,
+            .write-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 640px) {
+            .contact-row,
+            .contact-line {
+                padding: 1.15rem 1.1rem;
+            }
+            .contact-line {
+                align-items: flex-start;
+            }
+            .contact-line img {
+                width: 92px;
+                height: 92px;
+            }
+            .checklist li {
+                padding: 1rem 1.1rem;
+            }
         }
     </style>
 </head>
 
 <body class="lang-en chinese-mode">
+    <!-- Line icons (inlined so they also show when the file is opened directly) -->
+    <svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+    <symbol id="chat" viewBox="0 0 24 24">
+        <path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/>
+        <path d="M8 10h8M8 13h5"/>
+    </symbol>
+    <symbol id="laptop" viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="11" rx="1.5"/>
+        <path d="M2 19h20"/>
+        <path d="M10 10.5l2 2 3-3.5"/>
+    </symbol>
+    <symbol id="user-plus" viewBox="0 0 24 24">
+        <circle cx="9" cy="8" r="4"/>
+        <path d="M2 21v-1a7 7 0 0 1 14 0v1"/>
+        <path d="M19 8v6M16 11h6"/>
+    </symbol>
+    <symbol id="doc-check" viewBox="0 0 24 24">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+        <path d="M14 3v5h5"/>
+        <path d="M9 14l2 2 4-4"/>
+    </symbol>
+    <symbol id="doc-handover" viewBox="0 0 24 24">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+        <path d="M14 3v5h5"/>
+        <path d="M9 15h6M13 13l2 2-2 2"/>
+    </symbol>
+    <symbol id="bridge" viewBox="0 0 24 24">
+        <path d="M2 16h20"/>
+        <path d="M4 4v12M20 4v12"/>
+        <path d="M4 5c4 7 12 7 16 0"/>
+        <path d="M8 9v7M12 10.3V16M16 9v7"/>
+        <path d="M6 20h12"/>
+    </symbol>
+    <symbol id="building" viewBox="0 0 24 24">
+        <rect x="4" y="3" width="10" height="18" rx="1"/>
+        <path d="M14 9h5a1 1 0 0 1 1 1v11"/>
+        <path d="M2 21h20"/>
+        <path d="M8 7h2M8 11h2M8 15h2M17 13h0M17 17h0"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 24 24">
+        <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/>
+        <path d="M9 12l2 2 4-4"/>
+    </symbol>
+    <symbol id="calendar" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="2"/>
+        <path d="M3 10h18M8 3v4M16 3v4"/>
+        <path d="M7.5 14.5h5M7.5 17.5h8"/>
+    </symbol>
+    <symbol id="cloud" viewBox="0 0 24 24">
+        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+    </symbol>
+    <symbol id="clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 2"/>
+    </symbol>
+    <symbol id="lock" viewBox="0 0 24 24">
+        <rect x="5" y="11" width="14" height="10" rx="2"/>
+        <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        <path d="M12 15v2"/>
+    </symbol>
+    <symbol id="factory" viewBox="0 0 24 24">
+        <path d="M3 21V10l5 3v-3l5 3v-3l5 3V4h3v17z"/>
+        <path d="M7 17h2M12 17h2"/>
+    </symbol>
+    <symbol id="cube" viewBox="0 0 24 24">
+        <path d="M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5z"/>
+        <path d="M3.5 7.25L12 12l8.5-4.75M12 12v9.5"/>
+    </symbol>
+    <symbol id="flow" viewBox="0 0 24 24">
+        <path d="M3 7c3-3 6 3 9 0s6-3 9 0"/>
+        <path d="M3 12c3-3 6 3 9 0s6-3 9 0"/>
+        <path d="M3 17c3-3 6 3 9 0s6-3 9 0"/>
+    </symbol>
+    <symbol id="chip" viewBox="0 0 24 24">
+        <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+        <rect x="9.5" y="9.5" width="5" height="5"/>
+        <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>
+    </symbol>
+    <symbol id="check" viewBox="0 0 24 24">
+        <path d="M5 12.5l4.5 4.5L19 7.5"/>
+    </symbol>
+    <symbol id="mesh" viewBox="0 0 24 24">
+        <path d="M3 20L12 4l9 16z"/>
+        <path d="M7.5 12h9M7.5 12l4.5 8 4.5-8"/>
+    </symbol>
+    <symbol id="bulb" viewBox="0 0 24 24">
+        <path d="M9 18h6M10 21h4"/>
+        <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>
+    </symbol>
+    <symbol id="mail" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3.5 6.5l8.5 6.5 8.5-6.5"/>
+    </symbol>
+    <symbol id="phone" viewBox="0 0 24 24">
+        <path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/>
+    </symbol>
+    <symbol id="pin" viewBox="0 0 24 24">
+        <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/>
+        <circle cx="12" cy="9.5" r="2.5"/>
+    </symbol>
+    </svg>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">是睿科技 <small>SOLVERIGHT</small></a>
+        <nav class="site-links">
+            <a href="services.html" class="hide-mobile"><span class="en">Plans</span><span class="zh">合作方式</span></a>
+            <a href="projects.html" class="hide-mobile"><span class="en">Projects</span><span class="zh">作品</span></a>
+            <a href="product.html" class="hide-mobile"><span class="en">Product Dev</span><span class="zh">產品開發</span></a>
+            <a href="contact.html" class="nav-cta active"><span class="en">Contact</span><span class="zh">聯絡</span></a>
+            <button id="lang-toggle-btn" class="lang-btn">English</button>
+        </nav>
+    </header>
 
-    <!-- Navigation (Language Toggle & Back) -->
-    <nav style="position: fixed; top: 0; right: 0; padding: 20px; z-index: 1000; display: flex; gap: 10px;">
-        <a href="index.html" class="lang-btn">
-            <span class="en">Home</span>
-            <span class="zh">首頁</span>
-        </a>
-        <button id="lang-toggle-btn" class="lang-btn">English</button>
-    </nav>
+    <main>
 
-    <main class="contact-layout fade-in-up">
-        <div class="contact-grid">
+        <section class="page-hero">
+            <div class="wrap contact-hero">
+                <div class="fade-in-up">
+                    <div class="sec-label"><span class="en">FREE NEEDS ASSESSMENT</span><span class="zh">免費需求評估</span></div>
+                    <h1>
+                        <span class="en">Tell us your situation.<br><em>The assessment is free.</em></span>
+                        <span class="zh">說明你的狀況，<br><em>我們先免費評估。</em></span>
+                    </h1>
+                    <p class="lead">
+                        <span class="en">What's going on, what kind of engineering you need, and for how long. We'll suggest a plan and send a quote. No commitment.</span>
+                        <span class="zh">告訴我們目前的狀況、需要哪類工程、預計多久，我們評估後提供建議與報價，不用先承諾任何事。</span>
+                    </p>
+                    <ol class="mini-steps">
+                        <li><b>1</b><span class="en">Tell us by email, phone or LINE</span><span class="zh">用 Email、電話或 LINE 說明狀況</span></li>
+                        <li><b>2</b><span class="en">We reply within 1–2 business days</span><span class="zh">1–2 個工作天內回覆</span></li>
+                        <li><b>3</b><span class="en">You get a recommended plan and a quote</span><span class="zh">收到建議的合作方式與報價</span></li>
+                    </ol>
+                    <div class="button-row">
+                        <a href="mailto:austinyoan@gmail.com?subject=%E6%98%AF%E7%9D%BF%E7%A7%91%E6%8A%80%EF%BD%9C%E9%9C%80%E6%B1%82%E8%A9%95%E4%BC%B0&amp;body=%E5%85%AC%E5%8F%B8%E5%90%8D%E7%A8%B1%EF%BC%9A%0A%E8%81%AF%E7%B5%A1%E4%BA%BA%EF%BC%8F%E8%81%B7%E7%A8%B1%EF%BC%9A%0A%E7%9B%AE%E5%89%8D%E7%8B%80%E6%B3%81%EF%BC%88%E4%B8%80%E6%AC%A1%E6%80%A7%E4%BB%BB%E5%8B%99%EF%BC%8F%E6%9C%89%E4%BA%BA%E9%9B%A2%E8%81%B7%E9%9C%80%E8%A6%81%E9%8A%9C%E6%8E%A5%EF%BC%8F%E9%95%B7%E6%9C%9F%E9%9C%80%E6%B1%82%EF%BC%8F%E5%80%8B%E4%BA%BA%E7%94%A2%E5%93%81%E6%83%B3%E6%B3%95%EF%BC%89%EF%BC%9A%0A%E9%9C%80%E8%A6%81%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%A1%9E%E5%88%A5%EF%BC%88%E6%A9%9F%E6%A7%8B%E8%A8%AD%E8%A8%88%EF%BC%8F%E5%88%86%E6%9E%90%E6%A8%A1%E6%93%AC%EF%BC%8F%E9%9B%BB%E6%8E%A7%E9%9F%8C%E9%AB%94%EF%BC%8FPCB%EF%BC%89%EF%BC%9A%0A%E9%A0%90%E8%A8%88%E6%9C%9F%E9%96%93%EF%BC%9A%0A%E5%85%B6%E4%BB%96%E8%AA%AA%E6%98%8E%EF%BC%9A%0A" class="btn"><span class="en">Request by Email</span><span class="zh">Email 申請免費評估</span></a>
+                        <a href="tel:+886961353313" class="btn-ghost"><span class="en">Call us</span><span class="zh">直接打電話</span></a>
+                    </div>
+                    <p class="reply-note">
+                        <span class="en">The email opens with a short form already filled in.</span>
+                        <span class="zh">點 Email 按鈕，信件會自動帶入需求表，填空就好。</span>
+                    </p>
+                </div>
 
-            <!-- Left Column -->
-            <div class="contact-left">
-                <h1>
-                    <span class="en">Let's Build<br>Something<br>Together</span>
-                    <span class="zh">讓我們一起<br>打造產品</span>
-                </h1>
-                <p class="subtitle">
-                    <span class="en">You've been thinking long enough. Let's talk.</span>
-                    <span class="zh">你已經想了夠久了。來說說看。</span>
-                </p>
-            </div>
-
-            <!-- Right Column: Card -->
-            <div class="contact-right">
-                <div class="contact-card">
-
-                    <!-- Email -->
-                    <a href="mailto:austinyoan@gmail.com?subject=Inquiry%20for%20Product%20Design" class="contact-item">
-                        <div class="contact-icon">
-                            <span class="material-icons">email</span>
-                        </div>
-                        <div class="contact-text">
-                            <span class="label">Email</span>
-                            <span class="value">austinyoan@gmail.com</span>
-                        </div>
+                <div class="contact-panel fade-in-up delay">
+                    <a href="mailto:austinyoan@gmail.com?subject=%E6%98%AF%E7%9D%BF%E7%A7%91%E6%8A%80%EF%BD%9C%E9%9C%80%E6%B1%82%E8%A9%95%E4%BC%B0&amp;body=%E5%85%AC%E5%8F%B8%E5%90%8D%E7%A8%B1%EF%BC%9A%0A%E8%81%AF%E7%B5%A1%E4%BA%BA%EF%BC%8F%E8%81%B7%E7%A8%B1%EF%BC%9A%0A%E7%9B%AE%E5%89%8D%E7%8B%80%E6%B3%81%EF%BC%88%E4%B8%80%E6%AC%A1%E6%80%A7%E4%BB%BB%E5%8B%99%EF%BC%8F%E6%9C%89%E4%BA%BA%E9%9B%A2%E8%81%B7%E9%9C%80%E8%A6%81%E9%8A%9C%E6%8E%A5%EF%BC%8F%E9%95%B7%E6%9C%9F%E9%9C%80%E6%B1%82%EF%BC%8F%E5%80%8B%E4%BA%BA%E7%94%A2%E5%93%81%E6%83%B3%E6%B3%95%EF%BC%89%EF%BC%9A%0A%E9%9C%80%E8%A6%81%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%A1%9E%E5%88%A5%EF%BC%88%E6%A9%9F%E6%A7%8B%E8%A8%AD%E8%A8%88%EF%BC%8F%E5%88%86%E6%9E%90%E6%A8%A1%E6%93%AC%EF%BC%8F%E9%9B%BB%E6%8E%A7%E9%9F%8C%E9%AB%94%EF%BC%8FPCB%EF%BC%89%EF%BC%9A%0A%E9%A0%90%E8%A8%88%E6%9C%9F%E9%96%93%EF%BC%9A%0A%E5%85%B6%E4%BB%96%E8%AA%AA%E6%98%8E%EF%BC%9A%0A" class="contact-row">
+                        <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg></span>
+                        <div><small>EMAIL</small><strong>austinyoan@gmail.com</strong></div>
+                        <span class="arrow">→</span>
                     </a>
-
-                    <!-- Phone -->
-                    <a href="tel:+886961353313" class="contact-item">
-                        <div class="contact-icon">
-                            <span class="material-icons">call</span>
-                        </div>
-                        <div class="contact-text">
-                            <span class="label">Phone</span>
-                            <span class="value">+886 961-353-313</span>
-                        </div>
+                    <a href="tel:+886961353313" class="contact-row">
+                        <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#phone"/></svg></span>
+                        <div><small><span class="en">PHONE</span><span class="zh">電話</span></small><strong>+886 961-353-313</strong></div>
+                        <span class="arrow">→</span>
                     </a>
-
-                    <!-- Line -->
-                    <div class="contact-item" style="cursor: default; align-items: flex-start;">
-                        <div class="contact-icon" style="margin-top: 5px;">
-                            <span class="material-icons">chat</span>
-                        </div>
-                        <div class="contact-text">
-                            <span class="label">Line ID</span>
-                            <div class="value">
-                                <img src="assets/line_qr.png" alt="Line QR Code"
-                                    style="width: 120px; border-radius: 8px; margin-top: 10px; border: 2px solid white;">
-                            </div>
+                    <div class="contact-row">
+                        <span class="icon-badge sm"><svg class="icon" aria-hidden="true"><use href="#pin"/></svg></span>
+                        <div><small><span class="en">LOCATION</span><span class="zh">地點</span></small><strong><span class="en">Taipei · Remote across Taiwan</span><span class="zh">台北・遠端服務全台</span></strong></div>
+                    </div>
+                    <div class="contact-line">
+                        <img src="assets/line_qr.png" alt="LINE QR Code">
+                        <div>
+                            <strong>LINE</strong>
+                            <p><span class="en">Scan to add us on LINE. Handy for sending photos and drawings.</span><span class="zh">掃描加入 LINE，傳照片、圖面最方便。</span></p>
                         </div>
                     </div>
-
-                    <!-- Studio -->
-                    <div class="contact-item" style="cursor: default;">
-                        <div class="contact-icon">
-                            <span class="material-icons">place</span>
-                        </div>
-                        <div class="contact-text">
-                            <span class="label">Studio</span>
-                            <span class="value">Taipei, Taiwan</span>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+        </section>
 
-            <!-- Bottom CTA -->
-            <div class="cta-container fade-in-up delay">
-                <a href="mailto:austinyoan@gmail.com?subject=Inquiry%20for%20Product%20Design" class="contact-cta-btn">
-                    <span class="en">Start a Project via Email</span>
-                    <span class="zh">以 Email 開始專案</span>
-                </a>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
-                    <span class="en">I typically respond within 1–2 business days.</span>
-                    <span class="zh">我通常在 1–2 個工作天內回覆。</span>
-                </p>
+        <section class="band band-white">
+            <div class="wrap write-layout">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">WHAT TO SEND</span><span class="zh">信裡可以寫什麼</span></div>
+                    <h2 class="sec-title"><span class="en">Five things help us reply faster</span><span class="zh">寫下這五件事，<br>我們能更快回覆</span></h2>
+                    <p class="sec-sub"><span class="en">Not sure about some of them? Leave them blank. We'll work it out together.</span><span class="zh">有些不確定也沒關係，留空就好，我們一起釐清。</span></p>
+                </div>
+                <ol class="checklist">
+                    <li><span class="num">01</span><div><strong><span class="en">Company and contact</span><span class="zh">公司名稱、聯絡人與職稱</span></strong></div></li>
+                    <li><span class="num">02</span><div><strong><span class="en">Your situation</span><span class="zh">目前狀況</span></strong><small><span class="en">One-off job / someone left / ongoing need / product idea</span><span class="zh">一次性任務／有人離職需要銜接／長期需求／個人產品想法</span></small></div></li>
+                    <li><span class="num">03</span><div><strong><span class="en">Kind of engineering</span><span class="zh">需要的工程類別</span></strong><small><span class="en">Mechanical / simulation / firmware / PCB</span><span class="zh">機構設計／分析模擬／電控韌體／PCB</span></small></div></li>
+                    <li><span class="num">04</span><div><strong><span class="en">Expected duration</span><span class="zh">預計期間</span></strong><small><span class="en">A deadline, or roughly how many months</span><span class="zh">交期，或大概需要幾個月</span></small></div></li>
+                    <li><span class="num">05</span><div><strong><span class="en">Anything else</span><span class="zh">其他說明</span></strong><small><span class="en">Photos, drawings or specs can come later</span><span class="zh">照片、圖面、規格可以之後再補</span></small></div></li>
+                </ol>
             </div>
+        </section>
 
-        </div>
     </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">是睿科技<small>SOLVERIGHT</small></div>
+                    <p>
+                        <span class="en">Solveright Inc. Remote outsourced engineers for mechanical design, simulation and controls. Based in Taipei, serving all of Taiwan.</span>
+                        <span class="zh">是睿科技股份有限公司。遠端外包工程團隊：機構設計、分析模擬、電控韌體。台北，遠端服務全台。</span>
+                    </p>
+                </div>
+                <div>
+                    <h4><span class="en">SITE</span><span class="zh">網站</span></h4>
+                    <ul>
+                        <li><a href="services.html"><span class="en">Plans</span><span class="zh">合作方式</span></a></li>
+                        <li><a href="projects.html"><span class="en">Projects</span><span class="zh">作品</span></a></li>
+                        <li><a href="product.html"><span class="en">Product Development</span><span class="zh">產品開發（個人與新創）</span></a></li>
+                        <li><a href="blog.html"><span class="en">Notes</span><span class="zh">技術筆記</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4><span class="en">CONTACT</span><span class="zh">聯絡</span></h4>
+                    <ul>
+                        <li><a href="mailto:austinyoan@gmail.com">austinyoan@gmail.com</a></li>
+                        <li><a href="tel:+886961353313">+886 961-353-313</a></li>
+                        <li><a href="contact.html"><span class="en">LINE · Free assessment</span><span class="zh">LINE・免費需求評估</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>© Solveright Inc.</p>
+        </div>
+    </footer>
 
     <script>
         const langBtn = document.getElementById('lang-toggle-btn');
         const body = document.body;
-
         langBtn.addEventListener('click', () => {
             body.classList.toggle('chinese-mode');
-            if (body.classList.contains('chinese-mode')) {
-                langBtn.textContent = 'English';
-            } else {
-                langBtn.textContent = '中文';
-            }
+            langBtn.textContent = body.classList.contains('chinese-mode') ? 'English' : '中文';
         });
     </script>
 </body>

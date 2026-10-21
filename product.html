@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>產品開發｜個人與新創 | 是睿科技</title>
+    <meta name="description" content="快速諮詢、專案藍圖、完整執行合作。三種服務等級，從釐清想法到產品落地，找到最適合你的合作方式。">
+    <meta property="og:title" content="產品開發｜個人與新創 | 是睿科技">
+    <meta property="og:description" content="你需要的不只是一個會畫圖的人。NT$3,000 起，從釐清想法開始。">
+    <meta property="og:url" content="https://austindesign.tw/product.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://austindesign.tw/assets/home/product-icecream.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGMELF4GDL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZGMELF4GDL');
+    </script>
+    <style>
+        .product-hero {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+        .product-hero .button-row {
+            margin-top: 2.25rem;
+        }
+        .hero-photo {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 6px solid #fff;
+            box-shadow: 0 30px 60px rgba(22, 25, 29, 0.16);
+        }
+
+        /* Three steps */
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .tier {
+            position: relative;
+            background: #fff;
+            border: 0.5px solid var(--line);
+            border-radius: 18px;
+            padding: 2rem 1.75rem 1.75rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+        .tier + .tier::before {
+            content: "→";
+            position: absolute;
+            left: -1.15rem;
+            top: 2.6rem;
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%;
+            background: var(--accent-color);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+        .tier-step {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--accent-color);
+            margin-bottom: 0.4rem;
+        }
+        .tier h3 {
+            color: var(--text-color);
+            font-size: 1.45rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+        .tier-for {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+        .tier ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            border-top: 0.5px solid var(--line);
+            padding-top: 1.1rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        .tier li {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.93rem;
+            line-height: 1.55;
+        }
+        .tier li .icon {
+            width: 17px;
+            height: 17px;
+            margin-top: 0.2rem;
+            color: var(--accent-color);
+            stroke-width: 2;
+        }
+        .tier-price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-top: 0.5px solid var(--line);
+            padding-top: 1.1rem;
+        }
+        .cases.two {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .cta-row {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+        .cta-row .individual-strip {
+            margin-top: 0;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .cta-card .button-row {
+            align-items: center;
+        }
+
+        @media (max-width: 960px) {
+            .product-hero,
+            .tiers,
+            .cases.two,
+            .cta-row {
+                grid-template-columns: 1fr;
+            }
+            .tier + .tier::before {
+                content: "↓";
+                left: 50%;
+                top: -1.15rem;
+                transform: translateX(-50%);
+            }
+        }
+        @media (max-width: 640px) {
+            .tier {
+                padding: 1.6rem 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="lang-en chinese-mode">
+    <!-- Line icons (inlined so they also show when the file is opened directly) -->
+    <svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+    <symbol id="chat" viewBox="0 0 24 24">
+        <path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/>
+        <path d="M8 10h8M8 13h5"/>
+    </symbol>
+    <symbol id="laptop" viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="11" rx="1.5"/>
+        <path d="M2 19h20"/>
+        <path d="M10 10.5l2 2 3-3.5"/>
+    </symbol>
+    <symbol id="user-plus" viewBox="0 0 24 24">
+        <circle cx="9" cy="8" r="4"/>
+        <path d="M2 21v-1a7 7 0 0 1 14 0v1"/>
+        <path d="M19 8v6M16 11h6"/>
+    </symbol>
+    <symbol id="doc-check" viewBox="0 0 24 24">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+        <path d="M14 3v5h5"/>
+        <path d="M9 14l2 2 4-4"/>
+    </symbol>
+    <symbol id="doc-handover" viewBox="0 0 24 24">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+        <path d="M14 3v5h5"/>
+        <path d="M9 15h6M13 13l2 2-2 2"/>
+    </symbol>
+    <symbol id="bridge" viewBox="0 0 24 24">
+        <path d="M2 16h20"/>
+        <path d="M4 4v12M20 4v12"/>
+        <path d="M4 5c4 7 12 7 16 0"/>
+        <path d="M8 9v7M12 10.3V16M16 9v7"/>
+        <path d="M6 20h12"/>
+    </symbol>
+    <symbol id="building" viewBox="0 0 24 24">
+        <rect x="4" y="3" width="10" height="18" rx="1"/>
+        <path d="M14 9h5a1 1 0 0 1 1 1v11"/>
+        <path d="M2 21h20"/>
+        <path d="M8 7h2M8 11h2M8 15h2M17 13h0M17 17h0"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 24 24">
+        <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/>
+        <path d="M9 12l2 2 4-4"/>
+    </symbol>
+    <symbol id="calendar" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="2"/>
+        <path d="M3 10h18M8 3v4M16 3v4"/>
+        <path d="M7.5 14.5h5M7.5 17.5h8"/>
+    </symbol>
+    <symbol id="cloud" viewBox="0 0 24 24">
+        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+    </symbol>
+    <symbol id="clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 2"/>
+    </symbol>
+    <symbol id="lock" viewBox="0 0 24 24">
+        <rect x="5" y="11" width="14" height="10" rx="2"/>
+        <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        <path d="M12 15v2"/>
+    </symbol>
+    <symbol id="factory" viewBox="0 0 24 24">
+        <path d="M3 21V10l5 3v-3l5 3v-3l5 3V4h3v17z"/>
+        <path d="M7 17h2M12 17h2"/>
+    </symbol>
+    <symbol id="cube" viewBox="0 0 24 24">
+        <path d="M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5z"/>
+        <path d="M3.5 7.25L12 12l8.5-4.75M12 12v9.5"/>
+    </symbol>
+    <symbol id="flow" viewBox="0 0 24 24">
+        <path d="M3 7c3-3 6 3 9 0s6-3 9 0"/>
+        <path d="M3 12c3-3 6 3 9 0s6-3 9 0"/>
+        <path d="M3 17c3-3 6 3 9 0s6-3 9 0"/>
+    </symbol>
+    <symbol id="chip" viewBox="0 0 24 24">
+        <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+        <rect x="9.5" y="9.5" width="5" height="5"/>
+        <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>
+    </symbol>
+    <symbol id="check" viewBox="0 0 24 24">
+        <path d="M5 12.5l4.5 4.5L19 7.5"/>
+    </symbol>
+    <symbol id="mesh" viewBox="0 0 24 24">
+        <path d="M3 20L12 4l9 16z"/>
+        <path d="M7.5 12h9M7.5 12l4.5 8 4.5-8"/>
+    </symbol>
+    <symbol id="bulb" viewBox="0 0 24 24">
+        <path d="M9 18h6M10 21h4"/>
+        <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>
+    </symbol>
+    <symbol id="mail" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3.5 6.5l8.5 6.5 8.5-6.5"/>
+    </symbol>
+    <symbol id="phone" viewBox="0 0 24 24">
+        <path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/>
+    </symbol>
+    <symbol id="pin" viewBox="0 0 24 24">
+        <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/>
+        <circle cx="12" cy="9.5" r="2.5"/>
+    </symbol>
+    </svg>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">是睿科技 <small>SOLVERIGHT</small></a>
+        <nav class="site-links">
+            <a href="services.html" class="hide-mobile"><span class="en">Plans</span><span class="zh">合作方式</span></a>
+            <a href="projects.html" class="hide-mobile"><span class="en">Projects</span><span class="zh">作品</span></a>
+            <a href="product.html" class="hide-mobile active"><span class="en">Product Dev</span><span class="zh">產品開發</span></a>
+            <a href="contact.html" class="nav-cta"><span class="en">Contact</span><span class="zh">聯絡</span></a>
+            <button id="lang-toggle-btn" class="lang-btn">English</button>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="page-hero">
+            <div class="wrap product-hero">
+                <div class="fade-in-up">
+                    <div class="sec-label"><span class="en">FOR INDIVIDUALS &amp; STARTUPS</span><span class="zh">給個人與新創</span></div>
+                    <h1>
+                        <span class="en">You need more than<br><em>someone who can model it.</em></span>
+                        <span class="zh">你需要的，<br><em>不只是一個會畫圖的人。</em></span>
+                    </h1>
+                    <p class="lead">
+                        <span class="en">From a rough idea to something you can make: we clarify it first, plan it properly, then build it with you.</span>
+                        <span class="zh">從一個模糊的想法，到可以製造的產品：先釐清、再規劃，最後一起做出來。</span>
+                    </p>
+                    <div class="button-row">
+                        <a href="diagnostic.html" class="btn"><span class="en">Start the Diagnostic</span><span class="zh">花 2 分鐘做診斷</span></a>
+                        <a href="contact.html" class="btn-ghost"><span class="en">Contact directly</span><span class="zh">直接聯絡</span></a>
+                    </div>
+                </div>
+                <div class="fade-in-up delay">
+                    <img class="hero-photo" src="assets/home/product-sketch.jpg" alt="電動冰淇淋挖杓設計草圖">
+                </div>
+            </div>
+        </section>
+
+        <section class="band band-white">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">THREE STEPS</span><span class="zh">三個階段</span></div>
+                    <h2 class="sec-title"><span class="en">Start small. Go further only when it makes sense.</span><span class="zh">從小步開始，<br>確定可行再往下走。</span></h2>
+                    <p class="sec-sub"><span class="en">Each step stands on its own, and the blueprint fee is credited toward execution.</span><span class="zh">每個階段都可以單獨進行，藍圖費可以折抵執行費用。</span></p>
+                </div>
+                <div class="tiers">
+                    <div class="tier">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#chat"/></svg></span>
+                        <div class="tier-step">STEP 01</div>
+                        <h3><span class="en">Quick Consult</span><span class="zh">快速諮詢</span></h3>
+                        <p class="tier-for"><span class="en">60 minutes to get your idea out of your head and into something we can actually discuss.</span><span class="zh">60 分鐘，把你的想法說清楚。</span></p>
+                        <ul>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Meeting notes + key takeaways</span><span class="zh">會議記錄 + 重點整理</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Initial feasibility assessment</span><span class="zh">初步可行性評估</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Recommended next steps</span><span class="zh">建議下一步</span></li>
+                        </ul>
+                        <div class="tier-price"><span class="en">From NT$3,000</span><span class="zh">NT$3,000 起</span></div>
+                    </div>
+                    <div class="tier">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#doc-check"/></svg></span>
+                        <div class="tier-step">STEP 02</div>
+                        <h3><span class="en">Project Blueprint</span><span class="zh">專案藍圖</span></h3>
+                        <p class="tier-for"><span class="en">A complete technical plan, so you know what to build, who to involve and what it'll cost.</span><span class="zh">完整的技術方案，讓你知道要花多少、要找誰、要做什麼。</span></p>
+                        <ul>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Technical spec document</span><span class="zh">技術方案文件</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">BOM cost estimation</span><span class="zh">BOM 預估</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Timeline planning</span><span class="zh">時程規劃</span></li>
+                        </ul>
+                        <div class="tier-price"><span class="en">From NT$15,000</span><span class="zh">NT$15,000 起</span></div>
+                    </div>
+                    <div class="tier">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#cube"/></svg></span>
+                        <div class="tier-step">STEP 03</div>
+                        <h3><span class="en">Full Execution</span><span class="zh">執行合作</span></h3>
+                        <p class="tier-for"><span class="en">From blueprint to finished product. We stay with you the whole way.</span><span class="zh">從藍圖到成品，一路陪你走完。</span></p>
+                        <ul>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Full development &amp; execution</span><span class="zh">完整開發執行</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Mechanical, electronics, software as needed</span><span class="zh">機械、電子、軟體全整合</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span class="en">Blueprint fee credited to project</span><span class="zh">藍圖費折抵專案費用</span></li>
+                        </ul>
+                        <div class="tier-price"><span class="en">Quoted per project</span><span class="zh">依專案估價</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="band">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div class="sec-label"><span class="en">PRODUCT PROJECTS</span><span class="zh">產品開發案例</span></div>
+                    <h2 class="sec-title"><span class="en">Ideas that became real products</span><span class="zh">從一個想法開始的產品</span></h2>
+                </div>
+                <div class="cases two">
+                    <a href="project_ergo_care.html" class="case">
+                        <img src="assets/home/product-icecream.jpg" alt="電動冰淇淋挖杓原型" loading="lazy">
+                        <div class="case-body">
+                            <div class="case-tags"><span class="case-tag"><span class="en">Prototype</span><span class="zh">原型開發</span></span><span class="case-tag"><span class="en">3D printing</span><span class="zh">3D 列印</span></span></div>
+                            <h3><span class="en">Electric ice-cream scoop</span><span class="zh">電動冰淇淋挖杓</span></h3>
+                            <p><span class="en">It started with a video of a drill in ice cream. A commercial-grade prototype in two weeks.</span><span class="zh">從一支電鑽插進冰淇淋的影片開始，兩週內完成商用等級原型。</span></p>
+                            <span class="text-link"><span class="en">View project →</span><span class="zh">看案例 →</span></span>
+                        </div>
+                    </a>
+                    <a href="project_glass_bottle.html" class="case">
+                        <img src="assets/home/product-bottle.jpg" alt="玉山造型玻璃酒瓶成品" loading="lazy">
+                        <div class="case-body">
+                            <div class="case-tags"><span class="case-tag"><span class="en">Surface modelling</span><span class="zh">曲面建模</span></span><span class="case-tag">DFM</span></div>
+                            <h3><span class="en">Premium glass bottle</span><span class="zh">高端玻璃酒瓶</span></h3>
+                            <p><span class="en">A Jade Mountain base, complex surfaces and blow-moulding DFM, from sketch to a production-ready design.</span><span class="zh">玉山造型瓶底，複雜曲面建模加上吹瓶工藝 DFM 分析，從草圖到可量產設計。</span></p>
+                            <span class="text-link"><span class="en">View project →</span><span class="zh">看案例 →</span></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="band band-white">
+            <div class="wrap cta-row">
+                <div class="cta-card">
+                    <h2><span class="en">Not sure where to start?</span><span class="zh">不確定從哪裡開始？</span></h2>
+                    <p><span class="en">Answer 3 questions in 2 minutes and we'll help you figure out your next step.</span><span class="zh">花 2 分鐘回答 3 個問題，我們幫你釐清下一步。</span></p>
+                    <div class="button-row">
+                        <a href="diagnostic.html" class="btn-white"><span class="en">Start the Diagnostic →</span><span class="zh">開始診斷 →</span></a>
+                        <a href="contact.html" class="btn-line-white"><span class="en">Contact directly</span><span class="zh">直接聯絡</span></a>
+                    </div>
+                </div>
+                <div class="individual-strip">
+                    <div class="strip-main">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#building"/></svg></span>
+                        <div>
+                            <h3><span class="en">A company short of engineers?</span><span class="zh">公司需要外包工程師？</span></h3>
+                            <p><span class="en">Bridge Support, long-term plans and Standby.</span><span class="zh">銜接支援、長期外部工程部、備援方案。</span></p>
+                        </div>
+                    </div>
+                    <a href="services.html" class="text-link"><span class="en">See the plans →</span><span class="zh">看合作方式 →</span></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">是睿科技<small>SOLVERIGHT</small></div>
+                    <p>
+                        <span class="en">Solveright Inc. Remote outsourced engineers for mechanical design, simulation and controls. Based in Taipei, serving all of Taiwan.</span>
+                        <span class="zh">是睿科技股份有限公司。遠端外包工程團隊：機構設計、分析模擬、電控韌體。台北，遠端服務全台。</span>
+                    </p>
+                </div>
+                <div>
+                    <h4><span class="en">SITE</span><span class="zh">網站</span></h4>
+                    <ul>
+                        <li><a href="services.html"><span class="en">Plans</span><span class="zh">合作方式</span></a></li>
+                        <li><a href="projects.html"><span class="en">Projects</span><span class="zh">作品</span></a></li>
+                        <li><a href="product.html"><span class="en">Product Development</span><span class="zh">產品開發（個人與新創）</span></a></li>
+                        <li><a href="blog.html"><span class="en">Notes</span><span class="zh">技術筆記</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4><span class="en">CONTACT</span><span class="zh">聯絡</span></h4>
+                    <ul>
+                        <li><a href="mailto:austinyoan@gmail.com">austinyoan@gmail.com</a></li>
+                        <li><a href="tel:+886961353313">+886 961-353-313</a></li>
+                        <li><a href="contact.html"><span class="en">LINE · Free assessment</span><span class="zh">LINE・免費需求評估</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>© Solveright Inc.</p>
+        </div>
+    </footer>
+
+    <script>
+        const langBtn = document.getElementById('lang-toggle-btn');
+        const body = document.body;
+        langBtn.addEventListener('click', () => {
+            body.classList.toggle('chinese-mode');
+            langBtn.textContent = body.classList.contains('chinese-mode') ? 'English' : '中文';
+        });
+    </script>
+</body>
+
+</html>
